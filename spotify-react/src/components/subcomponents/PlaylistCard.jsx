@@ -78,7 +78,7 @@ export default function PlaylistCard({
           }}
         />
       )}
-      <span className="playlist-card-text">{playlist.name}</span>
+      <span className="playlist-card-text glow-white">{playlist.name}</span>
     </span>
   );
 }
