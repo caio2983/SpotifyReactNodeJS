@@ -62,10 +62,6 @@ async function getNewReleases() {
   return await fetchWebApi("v1/browse/new-releases", "GET");
 }
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 async function getInitialPlaylists() {
   const playlist_ids = [
     "3yuRcKvcuH3UWE65rUG09N",
@@ -90,7 +86,6 @@ async function getInitialPlaylists() {
       tracks: result.tracks,
       artists: result.artists,
     });
-    await sleep(200);
   }
 
   return results;
