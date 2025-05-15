@@ -24,7 +24,6 @@
 .home-container {
   display: flex;
   padding-top: 8px;
-
   gap: 10px;
   width: 100%;
   height: 100%;
@@ -44,7 +43,7 @@
   width: 72%;
   height: 100vh;
   overflow-y: auto;
-  background: linear-gradient(180deg, #2f2f30, #0b0b0b);
+  background-color: #1d1d1e;
   padding: 64px;
   padding-inline: 56px;
   padding-top: 16px;
@@ -53,6 +52,28 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  z-index: 10;
+  position: relative;
+}
+
+.main-container-gradient {
+  top: 0;
+  left: 0;
+  z-index: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  margin: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.main-container-gradient-visible {
+  opacity: 0.8;
+}
+
+.main-container-gradient-invisible {
+  opacity: 0;
 }
 
 .main-buttons-container {
@@ -60,6 +81,7 @@
   gap: 8px;
   height: 50px;
   width: 100%;
+  z-index: 10;
 }
 
 .playlist-cards {
@@ -67,10 +89,11 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, auto);
   gap: 24px;
+  z-index: 10;
 }
 
 .playlist-card {
-  height: 60px;
+  height: 65px;
   background-color: #383737;
   border-radius: 6px;
   font-weight: bold;
@@ -80,6 +103,8 @@
   align-items: center;
   gap: 8px;
   overflow: hidden;
+  position: relative;
+  z-index: 10;
 }
 
 .playlist-card-text {
@@ -91,12 +116,35 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: "SpotifyMixBold", sans-serif;
+  transition: background-color 0.8s ease-in, box-shadow 0.3s ease;
+  z-index: 10;
+}
+
+.playlist-card-hovered {
+  background-color: #878484;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.8;
+  }
 }
 
 .mini-playlist-image-container {
   height: 100%;
   width: 60px;
   flex-shrink: 0;
+  z-index: 10;
 }
 
 .mini-playlist-image-container img {
@@ -105,6 +153,7 @@
   object-fit: cover;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
+  z-index: 10;
 }
 
 .playing-song {
