@@ -38,12 +38,14 @@ export default function Main() {
           background: playlistGradientColor
             ? `linear-gradient(
                 180deg,
-                rgba(${hexToRgb(playlistGradientColor)}, 0.5) 0%,
-                rgba(${hexToRgb(playlistGradientColor)}, 0.3) 20%,
+                rgba(${hexToRgb(playlistGradientColor)}, 0.75) 0%,
+                rgba(${hexToRgb(playlistGradientColor)}, 0.5) 5%,
+                rgba(${hexToRgb(playlistGradientColor)}, 0.25) 20%,
+                rgba(${hexToRgb(playlistGradientColor)}, 0.25) 30%,     
                 rgba(29, 29, 30, 0) 100%
               )`
             : "transparent",
-          height: "300px",
+          height: "400px",
         }}
         className="main-container-gradient"
       />

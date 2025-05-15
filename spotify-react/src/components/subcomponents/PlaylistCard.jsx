@@ -27,32 +27,39 @@ export default function PlaylistCard({
   const [playlistDominantColor, setDominantColor] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  // It's only a div with a gradient.
-
   return (
     <span
       key={playlist.id}
       onMouseEnter={() => {
         setIsHovered(true);
-        setPlaylistGradientColor(playlistDominantColor);
-        if (gradientRef?.current) {
-          gradientRef.current.classList.add("main-container-gradient-visible");
-          gradientRef.current.classList.remove(
-            "main-container-gradient-invisible"
-          );
-        }
+
+        setTimeout(() => {
+          if (gradientRef?.current) {
+            gradientRef.current.classList.add(
+              "main-container-gradient-visible"
+            );
+
+            gradientRef.current.classList.remove(
+              "main-container-gradient-invisible"
+            );
+          }
+          setPlaylistGradientColor(playlistDominantColor);
+        }, 100);
       }}
       onMouseLeave={() => {
         setIsHovered(false);
 
-        if (gradientRef?.current) {
-          gradientRef.current.classList.remove(
-            "main-container-gradient-visible"
-          );
-          gradientRef.current.classList.add(
-            "main-container-gradient-invisible"
-          );
-        }
+        setTimeout(() => {
+          if (gradientRef?.current) {
+            gradientRef.current.classList.remove(
+              "main-container-gradient-visible"
+            );
+            gradientRef.current.classList.add(
+              "main-container-gradient-invisible"
+            );
+          }
+          setPlaylistGradientColor(playlistDominantColor);
+        }, 100);
       }}
       className="playlist-card"
     >
