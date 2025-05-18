@@ -32,7 +32,9 @@ export default function SongExpanded({ setIsSongExpanded, selectedSong }) {
   return (
     <div
       className={`song-expanded-container ${animateClass}`}
-      style={{ backgroundColor: "red" }}
+      style={{
+        background: `linear-gradient(to top, #1d1d1e -20%, ${songDominantColor} 100%)`,
+      }}
     >
       <div className="expanded-black-background"></div>
       <button onClick={handleClick} className="expanded-button">

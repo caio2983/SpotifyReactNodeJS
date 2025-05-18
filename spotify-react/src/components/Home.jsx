@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Library from "./subcomponents/Library";
-import Main from "./subcomponents/Main";
+
+import Main from "./subcomponents/Main/Main";
 import "../App.css";
-import Playing from "./subcomponents/Playing";
-import LibraryExpanded from "./subcomponents/LibraryExpanded";
-import Song from "./subcomponents/Song";
-import SongExpanded from "./subcomponents/SongExpanded";
+import Playing from "./subcomponents/Main/Playing";
+import LibraryExpanded from "./subcomponents/Library/LibraryExpanded";
+import Song from "./subcomponents/Song/Song";
+import SongExpanded from "./subcomponents/Song/SongExpanded";
 import axios from "axios";
+import Library from "./subcomponents/Library/Library";
 
 export default function Home() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -41,7 +42,7 @@ export default function Home() {
         setIsSongExpanded={setIsSongExpanded}
         selectedSong={selectedSong}
       ></Song>
-      <Playing></Playing>
+      <Playing selectedSong={selectedSong}></Playing>
     </div>
   );
 }

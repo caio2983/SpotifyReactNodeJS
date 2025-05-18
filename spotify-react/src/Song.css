@@ -53,6 +53,7 @@
   width: 100%;
   transform: scaleX(1);
   opacity: 1;
+  transform-origin: right;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,6 +64,7 @@
   width: 0;
   opacity: 0;
   transform: scaleX(0);
+  transform-origin: right;
 }
 
 .song-image-container-expanded {
@@ -77,11 +79,3 @@
   top: 0;
   z-index: 10;
 }
-
-/* .expanded-black-background {
-  z-index: 1;
-  background-color: aqua;
-  height: 1000px;
-  width: 100vw;
-  position: absolute;
-} */
