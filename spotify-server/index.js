@@ -77,6 +77,10 @@ async function getInitialPlaylists() {
 
   for (const playlist_id of playlist_ids) {
     const result = await fetchWebApi(`v1/playlists/${playlist_id}`, "GET");
+    const owner_id = result.owner.id;
+    const resultOwner = await fetchWebApi(`v1/users/${owner_id}`, "GET");
+
+    console.log(result);
     results.push({
       image: result.images,
       href: result.href,
@@ -85,6 +89,9 @@ async function getInitialPlaylists() {
       owner: result.owner,
       tracks: result.tracks,
       artists: result.artists,
+      description: result.description,
+      owner: resultOwner,
+      followers: result.followers,
     });
   }
 
@@ -102,14 +109,6 @@ async function getInitialTrack() {
   result.name = resultTrack.name;
   result.albumName = resultTrack.album.name;
   result.artists = resultTrack.album.artists;
-
-  return result;
-}
-
-async function getAlbum(album_id) {
-  const url = `v1/albums/${album_id}`;
-
-  const result = await fetchWebApi(url, "GET");
 
   return result;
 }
@@ -139,7 +138,6 @@ app.get("/initial-track", async (req, res) => {
   try {
     const data = await getInitialTrack();
     res.json(data);
-    console.log(data);
   } catch (err) {
     console.error("error initial music", err);
     res.status(500).json({ error: "erro ao conseguir a primeira musica" });
