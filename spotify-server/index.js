@@ -91,6 +91,29 @@ async function getInitialPlaylists() {
   return results;
 }
 
+async function getInitialTrack() {
+  const initial_track_id = "6xwhCiWXREsAIQVZqHswVw";
+
+  const resultTrack = await fetchWebApi(`v1/tracks/${initial_track_id}`, "GET");
+
+  const result = { images: null, name: null, albumName: null, artists: null };
+
+  result.images = resultTrack.album.images;
+  result.name = resultTrack.name;
+  result.albumName = resultTrack.album.name;
+  result.artists = resultTrack.album.artists;
+
+  return result;
+}
+
+async function getAlbum(album_id) {
+  const url = `v1/albums/${album_id}`;
+
+  const result = await fetchWebApi(url, "GET");
+
+  return result;
+}
+
 app.get("/new-releases", async (req, res) => {
   try {
     const data = await getNewReleases();
@@ -104,11 +127,22 @@ app.get("/new-releases", async (req, res) => {
 app.get("/initial-playlists", async (req, res) => {
   try {
     const data = await getInitialPlaylists();
-    console.log(data);
+
     res.json(data);
   } catch (err) {
     console.error("error playlists", err);
     res.status(500).json({ error: "Erro ao acessar API do Spotify" });
+  }
+});
+
+app.get("/initial-track", async (req, res) => {
+  try {
+    const data = await getInitialTrack();
+    res.json(data);
+    console.log(data);
+  } catch (err) {
+    console.error("error initial music", err);
+    res.status(500).json({ error: "erro ao conseguir a primeira musica" });
   }
 });
 
