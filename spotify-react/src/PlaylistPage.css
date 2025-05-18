@@ -16,6 +16,7 @@
 }
 
 .playlist-page-header {
+  max-height: 350px;
   height: 350px;
   padding-bottom: 16px;
   width: 100%;
@@ -60,23 +61,27 @@
 .playlist-header-content {
   position: relative;
   display: flex;
-  gap: 10px;
+  gap: 36px;
   z-index: 20;
 }
 
 .playlist-header-text {
   margin-left: 12px;
-  width: 50%;
+  width: 60%;
   z-index: 20;
   display: flex;
   flex-direction: column;
   align-self: flex-end;
+  gap: 12px;
 }
 
 .playlist-header-text h1 {
   font-size: medium;
   font-weight: 800;
-  font-size: 2.875rem;
+  font-size: 2.8rem;
+}
+
+.playlist-text-glow {
   text-shadow: rgba(255, 255, 255, 0.26) 0px 0px 5px;
 }
 
@@ -90,4 +95,106 @@
   height: 100%;
   background-color: black;
   opacity: 0.3;
+}
+
+.playlist-description {
+  max-height: 100px;
+  overflow-y: hidden;
+  color: "#717780";
+  margin: 0;
+}
+
+.playlist-description:hover {
+  overflow-y: auto;
+}
+
+.playlist-description a {
+  color: white;
+}
+
+.playlist-title {
+  margin: 0;
+}
+
+.playlist-owner-image-wrapper {
+  margin: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.playlist-owner-image-wrapper img {
+  object-fit: contain;
+}
+
+.playlist-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.playlist-owner-name {
+  margin-left: 8px;
+  color: white;
+}
+
+.separation-ball {
+  margin-top: 2px;
+  width: 6px;
+  height: 6px;
+  background-color: #9ca0a6;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 4px 4px 0 4px;
+}
+
+.playlist-tools-container {
+  padding: 16px 24px 16px 24px;
+  height: 150px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 100;
+}
+
+.tools-wrapper {
+  width: auto;
+  height: 80%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.play-button {
+  width: 78px;
+  height: 78px;
+  background-color: #1ed760;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: transform 0.25s ease-out, background-color 0.25s ease-out;
+}
+
+.play-button:hover {
+  transform: scale(1.08);
+  background-color: #1fdf64;
+  z-index: 100;
+}
+
+.play-triangle {
+  border-left: 1.2em solid black;
+  border-top: 0.8em solid transparent;
+  border-bottom: 0.8em solid transparent;
+  z-index: 100;
+}
+
+.list-options {
+  margin-left: auto;
+  z-index: 100;
+  margin-right: 4px;
 }
