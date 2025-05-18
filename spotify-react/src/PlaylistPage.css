@@ -6,27 +6,88 @@
   border: 1px solid #1d1d1e;
   border-radius: 6px;
   display: flex;
-  z-index: 10;
+  z-index: 15;
   position: relative;
   overflow-y: scroll;
 }
 
-.playlist-page-image-container {
-  width: 192px;
-  height: 192px;
+.playlist-container {
+  gap: 0 !important;
 }
 
 .playlist-page-header {
-  height: fit-content;
+  height: 350px;
   padding-bottom: 16px;
   width: 100%;
-  padding-top: 60px;
+  padding-top: 40px;
   padding-inline: 24px;
+  position: relative;
+  z-index: 15;
 }
 
-.playlist-page-image-container img {
+.playlist-image-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  z-index: 15;
+  box-shadow: 13px 10px 103px -18px rgba(0, 0, 0, 0.89);
+  -webkit-box-shadow: 13px 10px 103px -18px rgba(0, 0, 0, 0.89);
+  -moz-box-shadow: 13px 10px 103px -18px rgba(0, 0, 0, 0.89);
+  margin: 0;
+}
+
+.playlist-image-wrapper img {
   object-fit: cover;
   border-radius: 4px;
   height: 100%;
   width: 100%;
+  z-index: 15;
+}
+
+.playlist-header-overlay {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  position: absolute;
+  z-index: 0;
+  box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.59) inset;
+  -webkit-box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.59) inset;
+  -moz-box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.59) inset;
+}
+
+.playlist-header-content {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.playlist-header-text {
+  margin-left: 12px;
+  width: 50%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+}
+
+.playlist-header-text h1 {
+  font-size: medium;
+  font-weight: 800;
+  font-size: 2.875rem;
+  text-shadow: rgba(255, 255, 255, 0.26) 0px 0px 5px;
+}
+
+.playlist-songs {
+  position: relative;
+}
+
+.songs-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.3;
 }

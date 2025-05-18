@@ -64,7 +64,11 @@ export default function Main() {
 
               <div className="playlist-cards">
                 {initialPlaylists.map((playlist, index) => (
-                  <Link to={`/playlist/${playlist.id}`} key={playlist.id}>
+                  <Link
+                    to={`/playlist/${playlist.id}`}
+                    state={{ playlist }}
+                    key={playlist.id}
+                  >
                     <PlaylistCard
                       playlist={playlist}
                       index={index}
