@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import PlaylistCard from "./PlaylistCard";
+import { Routes, Route, Link } from "react-router-dom";
+import PlaylistPage from "../PlaylistPage/PlaylistPage";
 
 export default function Main() {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
@@ -31,42 +33,54 @@ export default function Main() {
   }, []);
 
   return (
-    <div className="main-container">
-      <span
-        ref={gradientRef}
-        style={{
-          background: playlistGradientColor
-            ? `linear-gradient(
-                180deg,
-                rgba(${hexToRgb(playlistGradientColor)}, 0.75) 0%,
-                rgba(${hexToRgb(playlistGradientColor)}, 0.5) 5%,
-                rgba(${hexToRgb(playlistGradientColor)}, 0.25) 20%,
-                rgba(${hexToRgb(playlistGradientColor)}, 0.25) 30%,     
-                rgba(29, 29, 30, 0) 100%
-              )`
-            : "transparent",
-          height: "400px",
-        }}
-        className="main-container-gradient"
-      />
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="main-container main-container-padding">
+            <>
+              <span
+                ref={gradientRef}
+                style={{
+                  background: playlistGradientColor
+                    ? `linear-gradient(
+                      180deg,
+                      rgba(${hexToRgb(playlistGradientColor)}, 0.75) 0%,
+                      rgba(${hexToRgb(playlistGradientColor)}, 0.5) 5%,
+                      rgba(${hexToRgb(playlistGradientColor)}, 0.25) 20%,
+                      rgba(${hexToRgb(playlistGradientColor)}, 0.25) 30%,     
+                      rgba(29, 29, 30, 0) 100%
+                    )`
+                    : "transparent",
+                  height: "400px",
+                }}
+                className="main-container-gradient"
+              />
+              <div className="main-buttons-container">
+                <button>Tudo</button>
+                <button>Músicas</button>
+                <button>Podcasts</button>
+              </div>
 
-      <div className="main-buttons-container">
-        <button>Tudo</button>
-        <button>Músicas</button>
-        <button>Podcasts</button>
-      </div>
-      <div className="playlist-cards">
-        {initialPlaylists.map((playlist, index) => (
-          <PlaylistCard
-            key={playlist.id}
-            playlist={playlist}
-            index={index}
-            setPlaylistGradientColor={setPlaylistGradientColor}
-            setInitialGradientColor={setInitialGradientColor}
-            gradientRef={gradientRef}
-          />
-        ))}
-      </div>
-    </div>
+              <div className="playlist-cards">
+                {initialPlaylists.map((playlist, index) => (
+                  <Link to={`/playlist/${playlist.id}`} key={playlist.id}>
+                    <PlaylistCard
+                      playlist={playlist}
+                      index={index}
+                      setPlaylistGradientColor={setPlaylistGradientColor}
+                      setInitialGradientColor={setInitialGradientColor}
+                      gradientRef={gradientRef}
+                    />
+                  </Link>
+                ))}
+              </div>
+            </>
+          </div>
+        }
+      />
+      <Route path="/playlist/:id" element={<PlaylistPage />} />
+      <Route path="/artist/:id" element={<h1>Artist page</h1>} />
+    </Routes>
   );
 }

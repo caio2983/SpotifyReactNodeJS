@@ -1,0 +1,32 @@
+.playlist-page {
+  width: 60%;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #1d1d1e;
+  border: 1px solid #1d1d1e;
+  border-radius: 6px;
+  display: flex;
+  z-index: 10;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.playlist-page-image-container {
+  width: 192px;
+  height: 192px;
+}
+
+.playlist-page-header {
+  height: fit-content;
+  padding-bottom: 16px;
+  width: 100%;
+  padding-top: 60px;
+  padding-inline: 24px;
+}
+
+.playlist-page-image-container img {
+  object-fit: cover;
+  border-radius: 4px;
+  height: 100%;
+  width: 100%;
+}
