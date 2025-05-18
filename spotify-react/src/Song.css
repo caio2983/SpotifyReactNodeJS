@@ -5,8 +5,8 @@
 }
 
 .song-image-container {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -35,7 +35,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  height: 80vh;
+  height: 83vh;
   background-color: #1d1d1e;
   border: 1px solid #1d1d1e;
   border-radius: 10px;
