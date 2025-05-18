@@ -230,52 +230,10 @@
   height: 12vh;
   background-color: black;
   position: fixed;
-  z-index: 200;
+  z-index: 100;
   bottom: 0;
   left: 0;
   padding-inline: 12px;
-}
-
-/* Song container styles */
-
-.song-container {
-  width: 30%;
-  background-color: #1d1d1e;
-  border: 1px solid #1d1d1e;
-  border-radius: 6px;
-  height: 80vh;
-  padding: 24px;
-  z-index: 100;
-  transition: width 0.6s ease-in-out;
-}
-
-.song-expanded-container {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 80vh;
-  background-color: #1d1d1e;
-  border: 1px solid #1d1d1e;
-  border-radius: 6px;
-  padding: 24px;
-  z-index: 102;
-  transition: all 0.5s ease;
-  transform-origin: left;
-  overflow: hidden;
-  opacity: 0;
-  transform: scaleX(0);
-  margin-top: 8px;
-}
-
-.song-expanded-container.expanded {
-  padding-inline: 0;
-  width: 100%;
-  transform: scaleX(1);
-  opacity: 1;
-}
-
-.song-expanded-container.collapsed {
-  width: 0;
-  opacity: 0;
-  transform: scaleX(0);
+  display: flex;
+  align-items: center;
 }

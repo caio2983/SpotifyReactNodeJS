@@ -17,3 +17,71 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* Song container styles */
+
+.song-container {
+  width: 30%;
+  background-color: #1d1d1e;
+  border: 1px solid #1d1d1e;
+  border-radius: 6px;
+  height: 80vh;
+  padding: 24px;
+  z-index: 100;
+  transition: width 0.6s ease-in-out;
+}
+
+.song-expanded-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 80vh;
+  background-color: #1d1d1e;
+  border: 1px solid #1d1d1e;
+  border-radius: 10px;
+  z-index: 102;
+  transition: all 0.5s ease;
+  transform-origin: left;
+  overflow: hidden;
+  opacity: 0;
+  transform: scaleX(0);
+  margin-top: 8px;
+}
+
+.song-expanded-container.expanded {
+  padding-inline: 0;
+  width: 100%;
+  transform: scaleX(1);
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.song-expanded-container.collapsed {
+  width: 0;
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.song-image-container-expanded {
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.expanded-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+}
+
+/* .expanded-black-background {
+  z-index: 1;
+  background-color: aqua;
+  height: 1000px;
+  width: 100vw;
+  position: absolute;
+} */

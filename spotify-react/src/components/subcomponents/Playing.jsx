@@ -1,5 +1,9 @@
 import React from "react";
 
 export default function Playing() {
-  return <div className="playing-song">Playing</div>;
+  return (
+    <div className="playing-song">
+      <span>Playing</span>
+    </div>
+  );
 }
