@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function PlaylistSong() {
-  return <div>Song</div>;
+  return <div className="playlist-song-container">Song</div>;
 }

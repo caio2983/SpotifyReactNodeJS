@@ -4,7 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Vibrant } from "node-vibrant/browser";
 import parse from "html-react-parser";
 import PlaylistTools from "./PlaylistTools";
-import PlaylistSongs from "./PlaylistSongs";
+
+import PlaylistSong from "./PlaylistSong";
 
 export default function PlaylistPage() {
   const location = useLocation();
@@ -118,8 +119,21 @@ export default function PlaylistPage() {
         }}
       >
         <div className="songs-overlay"></div>
+
         <PlaylistTools></PlaylistTools>
-        <PlaylistSongs></PlaylistSongs>
+
+        <div className="songs-heading-container">
+          <div className="songs-heading">
+            <span className="songs-heading-title">
+              <span>#</span>
+              <span>Título</span>
+            </span>
+            <span className="songs-heading-album">Álbum</span>
+            <span className="songs-heading-added">Adicionada em</span>
+            <span className="songs-heading-duration">Duração</span>
+          </div>
+          <PlaylistSong></PlaylistSong>
+        </div>
       </div>
     </div>
   );

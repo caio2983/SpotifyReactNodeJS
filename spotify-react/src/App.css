@@ -8,6 +8,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "SpotifyMixMedium";
+  src: url("./assets/fonts/SpotifyMix-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SpotifyMixRegular";
+  src: url("./assets/fonts/SpotifyMix-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
 }
