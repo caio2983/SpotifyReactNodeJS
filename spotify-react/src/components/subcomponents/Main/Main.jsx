@@ -83,6 +83,7 @@ export default function Main() {
           </div>
         }
       />
+
       <Route path="/playlist/:id" element={<PlaylistPage />} />
       <Route path="/artist/:id" element={<h1>Artist page</h1>} />
     </Routes>
