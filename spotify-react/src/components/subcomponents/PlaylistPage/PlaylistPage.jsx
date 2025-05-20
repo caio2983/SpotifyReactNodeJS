@@ -111,11 +111,9 @@ export default function PlaylistPage() {
         style={{
           background: playlistDominantColor
             ? `linear-gradient(0deg, 
-                rgba(29, 29, 30, 1) 40%, 
-                ${hexToRgb(playlistDominantColor, 0.8)} 100%)`
+                rgba(29, 29, 30, 1) 90%, 
+                ${hexToRgb(playlistDominantColor, 0.8)} 110%)`
             : "#1d1d1e",
-
-          height: "1000px",
         }}
       >
         <div className="songs-overlay"></div>
@@ -132,7 +130,17 @@ export default function PlaylistPage() {
             <span className="songs-heading-added">Adicionada em</span>
             <span className="songs-heading-duration">Duração</span>
           </div>
-          <PlaylistSong></PlaylistSong>
+
+          <div className="song-list-container">
+            {playlist.tracks.items.map((song, index) => (
+              <PlaylistSong
+                key={index}
+                image={song.image}
+                key={index}
+                index={index}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
