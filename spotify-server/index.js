@@ -62,6 +62,12 @@ async function getNewReleases() {
   return await fetchWebApi("v1/browse/new-releases", "GET");
 }
 
+// This function is used to populate the ''tracks'' key in album / playlists
+async function getTrack(id) {
+  // https://api.spotify.com/v1/tracks/5E9qBEUja2yAjUPhQO8Gx7
+  return await fetchWebApi(`v1/tracks/${id}`, "GET");
+}
+
 async function getInitialPlaylists() {
   const playlist_ids = [
     "3yuRcKvcuH3UWE65rUG09N",
@@ -95,9 +101,17 @@ async function getInitialPlaylists() {
     });
   }
 
+  for (track in results.tracks?.items) {
+    const track_id = track.track.id;
+    const resultTrack = await getTrack(track_id);
+
+    track = resultTrack;
+  }
+
   return results;
 }
 
+// Minecraft default track
 async function getInitialTrack() {
   const initial_track_id = "6xwhCiWXREsAIQVZqHswVw";
 
@@ -134,6 +148,7 @@ app.get("/initial-playlists", async (req, res) => {
   }
 });
 
+// Minecraft default track
 app.get("/initial-track", async (req, res) => {
   try {
     const data = await getInitialTrack();
