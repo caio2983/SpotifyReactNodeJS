@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Vibrant } from "node-vibrant/browser";
+import { useGlobalContext } from "../../../GlobalContext";
 
 export default function SongExpanded({ setIsSongExpanded, selectedSong }) {
   const [animateClass, setAnimateClass] = useState("collapsed");
@@ -11,8 +12,10 @@ export default function SongExpanded({ setIsSongExpanded, selectedSong }) {
     });
   }, []);
 
+  const { songSelected, setSong } = useGlobalContext();
+
   useEffect(() => {
-    Vibrant.from(selectedSong?.images[0].url)
+    Vibrant.from(songSelected?.album?.images[0].url)
       .getPalette()
       .then((palette) => {
         if (palette?.Vibrant?.hex) {
@@ -44,7 +47,7 @@ export default function SongExpanded({ setIsSongExpanded, selectedSong }) {
       <div className="song-image-container song-image-container-expanded">
         <img
           className="song-image song-image-expanded"
-          src={selectedSong?.images[0].url}
+          src={songSelected?.album?.images[0].url}
           alt="Song thumbnail"
         />
       </div>

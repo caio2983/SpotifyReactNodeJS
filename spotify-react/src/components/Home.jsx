@@ -11,7 +11,7 @@ import axios from "axios";
 import Library from "./subcomponents/Library/Library";
 
 export default function Home() {
-  const { song, setSong } = useGlobalContext();
+  const { songSelected, setSong } = useGlobalContext();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isSongExpanded, setIsSongExpanded] = useState(false);
 
@@ -36,11 +36,14 @@ export default function Home() {
       {isSongExpanded && (
         <SongExpanded
           setIsSongExpanded={setIsSongExpanded}
-          selectedSong={song}
+          selectedSong={songSelected}
         ></SongExpanded>
       )}
-      <Song setIsSongExpanded={setIsSongExpanded} selectedSong={song}></Song>
-      <Playing selectedSong={song}></Playing>
+      <Song
+        setIsSongExpanded={setIsSongExpanded}
+        selectedSong={songSelected}
+      ></Song>
+      <Playing selectedSong={songSelected}></Playing>
     </div>
   );
 }

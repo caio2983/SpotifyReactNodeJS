@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useGlobalContext } from "../../../GlobalContext";
 
-export default function Song({ setIsSongExpanded, selectedSong }) {
+export default function Song({ setIsSongExpanded }) {
   const handleClick = () => {
     setIsSongExpanded(true);
   };
+
+  const { songSelected, setSong } = useGlobalContext();
 
   return (
     <div className="song-container">
@@ -11,7 +14,7 @@ export default function Song({ setIsSongExpanded, selectedSong }) {
       <div className="song-image-container">
         <img
           className="song-image"
-          src={selectedSong?.images[0].url}
+          src={songSelected?.album?.images[0].url}
           alt="Song thumbnail"
         />
       </div>

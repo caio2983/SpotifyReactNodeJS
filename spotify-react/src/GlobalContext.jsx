@@ -5,10 +5,10 @@ const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
 
 export function GlobalProvider({ children }) {
-  const [song, setSong] = useState(null);
+  const [songSelected, setSong] = useState(null);
 
   return (
-    <GlobalContext.Provider value={{ song, setSong }}>
+    <GlobalContext.Provider value={{ songSelected, setSong }}>
       {children}
     </GlobalContext.Provider>
   );
