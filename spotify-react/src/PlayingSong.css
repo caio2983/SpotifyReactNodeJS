@@ -1,0 +1,78 @@
+.playing-container {
+  width: 100%;
+  height: 12vh;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+}
+
+.playing-wrapper {
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playing-details {
+  height: 100%;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.playing-tools-center {
+  height: 100%;
+  width: 50%;
+  background-color: violet;
+}
+
+.playing-tools-right {
+  height: 100%;
+  width: 25%;
+  background-color: orange;
+}
+
+.playing-image {
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+  min-height: 70px;
+}
+
+.playing-image img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+}
+
+.playing-name-artist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5px;
+  width: 75%;
+}
+
+.playing-name {
+  font-family: "SpotifyMixMedium", monospace;
+  color: white;
+  font-size: medium;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.playing-artist {
+  font-family: "SpotifyMixMedium", monospace;
+  color: #b3b3b3;
+  font-size: medium;
+}
