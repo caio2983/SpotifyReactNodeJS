@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import PlaylistCard from "./PlaylistCard";
 import { Routes, Route, Link } from "react-router-dom";
-import PlaylistPage from "../PlaylistPage/PlaylistPage";
+import PlaylistPage from "../../pages/PlaylistPage/PlaylistPage";
 
 export default function Main() {
   const [initialPlaylists, setInitialPlaylists] = useState([]);

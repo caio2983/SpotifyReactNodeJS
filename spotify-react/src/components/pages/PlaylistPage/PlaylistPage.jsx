@@ -122,13 +122,13 @@ export default function PlaylistPage() {
 
         <div className="songs-heading-container">
           <div className="songs-heading">
-            <span className="songs-heading-title">
-              <span>#</span>
-              <span>Título</span>
-            </span>
-            <span className="songs-heading-album">Álbum</span>
-            <span className="songs-heading-added">Adicionada em</span>
-            <span className="songs-heading-duration">Duração</span>
+            <div className="column heading-title">
+              <span className="hashtag">#</span>
+              <span className="title">Título</span>
+            </div>
+            <div className="column heading-album">Álbum</div>
+            <div className="column heading-added">Adicionada em</div>
+            <div className="column heading-duration">Duração</div>
           </div>
 
           <div className="song-list-container">
@@ -137,6 +137,7 @@ export default function PlaylistPage() {
                 key={index}
                 image={song.track.album.images[2].url}
                 index={index}
+                song={song.track}
               />
             ))}
           </div>
