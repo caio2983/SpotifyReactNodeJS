@@ -11,6 +11,7 @@ export default function PlaylistPage() {
   const location = useLocation();
   const { playlist } = location.state || {};
   const [playlistDominantColor, setDominantColor] = useState(null);
+  const [gradientColor, setGradientColor] = useState(null);
 
   const [miniImgSrc, setMiniImgSrc] = useState(
     playlist.owner.images[1]?.url || playlist.image[0]?.url
@@ -28,7 +29,7 @@ export default function PlaylistPage() {
     console.log(playlist);
   }, [playlist]);
 
-  function darkenHexColor(hex, amount = 0.2) {
+  function darkenHexColor(hex, amount) {
     hex = hex.replace("#", "");
 
     var num = parseInt(hex, 16);
@@ -56,6 +57,8 @@ export default function PlaylistPage() {
         .then((palette) => {
           if (palette?.Vibrant?.hex) {
             const darkerColor = darkenHexColor(palette.Vibrant.hex, 0.1);
+            const evenDarkerColor = darkenHexColor(palette.Vibrant.hex, 0.5);
+            setGradientColor(evenDarkerColor);
             setDominantColor(darkerColor);
           }
         });
@@ -109,10 +112,10 @@ export default function PlaylistPage() {
       <div
         className="playlist-songs"
         style={{
-          background: playlistDominantColor
+          background: gradientColor
             ? `linear-gradient(0deg, 
                 rgba(29, 29, 30, 1) 90%, 
-                ${hexToRgb(playlistDominantColor, 0.8)} 110%)`
+                ${hexToRgb(gradientColor, 0.9)} 110%)`
             : "#1d1d1e",
         }}
       >
