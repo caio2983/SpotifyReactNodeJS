@@ -20,7 +20,7 @@
   height: 350px;
   padding-bottom: 16px;
   width: 100%;
-  padding-top: 40px;
+  padding-top: 32px;
   padding-inline: 24px;
   position: relative;
   z-index: 15;
@@ -102,6 +102,10 @@
   overflow-y: hidden;
   color: "#717780";
   margin: 0;
+
+  font-family: "SpotifyMixMedium", monospace;
+  font-size: large;
+  color: #b3b3b3;
 }
 
 .playlist-description:hover {
@@ -208,7 +212,7 @@
 
 .songs-heading {
   display: grid;
-  grid-template-columns: 3fr 3fr 3fr 1fr;
+  grid-template-columns: 4fr 2fr 2fr 1fr;
   align-items: center;
   padding: 8px 32px 16px 32px;
   margin-bottom: 12px;
@@ -216,6 +220,14 @@
   font-family: "SpotifyMixMedium";
   font-size: large;
   border-bottom: 1px solid rgba(214, 216, 220, 0.2);
+
+  font-family: "SpotifyMixMedium", monospace;
+  font-size: larger;
+  color: #b3b3b3;
+}
+
+.heading-duration {
+  text-align: right;
 }
 
 .heading-title {
@@ -231,7 +243,7 @@
 
 .song-card {
   display: grid;
-  grid-template-columns: 3fr 3fr 3fr 1fr;
+  grid-template-columns: 4fr 2fr 2fr 1fr;
   align-items: center;
   gap: 16px;
   padding: 8px 32px;
@@ -245,11 +257,44 @@
   cursor: pointer;
 }
 
+.song-artist {
+  font-family: "SpotifyMixMedium", monospace;
+  font-size: large;
+  color: #b3b3b3;
+}
+
 .song-album {
-  width: 12em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  font-family: "SpotifyMixMedium", monospace;
+  font-size: large;
+  color: #b3b3b3;
+
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.song-date {
+  font-family: "SpotifyMixMedium", monospace;
+  font-size: large;
+  color: #b3b3b3;
+
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.song-duration {
+  text-align: right;
+  font-family: "SpotifyMixMedium", monospace;
+  font-size: large;
+  color: #b3b3b3;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .song-album span {
@@ -303,8 +348,10 @@
 .song-index-album {
   display: flex;
   flex-direction: row;
-
   align-items: center;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .song-image-wrapper {
@@ -321,4 +368,21 @@
 .song-list-container {
   display: flex;
   flex-direction: column;
+}
+
+.song-name {
+  font-family: "SpotifyMixBold", monospace;
+  font-size: large;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name-artist-wrapper {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  max-width: 15em;
 }
