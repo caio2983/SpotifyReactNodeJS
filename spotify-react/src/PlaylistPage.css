@@ -150,7 +150,7 @@
 }
 
 .playlist-tools-container {
-  padding: 16px 24px 16px 24px;
+  padding: 16px 56px;
   height: 150px;
   width: 100%;
   display: flex;
@@ -242,6 +242,7 @@
 
 .song-card:hover {
   background-color: rgba(128, 128, 128, 0.3);
+  cursor: pointer;
 }
 
 .song-album {
@@ -255,7 +256,7 @@
   width: 80%;
 }
 
-.song-index {
+.song-index-number {
   font-family: "SpotifyMixBold", monospace;
   font-size: x-large;
   min-width: 3ch;
@@ -263,6 +264,35 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  position: relative;
+}
+
+.song-index {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.song-play-triangle {
+  font-family: "SpotifyMixBold", monospace;
+  font-size: x-large;
+  min-width: 3ch;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.song-card:hover .song-index {
+  opacity: 0;
+}
+
+.song-card:hover .song-play-triangle {
+  opacity: 1;
 }
 
 .hashtag {

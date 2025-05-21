@@ -21,7 +21,12 @@ export default function PlaylistSong({ index, image, song }) {
   return (
     <div className="song-card">
       <div className="song-index-album">
-        <span className="song-index">{index + 1}</span>
+        <span className="song-index-number">
+          <span className="song-index"> {index + 1}</span>
+
+          <span className="song-play-triangle">▶</span>
+        </span>
+
         <div className="song-image-wrapper">
           <img src={image}></img>
         </div>
