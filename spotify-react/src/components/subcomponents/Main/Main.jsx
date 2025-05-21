@@ -38,7 +38,7 @@ export default function Main() {
         path="/"
         element={
           <div className="main-container main-container-padding">
-            <>
+            <div className="main-wrapper">
               <span
                 ref={gradientRef}
                 style={{
@@ -79,7 +79,7 @@ export default function Main() {
                   </Link>
                 ))}
               </div>
-            </>
+            </div>
           </div>
         }
       />
