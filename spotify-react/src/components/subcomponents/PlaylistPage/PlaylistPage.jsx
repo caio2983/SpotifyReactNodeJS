@@ -135,8 +135,7 @@ export default function PlaylistPage() {
             {playlist.tracks.items.map((song, index) => (
               <PlaylistSong
                 key={index}
-                image={song.image}
-                key={index}
+                image={song.track.album.images[2].url}
                 index={index}
               />
             ))}

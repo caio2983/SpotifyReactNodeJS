@@ -226,12 +226,28 @@
 }
 
 .playlist-song-container {
-  padding-inline: 32px;
   z-index: 100;
-  background-color: #1ed760;
   height: 60px;
   display: flex;
   align-items: center;
+  gap: 44px;
+}
+
+.song-index {
+  font-family: "SpotifyMixBold", monospace;
+  font-size: x-large;
+  width: 3ch;
+  text-align: right;
+}
+.song-image-wrapper {
+  border-radius: 6px;
+  overflow: hidden;
+  height: 64px;
+  width: 64px;
+}
+
+.song-image {
+  object-fit: cover;
 }
 
 .song-list-container {
