@@ -208,7 +208,7 @@
 
 .songs-heading {
   display: grid;
-  grid-template-columns: 4fr 3fr 3fr 1fr;
+  grid-template-columns: 3fr 3fr 3fr 1fr;
   align-items: center;
   padding: 8px 32px 16px 32px;
   margin-bottom: 12px;
@@ -231,7 +231,7 @@
 
 .song-card {
   display: grid;
-  grid-template-columns: 4fr 3fr 3fr 1fr;
+  grid-template-columns: 3fr 3fr 3fr 1fr;
   align-items: center;
   gap: 16px;
   padding: 8px 32px;
@@ -245,16 +245,24 @@
 }
 
 .song-album {
+  width: 12em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+.song-album span {
+  width: 80%;
+}
+
 .song-index {
   font-family: "SpotifyMixBold", monospace;
   font-size: x-large;
-  width: 3ch;
+  min-width: 3ch;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .hashtag {
