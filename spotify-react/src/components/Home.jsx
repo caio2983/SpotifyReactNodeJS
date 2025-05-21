@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useGlobalContext } from "../GlobalContext";
 
 import Main from "./subcomponents/Main/Main";
 import "../App.css";
@@ -10,17 +11,17 @@ import axios from "axios";
 import Library from "./subcomponents/Library/Library";
 
 export default function Home() {
+  const { song, setSong } = useGlobalContext();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isSongExpanded, setIsSongExpanded] = useState(false);
 
-  const [selectedSong, setselectedSong] = useState(null);
-
+  // Gets the default selected song
   useEffect(() => {
     console.log("Requisição para track inicial disparada");
     axios
       .get("http://localhost:3000/initial-track")
       .then((response) => {
-        setselectedSong(response.data);
+        setSong(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -35,14 +36,11 @@ export default function Home() {
       {isSongExpanded && (
         <SongExpanded
           setIsSongExpanded={setIsSongExpanded}
-          selectedSong={selectedSong}
+          selectedSong={song}
         ></SongExpanded>
       )}
-      <Song
-        setIsSongExpanded={setIsSongExpanded}
-        selectedSong={selectedSong}
-      ></Song>
-      <Playing selectedSong={selectedSong}></Playing>
+      <Song setIsSongExpanded={setIsSongExpanded} selectedSong={song}></Song>
+      <Playing selectedSong={song}></Playing>
     </div>
   );
 }
