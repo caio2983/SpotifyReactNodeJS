@@ -31,7 +31,56 @@
 .playing-tools-center {
   height: 100%;
   width: 50%;
-  background-color: violet;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.playing-controls {
+  width: 40%;
+  height: 50%;
+  gap: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.playing-button-circle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 36px;
+  border-radius: 9999px;
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.playing-button-circle-wrapper:hover {
+  transform: scale(1.2);
+}
+
+.playing-button-circle-wrapper .fa-icon {
+  transition: transform 0.2s ease-in-out;
+}
+
+.playing-previous-next {
+  color: rgb(179, 179, 179);
+}
+
+.playing-next-wrapper,
+.playing-previous-wrapper {
+  transition: transform 0.2s ease-in-out;
+}
+
+.playing-next-wrapper:hover,
+.playing-previous-wrapper:hover {
+  transform: scale(1.2);
+}
+
+.playing-slider {
+  display: flex;
+  justify-content: center;
 }
 
 .playing-tools-right {
