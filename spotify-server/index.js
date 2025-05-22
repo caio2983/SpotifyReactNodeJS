@@ -68,6 +68,10 @@ async function getTrack(id) {
   return await fetchWebApi(`v1/tracks/${id}`, "GET");
 }
 
+async function getAlbum(id) {
+  return await fetchWebApi(`v1/albums/${id}`, "GET");
+}
+
 async function getInitialPlaylists() {
   const playlist_ids = [
     "3yuRcKvcuH3UWE65rUG09N",
@@ -86,7 +90,6 @@ async function getInitialPlaylists() {
     const owner_id = result.owner.id;
     const resultOwner = await fetchWebApi(`v1/users/${owner_id}`, "GET");
 
-    console.log(result);
     results.push({
       image: result.images,
       href: result.href,
@@ -116,6 +119,12 @@ async function getInitialTrack() {
   const initial_track_id = "6xwhCiWXREsAIQVZqHswVw";
 
   const resultTrack = await fetchWebApi(`v1/tracks/${initial_track_id}`, "GET");
+
+  album_id = resultTrack.album.id;
+
+  const album = await getAlbum(album_id);
+
+  resultTrack.album = album;
 
   return resultTrack;
 }
