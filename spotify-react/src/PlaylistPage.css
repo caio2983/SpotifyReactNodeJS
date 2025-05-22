@@ -171,23 +171,25 @@
   gap: 16px;
 }
 
-.play-button {
+.play-button-green {
   width: 78px;
   height: 78px;
   background-color: #1ed760;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  z-index: 100;
-  transition: transform 0.25s ease-out, background-color 0.25s ease-out;
+  border-radius: 9999px;
+  transition: transform 0.2s ease-in-out;
 }
 
-.play-button:hover {
-  transform: scale(1.08);
+.play-button-green:hover {
+  transform: scale(1.1);
   background-color: #1fdf64;
   z-index: 100;
+}
+
+.play-button-green:hover .fa-icon {
+  transform: scale(1.1);
 }
 
 .play-triangle {

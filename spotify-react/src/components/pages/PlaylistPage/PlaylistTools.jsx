@@ -1,12 +1,14 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 export default function PlaylistTools() {
   return (
     <div className="playlist-tools-container">
       <div className="tools-wrapper">
-        <span className="play-button">
-          <span className="play-triangle"></span>
-        </span>
+        <div className="play-button-green">
+          <FontAwesomeIcon icon={faPlay} style={{ color: "black" }} size="xl" />
+        </div>
         <span>+ button</span>
         <span>3 points</span>
       </div>

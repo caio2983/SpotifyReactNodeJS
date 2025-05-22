@@ -4,8 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 import { Vibrant } from "node-vibrant/browser";
 import parse from "html-react-parser";
 import PlaylistTools from "./PlaylistTools";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PlaylistSong from "./PlaylistSong";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 export default function PlaylistPage() {
   const location = useLocation();
@@ -131,7 +132,9 @@ export default function PlaylistPage() {
             </div>
             <div className="column heading-album">Álbum</div>
             <div className="column heading-added">Adicionada em</div>
-            <div className="column heading-duration">Duração</div>
+            <div className="column heading-duration">
+              <FontAwesomeIcon icon={faClock}></FontAwesomeIcon>
+            </div>
           </div>
 
           <div className="song-list-container">
