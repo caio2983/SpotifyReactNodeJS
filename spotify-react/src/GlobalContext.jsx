@@ -6,9 +6,21 @@ export const useGlobalContext = () => useContext(GlobalContext);
 
 export function GlobalProvider({ children }) {
   const [songSelected, setSong] = useState(null);
+  const [nextSongs, setNextSongs] = useState({
+    nextsongs: [],
+    id: null,
+    type: null,
+  });
 
   return (
-    <GlobalContext.Provider value={{ songSelected, setSong }}>
+    <GlobalContext.Provider
+      value={{
+        songSelected,
+        setSong,
+        nextSongs,
+        setNextSongs,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );

@@ -7,12 +7,14 @@ import PlaylistTools from "./PlaylistTools";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PlaylistSong from "./PlaylistSong";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { useGlobalContext } from "../../../GlobalContext";
 
 export default function PlaylistPage() {
   const location = useLocation();
   const { playlist } = location.state || {};
   const [playlistDominantColor, setDominantColor] = useState(null);
   const [gradientColor, setGradientColor] = useState(null);
+  const { nextSongs, setNextSongs } = useGlobalContext();
 
   const [miniImgSrc, setMiniImgSrc] = useState(
     playlist.owner.images[1]?.url || playlist.image[0]?.url
@@ -27,7 +29,13 @@ export default function PlaylistPage() {
   }
 
   useEffect(() => {
-    console.log(playlist);
+    console.log("PLAYLIST ADJISAJDIASIDN", playlist);
+    console.log("PLAYLIST PAGE ENXT SONGS", nextSongs);
+
+    setNextSongs({
+      nextsongs: playlist.tracks.items,
+      id: playlist.id,
+    });
   }, [playlist]);
 
   function darkenHexColor(hex, amount) {
@@ -144,6 +152,7 @@ export default function PlaylistPage() {
                 image={song.track.album.images[2].url}
                 index={index}
                 song={song.track}
+                playlist={playlist}
               />
             ))}
           </div>

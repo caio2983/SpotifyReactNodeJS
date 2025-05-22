@@ -3,12 +3,13 @@ import { format, formatDistanceToNow, differenceInMonths } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useGlobalContext } from "../../../GlobalContext";
 
-export default function PlaylistSong({ index, image, song }) {
+export default function PlaylistSong({ index, image, song, playlist }) {
   useEffect(() => {
     console.log(song);
   }, []);
 
   const { songSelected, setSong } = useGlobalContext();
+  const { nextSongs, setNextSongs } = useGlobalContext();
 
   function formatDate(inputDate) {
     const date = new Date(inputDate);
@@ -23,6 +24,13 @@ export default function PlaylistSong({ index, image, song }) {
 
   function clickSong() {
     setSong(song);
+    console.log("CLICKED SONG !!!", playlist);
+
+    setNextSongs({
+      nextsongs: playlist.tracks.items,
+      id: playlist.id,
+      type: "playlist",
+    });
   }
 
   return (

@@ -10,13 +10,67 @@ import {
   faPlay,
   faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 export default function Playing() {
   const { songSelected, setSong } = useGlobalContext();
+  const { nextSongs, setNextSongs } = useGlobalContext();
+
   const [isPlaying, setIsPlaying] = useState(false);
 
   const duration = songSelected?.duration_ms;
   const [currentTime, setCurrentTime] = useState(0);
+
+  const [currentNumber, setCurrentNumber] = useState(
+    songSelected?.track_number
+  );
+  const [nextSongId, setNextSongId] = useState(
+    nextSongs?.tracks?.items[currentNumber]?.id
+  );
+
+  useEffect(() => {
+    const number = songSelected?.track_number;
+    const next = nextSongs?.tracks?.items[number]?.id;
+
+    setCurrentNumber(number);
+    setNextSongId(next);
+
+    console.log("song changed");
+  }, [songSelected, nextSongs]);
+
+  function handleNextClick() {
+    console.log(nextSongs);
+
+    if (nextSongs.type == "playlist") {
+      let current_number = nextSongs.nextsongs.findIndex(
+        (item) => item.track.id === songSelected.id
+      );
+
+      const next_song_index = current_number + 1;
+      const next_song_id = nextSongs.nextsongs[next_song_index].track.id;
+
+      axios
+        .get(`http://localhost:3000/get-track/${next_song_id}`)
+        .then((response) => {
+          const track = response.data;
+          setSong(track);
+        });
+    } else if (nextSongs.type == "album") {
+      let current_number = nextSongs.nextsongs.findIndex(
+        (item) => item.id === songSelected.id
+      );
+
+      const next_song_index = current_number + 1;
+      const next_song_id = nextSongs.nextsongs[next_song_index].id;
+
+      axios
+        .get(`http://localhost:3000/get-track/${next_song_id}`)
+        .then((response) => {
+          const track = response.data;
+          setSong(track);
+        });
+    }
+  }
 
   return (
     <div className="playing-container">
@@ -45,7 +99,7 @@ export default function Playing() {
             <div className="playing-button-circle-wrapper">
               <FontAwesomeIcon icon={faPlay} style={{ color: "black" }} />
             </div>
-            <div className="playing-next-wrapper">
+            <div className="playing-next-wrapper" onClick={handleNextClick}>
               <FontAwesomeIcon
                 icon={faForwardStep}
                 size="2xl"

@@ -120,11 +120,11 @@ async function getInitialTrack() {
 
   const resultTrack = await fetchWebApi(`v1/tracks/${initial_track_id}`, "GET");
 
-  album_id = resultTrack.album.id;
+  return resultTrack;
+}
 
-  const album = await getAlbum(album_id);
-
-  resultTrack.album = album;
+async function getTrack(id) {
+  const resultTrack = await fetchWebApi(`v1/tracks/${id}`, "GET");
 
   return resultTrack;
 }
@@ -153,11 +153,55 @@ app.get("/initial-playlists", async (req, res) => {
 // Minecraft default track
 app.get("/initial-track", async (req, res) => {
   try {
-    const data = await getInitialTrack();
-    res.json(data);
+    const data_initialTrack = await getInitialTrack();
+
+    album_id = data_initialTrack.album.id;
+
+    const data_initialAlbum = await getAlbum(album_id);
+
+    res.json([data_initialTrack, data_initialAlbum]);
   } catch (err) {
     console.error("error initial music", err);
     res.status(500).json({ error: "erro ao conseguir a primeira musica" });
+  }
+});
+
+app.get("/get-track/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ error: "ID da música é obrigatório" });
+    }
+
+    const data_track = await getTrack(id);
+    // const album_id = data_track.album.id;
+
+    // const data_album = await getAlbum(album_id);
+
+    console.log(data_track);
+
+    res.json(data_track);
+  } catch (err) {
+    console.error("Erro ao buscar a música:", err);
+    res.status(500).json({ error: "Erro ao conseguir a música" });
+  }
+});
+
+app.get("/get-album/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ error: "ID da música é obrigatório" });
+    }
+
+    const album = await getAlbum(id);
+
+    res.json(album);
+  } catch (err) {
+    console.error("Erro ao buscar a música:", err);
+    res.status(500).json({ error: "Erro ao conseguir a música" });
   }
 });
 

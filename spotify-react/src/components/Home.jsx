@@ -12,6 +12,7 @@ import Library from "./subcomponents/Library/Library";
 
 export default function Home() {
   const { songSelected, setSong } = useGlobalContext();
+  const { nextSongs, setNextSongs } = useGlobalContext();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isSongExpanded, setIsSongExpanded] = useState(false);
 
@@ -21,7 +22,13 @@ export default function Home() {
     axios
       .get("http://localhost:3000/initial-track")
       .then((response) => {
-        setSong(response.data);
+        setSong(response.data[0]);
+
+        nextSongs.nextsongs = response.data[1].tracks.items;
+        nextSongs.id = response.data[1].id;
+        nextSongs.type = "album";
+
+        setNextSongs(nextSongs);
       })
       .catch((error) => {
         console.error(error);
@@ -39,10 +46,7 @@ export default function Home() {
           selectedSong={songSelected}
         ></SongExpanded>
       )}
-      <Song
-        setIsSongExpanded={setIsSongExpanded}
-        selectedSong={songSelected}
-      ></Song>
+      <Song setIsSongExpanded={setIsSongExpanded}></Song>
       <Playing selectedSong={songSelected}></Playing>
     </div>
   );

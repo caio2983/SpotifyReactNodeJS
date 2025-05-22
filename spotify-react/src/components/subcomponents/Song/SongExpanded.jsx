@@ -22,7 +22,7 @@ export default function SongExpanded({ setIsSongExpanded, selectedSong }) {
           setSongDominantColor(palette.Vibrant.hex);
         }
       });
-  }, [selectedSong]);
+  }, [songSelected]);
 
   const handleClick = () => {
     setAnimateClass("collapsed");
