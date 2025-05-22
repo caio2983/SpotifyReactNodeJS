@@ -86,7 +86,17 @@
 .playing-tools-right {
   height: 100%;
   width: 25%;
-  background-color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.playing-volume-slider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+  width: 40%;
 }
 
 .playing-image {

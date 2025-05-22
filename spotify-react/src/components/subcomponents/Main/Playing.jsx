@@ -8,6 +8,7 @@ import {
   faForward,
   faForwardStep,
   faPlay,
+  faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Playing() {
@@ -68,9 +69,20 @@ export default function Playing() {
         </div>
 
         <div className="playing-tools-right">
-          <button onClick={() => setIsPlaying((prev) => !prev)}>
-            {isPlaying ? "Pause" : "Play"}
-          </button>
+          <div className="playing-volume-slider">
+            <FontAwesomeIcon icon={faVolumeHigh}></FontAwesomeIcon>
+            <Slider
+              min={0}
+              max={100}
+              value={50}
+              aria-labelledby="volume-slider"
+              size="small"
+              color="white"
+              style={{
+                width: "75%",
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
