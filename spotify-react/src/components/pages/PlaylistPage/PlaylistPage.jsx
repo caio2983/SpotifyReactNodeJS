@@ -100,7 +100,7 @@ export default function PlaylistPage() {
               </figure>
               <Link>
                 <span className="playlist-text-glow playlist-owner-name">
-                  {playlist.owner.display_name}
+                  {playlist?.owner?.display_name}
                 </span>
               </Link>
               <span className="separation-ball"></span>
