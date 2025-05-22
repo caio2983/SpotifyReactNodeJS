@@ -50,19 +50,6 @@
   position: relative;
 }
 
-.scroll-wrapper {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.scroll-content {
-  display: inline-block;
-  white-space: nowrap;
-  animation: scroll-left-right 25s linear infinite alternate;
-  will-change: transform;
-}
-
 .song-name-big {
   font-family: "SpotifyMixBold";
   font-size: xx-large;
@@ -89,6 +76,12 @@
   font-size: x-large;
   margin-left: 0;
   transition: margin-left 0.3s ease;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
 }
 
 .song-container:hover .song-name-header {
