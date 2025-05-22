@@ -117,14 +117,7 @@ async function getInitialTrack() {
 
   const resultTrack = await fetchWebApi(`v1/tracks/${initial_track_id}`, "GET");
 
-  const result = { images: null, name: null, albumName: null, artists: null };
-
-  result.images = resultTrack.album.images;
-  result.name = resultTrack.name;
-  result.albumName = resultTrack.album.name;
-  result.artists = resultTrack.album.artists;
-
-  return result;
+  return resultTrack;
 }
 
 app.get("/new-releases", async (req, res) => {
