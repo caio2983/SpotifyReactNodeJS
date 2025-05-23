@@ -51,19 +51,6 @@
   width: 80%;
 }
 
-.search-results {
-  position: absolute;
-  background: gray;
-  width: 80%;
-  height: 550px;
-  bottom: -550px;
-  z-index: 100000000;
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
 .search-input:focus {
   border-top: 4px solid #fff;
   border-right: none;
@@ -98,7 +85,7 @@
   border-left: none;
 }
 
-.input-wrapper:focus-within .search-results {
+.input-wrapper:focus-within .header-search-results {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
@@ -114,4 +101,38 @@
 .input-inside {
   position: absolute;
   left: 16px;
+}
+
+/* Search results styles */
+
+.header-search-results {
+  position: absolute;
+  border: 1px solid rgb(42, 42, 42);
+  border-radius: 6px;
+  background-color: rgb(42, 42, 42);
+  width: 80%;
+  height: 550px;
+  bottom: -550px;
+  z-index: 100000000;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  padding: 20px 16px 16px 16px;
+}
+
+.header-search-results-container {
+  max-height: 100%;
+  overflow-y: auto;
+  background-color: red;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.buscas-recentes {
+  font-family: "SpotifyMixBold";
+  font-size: x-large;
+  color: white;
+  margin-left: 4px;
 }
