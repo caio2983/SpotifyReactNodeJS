@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
 const { fetchWebApi } = require("./fetchWebApi/fetchWebApi");
+const { getTrack, getInitialTrack } = require("./resultTypes/tracks/tracks");
 
 const app = express();
 const PORT = 3000;
@@ -13,12 +14,6 @@ const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
 async function getNewReleases() {
   return await fetchWebApi("v1/browse/new-releases", "GET");
-}
-
-// This function is used to populate the ''tracks'' key in album / playlists
-async function getTrack(id) {
-  // https://api.spotify.com/v1/tracks/5E9qBEUja2yAjUPhQO8Gx7
-  return await fetchWebApi(`v1/tracks/${id}`, "GET");
 }
 
 async function getAlbum(id) {
@@ -65,21 +60,6 @@ async function getInitialPlaylists() {
   }
 
   return results;
-}
-
-// Minecraft default track
-async function getInitialTrack() {
-  const initial_track_id = "6xwhCiWXREsAIQVZqHswVw";
-
-  const resultTrack = await fetchWebApi(`v1/tracks/${initial_track_id}`, "GET");
-
-  return resultTrack;
-}
-
-async function getTrack(id) {
-  const resultTrack = await fetchWebApi(`v1/tracks/${id}`, "GET");
-
-  return resultTrack;
 }
 
 app.get("/new-releases", async (req, res) => {
