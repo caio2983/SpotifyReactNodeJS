@@ -1,6 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
+const { fetchWebApi } = require("./fetchWebApi/fetchWebApi");
 
 const app = express();
 const PORT = 3000;
@@ -9,54 +10,6 @@ app.use(cors());
 // const token = process.env.SPOTIFY_TOKEN;
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-
-async function getAccessToken() {
-  const clientId = process.env.SPOTIFY_CLIENT_ID;
-  const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-
-  const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString(
-    "base64"
-  );
-
-  const response = await fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${credentials}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: "grant_type=client_credentials",
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Erro ao obter token: ${response.status} - ${errorText}`);
-  }
-
-  const data = await response.json();
-  return data.access_token;
-}
-
-async function fetchWebApi(endpoint, method, body) {
-  const token = await getAccessToken();
-
-  const res = await fetch(`https://api.spotify.com/${endpoint}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    method,
-    body: body ? JSON.stringify(body) : undefined,
-  });
-
-  if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(
-      `Erro na chamada para Spotify: ${res.status} - ${errorText}`
-    );
-  }
-
-  return await res.json();
-}
 
 async function getNewReleases() {
   return await fetchWebApi("v1/browse/new-releases", "GET");
