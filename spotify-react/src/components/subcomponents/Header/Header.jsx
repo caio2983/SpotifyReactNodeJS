@@ -1,5 +1,5 @@
 import React from "react";
-import spotifyLogo from "../assets/spotifyLogo.png";
+import spotifyLogo from "../../../assets/spotifyLogo.png";
 import { Link } from "react-router-dom";
 import HeaderSearchResults from "./HeaderSearchResults";
 
