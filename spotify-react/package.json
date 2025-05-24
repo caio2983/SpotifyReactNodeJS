@@ -20,6 +20,7 @@
     "axios": "^1.9.0",
     "date-fns": "^4.1.0",
     "html-react-parser": "^5.2.5",
+    "lodash.debounce": "^4.0.8",
     "node-vibrant": "^4.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

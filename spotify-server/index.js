@@ -5,6 +5,7 @@ const { fetchWebApi } = require("./fetchWebApi/fetchWebApi");
 const { getTrack, getInitialTrack } = require("./resultTypes/tracks/tracks");
 const { getInitialPlaylists } = require("./resultTypes/playlists/playlists");
 const { getAlbum } = require("./resultTypes/albums/albums");
+const { searchItems } = require("./search/search");
 
 const app = express();
 const PORT = 3000;
@@ -64,16 +65,27 @@ app.get("/get-track/:id", async (req, res) => {
     }
 
     const data_track = await getTrack(id);
-    // const album_id = data_track.album.id;
-
-    // const data_album = await getAlbum(album_id);
-
-    console.log(data_track);
 
     res.json(data_track);
   } catch (err) {
     console.error("Erro ao buscar a música:", err);
     res.status(500).json({ error: "Erro ao conseguir a música" });
+  }
+});
+
+app.get("/search/:search", async (req, res) => {
+  try {
+    const { search } = req.params;
+    if (!search) {
+      return res.status(400).json({ error: "Conteúdo da busca é obrigatório" });
+    }
+
+    const search_results = await searchItems(search);
+
+    res.json(search_results);
+  } catch (err) {
+    console.error("Erro ao buscar", err);
+    res.status(500).json({ error: "Erro ao buscar" });
   }
 });
 
