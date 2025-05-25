@@ -137,15 +137,19 @@
   transition: opacity 0.3s ease;
 }
 
-.main-container-padding {
-  padding: 0px 56px 64px 56px;
-}
-
 .main-wrapper {
-  padding-top: 48px;
   display: flex;
   flex-direction: column;
   gap: 64px;
+
+  padding: 48px 56px 28px 56px;
+}
+
+.swipers-wrapper {
+  padding-left: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .song-container {

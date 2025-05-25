@@ -8,6 +8,7 @@ import SwiperSpotify from "../SwiperSpotify";
 
 export default function Main() {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
+  const [initialArtists, setInitialArtists] = useState([]);
   const [playlistGradientColor, setPlaylistGradientColor] = useState(null);
   const [initialGradientColor, setInitialGradientColor] = useState(null);
   const gradientRef = useRef(null);
@@ -33,12 +34,26 @@ export default function Main() {
       });
   }, []);
 
+  useEffect(() => {
+    console.log("Requisição para artistas disparada");
+    axios
+      .get("http://localhost:3000/initial-artists")
+      .then((response) => {
+        setInitialArtists(response.data.artists);
+
+        console.log(response.data.artists);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar artistas:", error);
+      });
+  }, []);
+
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <div className="main-container main-container-padding">
+          <div className="main-container ">
             <div className="main-wrapper">
               <span
                 ref={gradientRef}
@@ -75,8 +90,17 @@ export default function Main() {
                   </Link>
                 ))}
               </div>
+            </div>
 
-              <SwiperSpotify></SwiperSpotify>
+            <div className="swipers-wrapper">
+              <SwiperSpotify
+                type="circle"
+                initialArtists={initialArtists}
+              ></SwiperSpotify>
+              <SwiperSpotify
+                type="square"
+                initialArtists={initialArtists}
+              ></SwiperSpotify>
             </div>
           </div>
         }

@@ -14,8 +14,8 @@ import {
 
 import axios from "axios";
 
-export default function SwiperSpotify() {
-  const [initialArtists, setInitialArtists] = useState([]);
+export default function SwiperSpotify({ type, initialArtists }) {
+  // const [initialArtists, setInitialArtists] = useState([]);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
@@ -25,19 +25,19 @@ export default function SwiperSpotify() {
 
   const swiperRef = useRef(null);
 
-  useEffect(() => {
-    console.log("Requisição para artistas disparada");
-    axios
-      .get("http://localhost:3000/initial-artists")
-      .then((response) => {
-        setInitialArtists(response.data.artists);
+  // useEffect(() => {
+  //   console.log("Requisição para artistas disparada");
+  //   axios
+  //     .get("http://localhost:3000/initial-artists")
+  //     .then((response) => {
+  //       setInitialArtists(response.data.artists);
 
-        console.log(response.data.artists);
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar artistas:", error);
-      });
-  }, []);
+  //       console.log(response.data.artists);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Erro ao buscar artistas:", error);
+  //     });
+  // }, []);
 
   const totalSlides = initialArtists.length;
 
@@ -73,13 +73,20 @@ export default function SwiperSpotify() {
           }
         >
           <div className="slide-content">
-            <div className="slide-circle">
+            <div
+              className={`${
+                type === "circle" ? "slide-circle" : "slide-square"
+              }`}
+            >
               <img src={artist.images[1].url} />
 
-              <div className="slider-image-box-shadow"></div>
+              <div className="slider-image-circle-box-shadow"></div>
             </div>
-            <span className="slide-name">{artist.name}</span>
-            <span className="slide-artist">Artista</span>
+
+            <div className="slide-text-wrapper">
+              <span className="slide-name">{artist.name}</span>
+              <span className="slide-artist">Artista</span>
+            </div>
           </div>
         </div>
       </SwiperSlide>
@@ -88,7 +95,11 @@ export default function SwiperSpotify() {
 
   return (
     <div className="swiper-component-container">
-      <p className="swiper-title">Seus artistas favoritos</p>
+      <p className="swiper-title">
+        {type === "circle"
+          ? "Seus artistas favoritos"
+          : "Suas músicas estão com saudade"}
+      </p>
       <div
         className="main-swiper"
         style={{ position: "relative" }}
