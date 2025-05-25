@@ -1,6 +1,7 @@
 const { fetchWebApi } = require("../../fetchWebApi/fetchWebApi");
 const { getTrack } = require("../tracks/tracks");
 
+// Fetches the initial set of playlists used to populate the homepage cards
 async function getInitialPlaylists() {
   const playlist_ids = [
     "3yuRcKvcuH3UWE65rUG09N",

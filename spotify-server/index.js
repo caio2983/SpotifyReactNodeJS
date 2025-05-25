@@ -6,6 +6,7 @@ const { getTrack, getInitialTrack } = require("./resultTypes/tracks/tracks");
 const { getInitialPlaylists } = require("./resultTypes/playlists/playlists");
 const { getAlbum } = require("./resultTypes/albums/albums");
 const { searchItems } = require("./search/search");
+const { getInitialArtists } = require("./resultTypes/artists/initialArtists");
 
 const app = express();
 const PORT = 3000;
@@ -37,6 +38,16 @@ app.get("/initial-playlists", async (req, res) => {
   } catch (err) {
     console.error("error playlists", err);
     res.status(500).json({ error: "Erro ao acessar API do Spotify" });
+  }
+});
+
+app.get("/initial-artists", async (req, res) => {
+  try {
+    const data = await getInitialArtists();
+    res.json(data);
+  } catch (err) {
+    console.error("error initial artists", err);
+    res.status(500).json({ error: "erro ao acessar os artistas inicaisi" });
   }
 });
 
