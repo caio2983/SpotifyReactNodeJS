@@ -1,6 +1,6 @@
 const { fetchWebApi } = require("../../fetchWebApi/fetchWebApi");
 
-// Minecraft default track
+// Minecraft default selected track
 async function getInitialTrack() {
   const initial_track_id = "6xwhCiWXREsAIQVZqHswVw";
 

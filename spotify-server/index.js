@@ -7,6 +7,7 @@ const { getInitialPlaylists } = require("./resultTypes/playlists/playlists");
 const { getAlbum } = require("./resultTypes/albums/albums");
 const { searchItems } = require("./search/search");
 const { getInitialArtists } = require("./resultTypes/artists/initialArtists");
+const { getInitialTracks } = require("./resultTypes/tracks/initialTracks");
 
 const app = express();
 const PORT = 3000;
@@ -48,6 +49,16 @@ app.get("/initial-artists", async (req, res) => {
   } catch (err) {
     console.error("error initial artists", err);
     res.status(500).json({ error: "erro ao acessar os artistas inicaisi" });
+  }
+});
+
+app.get("/initial-tracks", async (req, res) => {
+  try {
+    const data = await getInitialTracks();
+    res.json(data);
+  } catch (err) {
+    console.error("error initial artists", err);
+    res.status(500).json({ error: "erro ao acessar as tracks iniciais" });
   }
 });
 
