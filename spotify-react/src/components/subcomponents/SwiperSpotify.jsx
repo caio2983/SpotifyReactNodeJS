@@ -56,7 +56,7 @@ export default function SwiperSpotify() {
     }
 
     return initialArtists.map((artist, i) => (
-      <SwiperSlide key={i} style={{ height: "100%", width: "auto" }}>
+      <SwiperSlide key={i} style={{ height: "100%", width: "fit-content" }}>
         <div
           style={{
             opacity:
@@ -75,6 +75,8 @@ export default function SwiperSpotify() {
           <div className="slide-content">
             <div className="slide-circle">
               <img src={artist.images[1].url} />
+
+              <div className="slider-image-box-shadow"></div>
             </div>
             <span className="slide-name">{artist.name}</span>
             <span className="slide-artist">Artista</span>
