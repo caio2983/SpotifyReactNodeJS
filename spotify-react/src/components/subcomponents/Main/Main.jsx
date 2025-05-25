@@ -9,6 +9,7 @@ import SwiperSpotify from "../SwiperSpotify";
 export default function Main() {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
   const [initialArtists, setInitialArtists] = useState([]);
+  const [initialTracks, setInitialTracks] = useState([]);
   const [playlistGradientColor, setPlaylistGradientColor] = useState(null);
   const [initialGradientColor, setInitialGradientColor] = useState(null);
   const gradientRef = useRef(null);
@@ -40,8 +41,20 @@ export default function Main() {
       .get("http://localhost:3000/initial-artists")
       .then((response) => {
         setInitialArtists(response.data.artists);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar artistas:", error);
+      });
+  }, []);
 
-        console.log(response.data.artists);
+  useEffect(() => {
+    console.log("Requisição para artistas disparada");
+    axios
+      .get("http://localhost:3000/initial-tracks")
+      .then((response) => {
+        setInitialTracks(response.data.tracks);
+
+        console.log("TRACKSSSSSS", response.data);
       })
       .catch((error) => {
         console.error("Erro ao buscar artistas:", error);
@@ -95,12 +108,9 @@ export default function Main() {
             <div className="swipers-wrapper">
               <SwiperSpotify
                 type="circle"
-                initialArtists={initialArtists}
+                data={initialArtists}
               ></SwiperSpotify>
-              <SwiperSpotify
-                type="square"
-                initialArtists={initialArtists}
-              ></SwiperSpotify>
+              <SwiperSpotify type="square" data={initialTracks}></SwiperSpotify>
             </div>
           </div>
         }

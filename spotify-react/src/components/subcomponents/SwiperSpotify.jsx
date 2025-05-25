@@ -12,11 +12,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-import axios from "axios";
-
-export default function SwiperSpotify({ type, initialArtists }) {
-  // const [initialArtists, setInitialArtists] = useState([]);
-
+export default function SwiperSpotify({ type, data }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
 
@@ -25,27 +21,14 @@ export default function SwiperSpotify({ type, initialArtists }) {
 
   const swiperRef = useRef(null);
 
-  // useEffect(() => {
-  //   console.log("Requisição para artistas disparada");
-  //   axios
-  //     .get("http://localhost:3000/initial-artists")
-  //     .then((response) => {
-  //       setInitialArtists(response.data.artists);
-
-  //       console.log(response.data.artists);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Erro ao buscar artistas:", error);
-  //     });
-  // }, []);
-
-  const totalSlides = initialArtists.length;
+  const totalSlides = data.length;
 
   const fadedSlideIndex = (activeIndex + 4) % totalSlides;
   const leftFadedSlideIndex = (activeIndex - 1 + totalSlides) % totalSlides;
 
   function renderSlides() {
-    if (!Array.isArray(initialArtists) || totalSlides === 0) {
+    if (!Array.isArray(data) || totalSlides === 0) {
+      console.log("RENDER SLIDES ERROR", data);
       return (
         <SwiperSlide>
           <div className="slide-rectangle" style={{ textAlign: "center" }}>
@@ -55,7 +38,7 @@ export default function SwiperSpotify({ type, initialArtists }) {
       );
     }
 
-    return initialArtists.map((artist, i) => (
+    return data.map((item, i) => (
       <SwiperSlide key={i} style={{ height: "100%", width: "fit-content" }}>
         <div
           style={{
@@ -78,14 +61,26 @@ export default function SwiperSpotify({ type, initialArtists }) {
                 type === "circle" ? "slide-circle" : "slide-square"
               }`}
             >
-              <img src={artist.images[1].url} />
+              <img
+                src={
+                  type === "circle"
+                    ? item.images[1].url
+                    : item.album.images[1].url
+                }
+                alt="image"
+              />
 
               <div className="slider-image-circle-box-shadow"></div>
             </div>
 
             <div className="slide-text-wrapper">
-              <span className="slide-name">{artist.name}</span>
-              <span className="slide-artist">Artista</span>
+              <span className="slide-name">{item.name}</span>
+
+              <span className="slide-artist">
+                {type === "circle"
+                  ? "Artista"
+                  : item?.artists?.[0]?.name || "Desconhecido"}
+              </span>
             </div>
           </div>
         </div>
