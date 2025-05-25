@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import PlaylistCard from "./PlaylistCard";
 import { Routes, Route, Link } from "react-router-dom";
 import PlaylistPage from "../../pages/PlaylistPage/PlaylistPage";
+import SwiperSpotify from "../SwiperSpotify";
 
 export default function Main() {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
@@ -56,11 +57,6 @@ export default function Main() {
                 }}
                 className="main-container-gradient"
               />
-              <div className="main-buttons-container">
-                <button>Tudo</button>
-                <button>Músicas</button>
-                <button>Podcasts</button>
-              </div>
 
               <div className="playlist-cards">
                 {initialPlaylists.map((playlist, index) => (
@@ -79,6 +75,8 @@ export default function Main() {
                   </Link>
                 ))}
               </div>
+
+              <SwiperSpotify></SwiperSpotify>
             </div>
           </div>
         }
