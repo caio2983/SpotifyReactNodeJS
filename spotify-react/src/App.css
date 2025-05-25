@@ -2,6 +2,7 @@
 @import "./PlaylistPage.css";
 @import "./PlayingSong.css";
 @import "./Header.css";
+@import "./SwiperSpotify.css";
 
 @font-face {
   font-family: "SpotifyMixBold";
@@ -137,7 +138,14 @@
 }
 
 .main-container-padding {
-  padding: 16px 56px 64px 56px;
+  padding: 0px 56px 64px 56px;
+}
+
+.main-wrapper {
+  padding-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
 }
 
 .song-container {
@@ -163,7 +171,7 @@
   height: 100%;
   background-color: red;
   margin: 0;
-  transition: opacity 1s ease-in;
+  transition: opacity 1.3s ease-in;
 }
 
 .main-container-gradient-visible {
@@ -174,18 +182,9 @@
   opacity: 0;
 }
 
-.main-buttons-container {
-  display: flex;
-  gap: 8px;
-  height: 50px;
-  width: 100%;
-  z-index: 10;
-}
-
 .playlist-cards {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, auto);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   z-index: 10;
 }
@@ -214,8 +213,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: "SpotifyMixBold", sans-serif;
+  font-size: large;
   transition: background-color 0.8s ease-in, box-shadow 0.3s ease;
+  color: white;
   z-index: 10;
+
+  padding: 12px 8px 12px 0;
 }
 
 .glow-white {
