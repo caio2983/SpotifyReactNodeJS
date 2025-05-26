@@ -69,6 +69,22 @@ export default function Playing() {
           const track = response.data;
           setSong(track);
         });
+    } else if (nextSongs.type == "artist") {
+      let current_number = nextSongs.nextsongs.findIndex(
+        (item) => item.id === songSelected.id
+      );
+
+      console.log("NEXT SONG ARTIST !!!!!");
+
+      const next_song_index = current_number + 1;
+      const next_song_id = nextSongs.nextsongs[next_song_index].id;
+
+      axios
+        .get(`http://localhost:3000/get-track/${next_song_id}`)
+        .then((response) => {
+          const track = response.data;
+          setSong(track);
+        });
     }
   }
 
