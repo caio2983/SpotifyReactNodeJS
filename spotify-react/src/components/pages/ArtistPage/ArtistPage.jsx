@@ -5,6 +5,8 @@ import { Vibrant } from "node-vibrant/browser";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import ArtistSong from "./ArtistSong";
+import { useGlobalContext } from "../../../GlobalContext";
 
 export default function ArtistPage() {
   const location = useLocation();
@@ -12,6 +14,8 @@ export default function ArtistPage() {
   const [artistDominantColor, setDominantColor] = useState(null);
   const [gradientColor, setGradientColor] = useState(null);
   const [popularTracks, setPopularTracks] = useState([]);
+
+  const { nextSongs, setNextSongs } = useGlobalContext();
 
   useEffect(() => {
     console.log("ARTIST CLICKED", location.state.item);
@@ -124,7 +128,17 @@ export default function ArtistPage() {
           <div className="song-list-container">
             <div className="artist-popular-tracks">
               <span>Populares</span>
-              <div className="artist-popular-tracks-wrapper">Track 1</div>
+              <div className="artist-popular-tracks-wrapper">
+                {popularTracks?.tracks?.map((track, index) => (
+                  <ArtistSong
+                    key={index + 1}
+                    track={track}
+                    index={index + 1}
+                    tracks={popularTracks.tracks}
+                    artist_id={artist.id}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

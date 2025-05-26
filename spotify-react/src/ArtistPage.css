@@ -59,7 +59,6 @@
   display: flex;
   gap: 36px;
   z-index: 20;
-  margin-bottom: 12px;
 }
 
 .artist-header-text {
@@ -138,21 +137,6 @@
   gap: 16px;
 }
 
-.song-card {
-  display: grid;
-  grid-template-columns: 4fr 2fr 2fr 1fr;
-  align-items: center;
-  gap: 16px;
-  padding: 8px 32px;
-  color: #fff;
-  border-radius: 8px;
-}
-
-.song-card:hover {
-  background-color: rgba(128, 128, 128, 0.3);
-  cursor: pointer;
-}
-
 .song-artist,
 .song-album,
 .song-date,
@@ -201,35 +185,6 @@
   max-width: 15em;
 }
 
-.song-index-number,
-.song-play-triangle {
-  min-width: 3ch;
-  text-align: left;
-  position: relative;
-}
-
-.song-index-number {
-  font-family: "SpotifyMixBold", monospace;
-  font-size: x-large;
-}
-
-.song-play-triangle {
-  font-size: x-large;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.song-card:hover .song-index-number {
-  opacity: 0;
-}
-
-.song-card:hover .song-play-triangle {
-  opacity: 1;
-}
-
 .artist-tools-wrapper {
   z-index: 10;
   margin-top: 16px;
@@ -259,7 +214,6 @@
 }
 
 .artist-popular-tracks-wrapper {
-  background-color: purple;
   padding-inline: 36px;
   display: flex;
   flex-direction: column;
