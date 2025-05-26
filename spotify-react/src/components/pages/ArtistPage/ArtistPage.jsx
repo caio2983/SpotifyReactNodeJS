@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import PlaylistTools from "../PlaylistPage/PlaylistTools";
 import { useLocation } from "react-router-dom";
 import { Vibrant } from "node-vibrant/browser";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 export default function ArtistPage() {
   const location = useLocation();
   const artist = location.state?.item;
   const [artistDominantColor, setDominantColor] = useState(null);
   const [gradientColor, setGradientColor] = useState(null);
+  const [popularTracks, setPopularTracks] = useState([]);
 
   useEffect(() => {
     console.log("ARTIST CLICKED", location.state.item);
@@ -22,6 +26,20 @@ export default function ArtistPage() {
           setGradientColor(evenDarkerColor);
           setDominantColor(darkerColor);
         }
+      });
+  }, []);
+
+  useEffect(() => {
+    if (!artist?.id) return;
+
+    axios
+      .get(`http://localhost:3000/artist-popular-tracks/${artist.id}`)
+      .then((response) => {
+        setPopularTracks(response.data);
+        console.log("POPULAR TRACKS", response.data);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }, []);
 
@@ -91,8 +109,24 @@ export default function ArtistPage() {
       >
         <div className="songs-overlay"></div>
 
+        <div className="artist-tools-wrapper">
+          <div className="play-button-green">
+            <FontAwesomeIcon
+              icon={faPlay}
+              style={{ color: "black" }}
+              size="xl"
+            />
+          </div>
+          <button>Seguir</button>
+        </div>
+
         <div className="songs-heading-container">
-          <div className="song-list-container"></div>
+          <div className="song-list-container">
+            <div className="artist-popular-tracks">
+              <span>Populares</span>
+              <div className="artist-popular-tracks-wrapper">Track 1</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
