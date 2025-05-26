@@ -61,7 +61,6 @@
   display: flex;
   gap: 36px;
   z-index: 20;
-  margin-bottom: 8px;
 }
 
 .playlist-header-text {
@@ -213,7 +212,7 @@
 
 .songs-heading {
   display: grid;
-  grid-template-columns: 4fr 2fr 2fr 1fr;
+  grid-template-columns: 5fr 2fr 2fr 1fr;
   align-items: center;
   padding: 8px 32px 16px 32px;
   margin-bottom: 12px;
@@ -346,15 +345,6 @@
   text-align: left;
 }
 
-.song-index-album {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
-}
-
 .song-image-wrapper {
   border-radius: 6px;
   overflow: hidden;
@@ -363,6 +353,8 @@
 }
 
 .song-image {
+  height: 100% !important;
+  width: 100% !important;
   object-fit: cover;
 }
 
@@ -377,13 +369,15 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 100%;
 }
 
 .name-artist-wrapper {
-  margin-left: 12px;
+  width: auto;
   display: flex;
   flex-direction: column;
   gap: 2px;
-
-  max-width: 15em;
+  display: inline-block;
+  min-width: 0;
+  max-width: 100%;
 }

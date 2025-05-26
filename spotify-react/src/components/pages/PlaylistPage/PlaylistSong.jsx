@@ -36,14 +36,16 @@ export default function PlaylistSong({ index, image, song, playlist }) {
   return (
     <div className="song-card">
       <div className="song-index-album">
-        <span className="song-index-number" onClick={clickSong}>
+        <div className="song-index-number" onClick={clickSong}>
           <span className="song-index"> {index + 1}</span>
 
           <span className="song-play-triangle">▶</span>
-        </span>
+        </div>
+
         <div className="song-image-wrapper">
           <img src={image}></img>
         </div>
+
         <div className="name-artist-wrapper">
           <span className="song-name">{song.name}</span>
           <span className="song-artist">{song.artists[0].name}</span>
