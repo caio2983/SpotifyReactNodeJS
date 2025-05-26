@@ -5,6 +5,7 @@ import PlaylistCard from "./PlaylistCard";
 import { Routes, Route, Link } from "react-router-dom";
 import PlaylistPage from "../../pages/PlaylistPage/PlaylistPage";
 import SwiperSpotify from "../SwiperSpotify";
+import ArtistPage from "../../pages/ArtistPage/ArtistPage";
 
 export default function Main() {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
@@ -117,7 +118,7 @@ export default function Main() {
       />
 
       <Route path="/playlist/:id" element={<PlaylistPage />} />
-      <Route path="/artist/:id" element={<h1>Artist page</h1>} />
+      <Route path="/artist/:id" element={<ArtistPage></ArtistPage>} />
     </Routes>
   );
 }

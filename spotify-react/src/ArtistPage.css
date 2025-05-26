@@ -1,0 +1,267 @@
+.artist-container {
+  gap: 0 !important;
+}
+
+.artist-page {
+  width: 60%;
+
+  overflow-y: auto;
+  background-color: #1d1d1e;
+  border: 1px solid #1d1d1e;
+  border-radius: 6px;
+  display: flex;
+  z-index: 15;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.artist-container {
+  gap: 0 !important;
+}
+
+.artist-page-header {
+  padding-bottom: 16px;
+  max-height: 350px;
+  width: 100%;
+  padding-top: 32px;
+  padding-inline: 24px;
+  position: relative;
+  z-index: 15;
+}
+
+.artist-image-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  z-index: 15;
+  box-shadow: 13px 10px 103px -18px rgba(0, 0, 0, 0.89);
+  margin: 0;
+}
+
+.artist-image-wrapper img {
+  object-fit: cover;
+  border-radius: 4px;
+  height: 100%;
+  width: 100%;
+  z-index: 15;
+}
+
+.artist-header-overlay {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 0;
+  box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.59) inset;
+}
+
+.artist-header-content {
+  position: relative;
+  display: flex;
+  gap: 36px;
+  z-index: 20;
+}
+
+.artist-header-text {
+  margin-left: 12px;
+  width: 60%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  gap: 12px;
+}
+
+.artist-header-text h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+}
+
+.artist-text-glow {
+  text-shadow: rgba(255, 255, 255, 0.26) 0px 0px 5px;
+}
+
+.artist-songs {
+  position: relative;
+  height: fit-content;
+}
+
+.songs-overlay {
+  position: absolute;
+  background-color: black;
+  opacity: 0.3;
+}
+
+.artist-description {
+  max-height: 100px;
+  overflow-y: hidden;
+  color: #b3b3b3;
+  margin: 0;
+  font-family: "SpotifyMixMedium", monospace;
+  font-size: large;
+}
+
+.artist-description:hover {
+  overflow-y: auto;
+}
+
+.artist-description a {
+  color: white;
+}
+
+.artist-title {
+  margin: 0;
+}
+
+.artist-owner-image-wrapper {
+  margin: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.artist-owner-image-wrapper img {
+  object-fit: contain;
+}
+
+.artist-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.artist-owner-name {
+  margin-left: 8px;
+  color: white;
+}
+
+.separation-ball {
+  margin-top: 2px;
+  width: 6px;
+  height: 6px;
+  background-color: #9ca0a6;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 4px 4px 0 4px;
+}
+
+.songs-heading-container {
+  width: 100%;
+  padding-inline: 24px;
+}
+
+.songs-heading {
+  display: grid;
+  grid-template-columns: 4fr 2fr 2fr 1fr;
+  align-items: center;
+  padding: 8px 32px 16px 32px;
+  margin-bottom: 12px;
+  font-family: "SpotifyMixMedium", monospace;
+  font-size: larger;
+  color: #b3b3b3;
+  border-bottom: 1px solid rgba(214, 216, 220, 0.2);
+}
+
+.heading-duration {
+  text-align: right;
+}
+
+.heading-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.song-card {
+  display: grid;
+  grid-template-columns: 4fr 2fr 2fr 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 32px;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.song-card:hover {
+  background-color: rgba(128, 128, 128, 0.3);
+  cursor: pointer;
+}
+
+.song-artist,
+.song-album,
+.song-date,
+.song-duration {
+  font-family: "SpotifyMixMedium", monospace;
+  font-size: large;
+  color: #b3b3b3;
+}
+
+.song-index-album {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.song-image-wrapper {
+  border-radius: 6px;
+  overflow: hidden;
+  height: 64px;
+  width: 64px;
+}
+
+.song-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.song-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-name {
+  font-family: "SpotifyMixBold", monospace;
+  font-size: large;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name-artist-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 15em;
+}
+
+.song-index-number,
+.song-play-triangle {
+  min-width: 3ch;
+  text-align: left;
+  position: relative;
+}
+
+.song-index-number {
+  font-family: "SpotifyMixBold", monospace;
+  font-size: x-large;
+}
+
+.song-play-triangle {
+  font-size: x-large;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.song-card:hover .song-index-number {
+  opacity: 0;
+}
+
+.song-card:hover .song-play-triangle {
+  opacity: 1;
+}

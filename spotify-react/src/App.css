@@ -3,6 +3,7 @@
 @import "./PlayingSong.css";
 @import "./Header.css";
 @import "./SwiperSpotify.css";
+@import "./ArtistPage.css";
 
 @font-face {
   font-family: "SpotifyMixBold";
@@ -148,7 +149,6 @@
 }
 
 .swipers-wrapper {
-  padding-left: 56px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -178,7 +178,7 @@
 
 .playlist-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   z-index: 10;
 }
