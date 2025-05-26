@@ -11,6 +11,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function SwiperSpotify({ type, data }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -39,51 +40,56 @@ export default function SwiperSpotify({ type, data }) {
     }
 
     return data.map((item, i) => (
-      <SwiperSlide key={i} style={{ height: "100%", width: "fit-content" }}>
-        <div
-          style={{
-            opacity:
-              i === fadedSlideIndex || i === leftFadedSlideIndex ? 0.4 : 1,
-            transition: "opacity 0.3s ease",
-          }}
-          className="slide-rectangle"
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor =
-              "rgba(255, 255, 255, 0.14)")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = "transparent")
-          }
-        >
-          <div className="slide-content">
-            <div
-              className={`${
-                type === "circle" ? "slide-circle" : "slide-square"
-              }`}
-            >
-              <img
-                src={
-                  type === "circle"
-                    ? item.images[1].url
-                    : item.album.images[1].url
-                }
-                alt="image"
-              />
+      <SwiperSlide
+        key={i}
+        style={{ height: "100%", width: "fit-content", paddingLeft: "56px" }}
+      >
+        <Link to={`/${type === "circle" ? "artist" : "track"}/${item.id}`}>
+          <div
+            style={{
+              opacity:
+                i === fadedSlideIndex || i === leftFadedSlideIndex ? 0.4 : 1,
+              transition: "opacity 0.3s ease",
+            }}
+            className="slide-rectangle"
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor =
+                "rgba(255, 255, 255, 0.14)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "transparent")
+            }
+          >
+            <div className="slide-content">
+              <div
+                className={`${
+                  type === "circle" ? "slide-circle" : "slide-square"
+                }`}
+              >
+                <img
+                  src={
+                    type === "circle"
+                      ? item.images[1].url
+                      : item.album.images[1].url
+                  }
+                  alt="image"
+                />
 
-              <div className="slider-image-circle-box-shadow"></div>
-            </div>
+                <div className="slider-image-circle-box-shadow"></div>
+              </div>
 
-            <div className="slide-text-wrapper">
-              <span className="slide-name">{item.name}</span>
+              <div className="slide-text-wrapper">
+                <span className="slide-name">{item.name}</span>
 
-              <span className="slide-artist">
-                {type === "circle"
-                  ? "Artista"
-                  : item?.artists?.[0]?.name || "Desconhecido"}
-              </span>
+                <span className="slide-artist">
+                  {type === "circle"
+                    ? "Artista"
+                    : item?.artists?.[0]?.name || "Desconhecido"}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       </SwiperSlide>
     ));
   }
