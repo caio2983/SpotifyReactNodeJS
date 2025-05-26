@@ -29,9 +29,6 @@ export default function PlaylistPage() {
   }
 
   useEffect(() => {
-    console.log("PLAYLIST ADJISAJDIASIDN", playlist);
-    console.log("PLAYLIST PAGE ENXT SONGS", nextSongs);
-
     setNextSongs({
       nextsongs: playlist.tracks.items,
       id: playlist.id,
@@ -123,9 +120,10 @@ export default function PlaylistPage() {
         style={{
           background: gradientColor
             ? `linear-gradient(0deg, 
-                rgba(29, 29, 30, 1) 90%, 
-                ${hexToRgb(gradientColor, 0.9)} 110%)`
+                rgba(29, 29, 30, 1) 0%, 
+                ${hexToRgb(gradientColor, 0.5)} 110%)`
             : "#1d1d1e",
+          height: "100vh",
         }}
       >
         <div className="songs-overlay"></div>

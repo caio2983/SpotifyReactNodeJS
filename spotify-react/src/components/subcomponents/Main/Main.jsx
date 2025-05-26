@@ -54,8 +54,6 @@ export default function Main() {
       .get("http://localhost:3000/initial-tracks")
       .then((response) => {
         setInitialTracks(response.data.tracks);
-
-        console.log("TRACKSSSSSS", response.data);
       })
       .catch((error) => {
         console.error("Erro ao buscar artistas:", error);
