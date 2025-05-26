@@ -4,7 +4,6 @@
 
 .artist-page {
   width: 60%;
-
   overflow-y: auto;
   background-color: #1d1d1e;
   border: 1px solid #1d1d1e;
@@ -13,10 +12,6 @@
   z-index: 15;
   position: relative;
   overflow-y: scroll;
-}
-
-.artist-container {
-  gap: 0 !important;
 }
 
 .artist-page-header {
@@ -33,6 +28,8 @@
   position: relative;
   width: 200px;
   height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
   z-index: 15;
   box-shadow: 13px 10px 103px -18px rgba(0, 0, 0, 0.89);
   margin: 0;
@@ -40,9 +37,9 @@
 
 .artist-image-wrapper img {
   object-fit: cover;
-  border-radius: 4px;
   height: 100%;
   width: 100%;
+  border-radius: 50%;
   z-index: 15;
 }
 
@@ -57,29 +54,34 @@
 }
 
 .artist-header-content {
+  height: 100%;
   position: relative;
   display: flex;
   gap: 36px;
   z-index: 20;
+  margin-bottom: 12px;
 }
 
 .artist-header-text {
+  height: 100%;
   margin-left: 12px;
   width: 60%;
   z-index: 20;
   display: flex;
   flex-direction: column;
-  align-self: flex-end;
+  justify-content: center;
   gap: 12px;
 }
 
 .artist-header-text h1 {
-  font-size: 2.8rem;
+  color: white;
+  z-index: 10000;
+  font-size: 4.5rem;
   font-weight: 800;
 }
 
 .artist-text-glow {
-  text-shadow: rgba(255, 255, 255, 0.26) 0px 0px 5px;
+  text-shadow: rgba(255, 255, 255, 0.15) 0px 0px 5px;
 }
 
 .artist-songs {
@@ -93,36 +95,8 @@
   opacity: 0.3;
 }
 
-.artist-description {
-  max-height: 100px;
-  overflow-y: hidden;
-  color: #b3b3b3;
-  margin: 0;
-  font-family: "SpotifyMixMedium", monospace;
-  font-size: large;
-}
-
-.artist-description:hover {
-  overflow-y: auto;
-}
-
-.artist-description a {
-  color: white;
-}
-
 .artist-title {
   margin: 0;
-}
-
-.artist-owner-image-wrapper {
-  margin: 0;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-.artist-owner-image-wrapper img {
-  object-fit: contain;
 }
 
 .artist-details {
@@ -132,19 +106,9 @@
   gap: 8px;
 }
 
-.artist-owner-name {
-  margin-left: 8px;
-  color: white;
-}
-
-.separation-ball {
-  margin-top: 2px;
-  width: 6px;
-  height: 6px;
-  background-color: #9ca0a6;
-  border-radius: 50%;
-  display: inline-block;
-  margin: 4px 4px 0 4px;
+.artist-followers {
+  font-family: "SpotifyMixMedium";
+  font-size: 1.25rem;
 }
 
 .songs-heading-container {

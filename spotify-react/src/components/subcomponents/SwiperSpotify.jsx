@@ -42,9 +42,15 @@ export default function SwiperSpotify({ type, data }) {
     return data.map((item, i) => (
       <SwiperSlide
         key={i}
-        style={{ height: "100%", width: "fit-content", paddingLeft: "56px" }}
+        style={{
+          height: "100%",
+          width: "fit-content",
+        }}
       >
-        <Link to={`/${type === "circle" ? "artist" : "track"}/${item.id}`}>
+        <Link
+          to={`/${type === "circle" ? "artist" : "track"}/${item.id}`}
+          state={{ item }}
+        >
           <div
             style={{
               opacity:
@@ -109,7 +115,7 @@ export default function SwiperSpotify({ type, data }) {
       >
         <Swiper
           spaceBetween={0}
-          slidesPerView={4.25}
+          slidesPerView={4.5}
           slidesPerGroup={2}
           modules={[Navigation]}
           loop={false}
