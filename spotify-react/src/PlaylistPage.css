@@ -16,8 +16,6 @@
 }
 
 .playlist-page-header {
-  max-height: 350px;
-  height: 350px;
   padding-bottom: 16px;
   width: 100%;
   padding-top: 32px;
@@ -63,6 +61,7 @@
   display: flex;
   gap: 36px;
   z-index: 20;
+  margin-bottom: 8px;
 }
 
 .playlist-header-text {

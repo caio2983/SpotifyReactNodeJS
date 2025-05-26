@@ -152,8 +152,8 @@
 }
 
 .song-image-expanded {
-  width: 500px;
-  height: 500px;
+  width: 500px !important;
+  height: 500px !important;
 }
 
 .expanded-button {
