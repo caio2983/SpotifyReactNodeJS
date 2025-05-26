@@ -80,7 +80,7 @@ export default function Main() {
                       rgba(29, 29, 30, 0) 100%
                     )`
                     : "transparent",
-                  height: "400px",
+                  height: "500px",
                 }}
                 className="main-container-gradient"
               />
