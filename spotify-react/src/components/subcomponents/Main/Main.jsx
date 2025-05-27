@@ -116,7 +116,7 @@ export default function Main() {
       />
 
       <Route path="/playlist/:id" element={<PlaylistPage />} />
-      <Route path="/artist/:id" element={<ArtistPage></ArtistPage>} />
+      <Route path="/artist/:artistId" element={<ArtistPage></ArtistPage>} />
     </Routes>
   );
 }
