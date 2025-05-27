@@ -11,6 +11,8 @@ const { getInitialTracks } = require("./resultTypes/tracks/initialTracks");
 const {
   getArtistPopularTracks,
 } = require("./resultTypes/artists/artistPopularTracks");
+const { getArtistAlbums } = require("./resultTypes/artists/artistAlbums");
+const { getArtist } = require("./resultTypes/artists/getArtist");
 
 const app = express();
 const PORT = 3000;
@@ -144,6 +146,38 @@ app.get("/artist-popular-tracks/:id", async (req, res) => {
   } catch (err) {
     console.error("Erro ao buscar as músicas mais populares do artista:", err);
     res.status(500).json({ error: "erro ao conseguir as músicas " });
+  }
+});
+
+app.get("/artist-albums/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ error: "ID do artista é obrigatório" });
+    }
+
+    const albums = await getArtistAlbums(id);
+    res.json(albums);
+  } catch (err) {
+    console.error("Erro ao buscar os albuns do artista:", err);
+    res.status(500).json({ error: "erro ao conseguir os albuns " });
+  }
+});
+
+app.get("/artist/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("IDDDDD", id);
+    if (!id) {
+      return res.status(400).json({ error: "ID do artista é obrigatório" });
+    }
+
+    const albums = await getArtist(id);
+    res.json(albums);
+  } catch (err) {
+    console.error("Erro ao buscar o artista:", err);
+    res.status(500).json({ error: "erro ao conseguir o artista " });
   }
 });
 
