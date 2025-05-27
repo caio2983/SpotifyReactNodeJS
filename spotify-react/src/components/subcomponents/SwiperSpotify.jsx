@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-export default function SwiperSpotify({ type, data }) {
+export default function SwiperSpotify({ type, data, album }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
 
@@ -22,10 +22,7 @@ export default function SwiperSpotify({ type, data }) {
 
   const swiperRef = useRef(null);
 
-  const totalSlides = data.length;
-
-  const fadedSlideIndex = (activeIndex + 4) % totalSlides;
-  const leftFadedSlideIndex = (activeIndex - 1 + totalSlides) % totalSlides;
+  const totalSlides = data?.length ?? 0;
 
   function renderSlides() {
     if (!Array.isArray(data) || totalSlides === 0) {
@@ -52,11 +49,6 @@ export default function SwiperSpotify({ type, data }) {
           state={{ item }}
         >
           <div
-            style={{
-              opacity:
-                i === fadedSlideIndex || i === leftFadedSlideIndex ? 0.4 : 1,
-              transition: "opacity 0.3s ease",
-            }}
             className="slide-rectangle"
             onMouseEnter={(e) =>
               (e.currentTarget.style.backgroundColor =
@@ -75,8 +67,8 @@ export default function SwiperSpotify({ type, data }) {
                 <img
                   src={
                     type === "circle"
-                      ? item.images[1].url
-                      : item.album.images[1].url
+                      ? item.images?.[1]?.url ?? item.album?.images?.[1]?.url
+                      : item.album?.images?.[1]?.url ?? item.images?.[1]?.url
                   }
                   alt="image"
                 />
@@ -86,7 +78,6 @@ export default function SwiperSpotify({ type, data }) {
 
               <div className="slide-text-wrapper">
                 <span className="slide-name">{item.name}</span>
-
                 <span className="slide-artist">
                   {type === "circle"
                     ? "Artista"
@@ -102,11 +93,13 @@ export default function SwiperSpotify({ type, data }) {
 
   return (
     <div className="swiper-component-container">
-      <p className="swiper-title">
-        {type === "circle"
-          ? "Seus artistas favoritos"
-          : "Suas músicas estão com saudade"}
-      </p>
+      {!album && (
+        <p className="swiper-title">
+          {type === "circle"
+            ? "Seus artistas favoritos"
+            : "Suas músicas estão com saudade"}
+        </p>
+      )}
       <div
         className="main-swiper"
         style={{ position: "relative" }}
@@ -115,7 +108,7 @@ export default function SwiperSpotify({ type, data }) {
       >
         <Swiper
           spaceBetween={0}
-          slidesPerView={4.5}
+          slidesPerView={4}
           slidesPerGroup={2}
           modules={[Navigation]}
           loop={false}
@@ -141,18 +134,24 @@ export default function SwiperSpotify({ type, data }) {
 
         <button
           ref={prevRef}
-          className={`custom-swiper-button prev ${isHover ? "visible" : ""}`}
+          className={`custom-swiper-button prev ${isHover ? "visible" : ""} ${
+            totalSlides < 5 ? "disabled" : ""
+          }`}
           aria-label="Previous slide"
           type="button"
+          disabled={totalSlides < 5}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
 
         <button
           ref={nextRef}
-          className={`custom-swiper-button next ${isHover ? "visible" : ""}`}
+          className={`custom-swiper-button next ${isHover ? "visible" : ""} ${
+            totalSlides < 5 ? "disabled" : ""
+          }`}
           aria-label="Next slide"
           type="button"
+          disabled={totalSlides < 5}
         >
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
