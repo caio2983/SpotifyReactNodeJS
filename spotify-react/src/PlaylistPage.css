@@ -168,7 +168,6 @@
   align-items: center;
   gap: 16px;
 }
-
 .play-button-green {
   width: 78px;
   height: 78px;
@@ -178,6 +177,17 @@
   justify-content: center;
   border-radius: 9999px;
   transition: transform 0.2s ease-in-out;
+}
+
+.play-button-green span {
+  color: black;
+  font-size: 2.2rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+  margin-left: 2px;
 }
 
 .play-button-green:hover {
