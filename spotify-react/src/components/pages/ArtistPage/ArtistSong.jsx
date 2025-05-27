@@ -27,7 +27,7 @@ export default function ArtistSong({ track, index, tracks, artist_id }) {
   }
 
   return (
-    <div className="song-card">
+    <div className="song-card" style={{ gridTemplateColumns: "8fr 2fr" }}>
       <div className="song-index-album">
         <div className="song-index-number" onClick={clickSong}>
           <div
@@ -67,17 +67,15 @@ export default function ArtistSong({ track, index, tracks, artist_id }) {
           <img src={track?.album?.images[2].url}></img>
         </div>
         <div className="name-artist-wrapper">
-          <span className="song-name"></span>
-          <span className="song-artist"></span>
+          <span className="song-name">{track.name}</span>
         </div>
       </div>
-      <span className="song-album"></span>
-      <span className="song-date"></span>
+
       <span className="song-duration">
-        {/* {Math.floor(song.duration_ms / 60000)}:
-        {Math.floor((song.duration_ms % 60000) / 1000)
+        {Math.floor(track.duration_ms / 60000)}:
+        {Math.floor((track.duration_ms % 60000) / 1000)
           .toString()
-          .padStart(2, "0")} */}
+          .padStart(2, "0")}
       </span>
     </div>
   );

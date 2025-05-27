@@ -1,25 +1,67 @@
 import React, { useEffect, useState } from "react";
 import PlaylistTools from "../PlaylistPage/PlaylistTools";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Vibrant } from "node-vibrant/browser";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import ArtistSong from "./ArtistSong";
 import { useGlobalContext } from "../../../GlobalContext";
+import SwiperSpotify from "../../subcomponents/SwiperSpotify";
 
 export default function ArtistPage() {
   const location = useLocation();
-  const artist = location.state?.item;
+  const { artistId } = useParams();
+
+  // Inicializa artist com o item do location.state, se existir, ou null
+  const [artist, setArtist] = useState(location.state?.item || null);
   const [artistDominantColor, setDominantColor] = useState(null);
   const [gradientColor, setGradientColor] = useState(null);
   const [popularTracks, setPopularTracks] = useState([]);
-
+  const [showAllTracks, setShowAllTracks] = useState(false);
+  const [albums, setAlbums] = useState({
+    album: [],
+    single: [],
+    appears_on: [],
+    compilation: [],
+  });
   const { nextSongs, setNextSongs } = useGlobalContext();
 
+  const [selectedAlbumType, setSelectedAlbumType] = useState("album");
+
+  function separateAlbums(albums) {
+    const result = {
+      album: [],
+      single: [],
+      appears_on: [],
+      compilation: [],
+    };
+
+    for (const album of albums) {
+      const type = album.album_type;
+
+      if (Object.prototype.hasOwnProperty.call(result, type)) {
+        result[type].push(album);
+      }
+    }
+
+    return result;
+  }
+
+  // Caso não tenha o artista vindo pelo state, buscar via API usando artistId
   useEffect(() => {
-    console.log("ARTIST CLICKED", location.state.item);
-    console.log("artist images:", location.state.item);
+    if (!artist) {
+      console.log("TESTEEEEE");
+      axios
+        .get(`http://localhost:3000/artist/${artistId}`)
+        .then((response) => {
+          setArtist(response.data);
+        })
+        .catch(console.error);
+    }
+  }, []);
+
+  // Pegar paleta de cores para o header (depende do artista)
+  useEffect(() => {
+    if (!artist) return;
 
     Vibrant.from(artist?.images[1]?.url)
       .getPalette()
@@ -31,8 +73,9 @@ export default function ArtistPage() {
           setDominantColor(darkerColor);
         }
       });
-  }, []);
+  }, [artist]);
 
+  // Buscar faixas populares do artista
   useEffect(() => {
     if (!artist?.id) return;
 
@@ -40,12 +83,24 @@ export default function ArtistPage() {
       .get(`http://localhost:3000/artist-popular-tracks/${artist.id}`)
       .then((response) => {
         setPopularTracks(response.data);
-        console.log("POPULAR TRACKS", response.data);
       })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+      .catch(console.error);
+  }, [artist]);
+
+  // Buscar álbuns do artista e separar por tipo
+  useEffect(() => {
+    if (!artist?.id) return;
+
+    axios
+      .get(`http://localhost:3000/artist-albums/${artist.id}`)
+      .then((response) => {
+        const separated_albums = separateAlbums(response.data.items);
+
+        console.log(separated_albums);
+        setAlbums(separated_albums);
+      })
+      .catch(console.error);
+  }, [artist]);
 
   function hexToRgb(hex, alpha) {
     const cleanHex = hex.replace("#", "");
@@ -92,7 +147,7 @@ export default function ArtistPage() {
           <div className="artist-header-text">
             <h1 className="artist-title artist-text-glow">{artist?.name}</h1>
             <span className="artist-followers">
-              {artist?.followers.total} seguidores
+              {artist?.followers?.total} seguidores
             </span>
             <div className="artist-details"></div>
           </div>
@@ -112,36 +167,95 @@ export default function ArtistPage() {
         }}
       >
         <div className="songs-overlay"></div>
-
         <div className="artist-tools-wrapper">
           <div className="play-button-green">
-            <FontAwesomeIcon
-              icon={faPlay}
-              style={{ color: "black" }}
-              size="xl"
-            />
+            <span>▶</span>
           </div>
           <button>Seguir</button>
         </div>
-
-        <div className="songs-heading-container">
+        <div className="songs-heading-container artist-songs-heading">
           <div className="song-list-container">
             <div className="artist-popular-tracks">
               <span>Populares</span>
               <div className="artist-popular-tracks-wrapper">
-                {popularTracks?.tracks?.map((track, index) => (
-                  <ArtistSong
-                    key={index + 1}
-                    track={track}
-                    index={index + 1}
-                    tracks={popularTracks.tracks}
-                    artist_id={artist.id}
-                  />
-                ))}
+                {popularTracks?.tracks
+                  ?.slice(0, showAllTracks ? 10 : 5)
+                  .map((track, index) => (
+                    <ArtistSong
+                      key={index + 1}
+                      track={track}
+                      index={index + 1}
+                      tracks={popularTracks.tracks}
+                      artist_id={artist?.id}
+                    />
+                  ))}
               </div>
+              {popularTracks?.tracks?.length > 5 && (
+                <button
+                  onClick={() => setShowAllTracks(!showAllTracks)}
+                  className="show-more-button"
+                >
+                  {showAllTracks ? "Mostrar menos" : "Mostrar tudo"}
+                </button>
+              )}
             </div>
           </div>
         </div>
+
+        <div className="swipers-wrapper artist-discography">
+          <p className="discography">Discografia</p>
+          <div className="albuns-buttons">
+            {["album", "single"].map((key) => {
+              if (!albums[key] || albums[key].length === 0) return null;
+
+              const labels = {
+                album: "Álbuns",
+                single: "Singles",
+              };
+
+              return (
+                <button
+                  key={key}
+                  className={`album-button ${
+                    selectedAlbumType === key ? "active" : ""
+                  }`}
+                  onClick={() => setSelectedAlbumType(key)}
+                >
+                  {labels[key]}
+                </button>
+              );
+            })}
+          </div>
+          <SwiperSpotify
+            type="square"
+            data={albums?.[selectedAlbumType] || []}
+            album={true}
+          />
+        </div>
+
+        {albums?.appears_on && albums.appears_on.length > 0 && (
+          <div className="swipers-wrapper artist-appears-on">
+            <p className="discography">Aparece em</p>
+            <SwiperSpotify
+              type="square"
+              data={albums.appears_on}
+              album={true}
+            />
+          </div>
+        )}
+
+        {albums?.compilation && albums.compilation.length > 0 && (
+          <div className="swipers-wrapper artist-compilation">
+            <p className="discography">Com {artist?.name}</p>
+            {selectedAlbumType && (
+              <SwiperSpotify
+                type="square"
+                data={albums[selectedAlbumType] || []}
+                album={true}
+              />
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
