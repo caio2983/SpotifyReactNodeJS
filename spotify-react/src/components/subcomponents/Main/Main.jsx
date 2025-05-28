@@ -7,6 +7,7 @@ import PlaylistPage from "../../pages/PlaylistPage/PlaylistPage";
 import SwiperSpotify from "../SwiperSpotify";
 import ArtistPage from "../../pages/ArtistPage/ArtistPage";
 import PlaylistCardSkeleton from "./PlaylistCardSkeleton";
+import SearchingPage from "../../pages/SearchingPage/SearchingPage";
 
 export default function Main() {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
@@ -128,6 +129,10 @@ export default function Main() {
 
       <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
       <Route path="/artist/:artistId" element={<ArtistPage></ArtistPage>} />
+      <Route
+        path="/search/:searchInput"
+        element={<SearchingPage></SearchingPage>}
+      />
     </Routes>
   );
 }

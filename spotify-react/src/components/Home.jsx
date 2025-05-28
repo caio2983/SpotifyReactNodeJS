@@ -80,8 +80,7 @@ export default function Home() {
 
       {/* MAIN */}
       <div className="resizable main" style={{ width: `${mainWidth}%` }}>
-        {isSearching && <SearchingPage></SearchingPage>}
-        {!isSearching && <Main></Main>}
+        <Main></Main>
       </div>
 
       {/* SONG */}

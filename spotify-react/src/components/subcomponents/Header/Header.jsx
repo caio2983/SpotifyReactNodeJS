@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import debounce from "lodash.debounce";
 import spotifyLogo from "../../../assets/spotifyLogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HeaderSearchResults from "./HeaderSearchResults";
 import { useGlobalContext } from "../../../GlobalContext";
 
@@ -11,6 +11,7 @@ export default function Header() {
   const [searchResults, setSearchResults] = useState([]);
   const { setIsSearching } = useGlobalContext();
   const { setGlobalSearchResult } = useGlobalContext();
+  const navigate = useNavigate();
 
   const fetchSearchResults = async (query) => {
     try {
@@ -39,6 +40,7 @@ export default function Header() {
       if (query.trim() !== "") {
         fetchSearchResults(query);
         setIsSearching(true);
+        navigate(`/search/${encodeURIComponent(query)}`);
       } else {
         setSearchResults([]);
       }
