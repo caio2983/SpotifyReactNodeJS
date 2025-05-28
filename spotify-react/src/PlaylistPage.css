@@ -364,12 +364,6 @@
   width: 64px;
 }
 
-.song-image {
-  height: 100% !important;
-  width: 100% !important;
-  object-fit: cover;
-}
-
 .song-list-container {
   display: flex;
   flex-direction: column;
