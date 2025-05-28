@@ -3,14 +3,15 @@ import { useGlobalContext } from "../../../GlobalContext";
 import SwiperSpotify from "../../subcomponents/SwiperSpotify";
 
 export default function SearchingPage() {
-  const { globalSearchResult } = useGlobalContext();
-
-  useEffect(() => {
-    console.log("GLOBAL RESULTTTT", globalSearchResult);
-  }, [globalSearchResult]);
+  const { globalSearchResult, searchTerm } = useGlobalContext();
 
   return (
     <div className="main-container searching-container">
+      <p className="showing-results">
+        Mostrando resultados para:
+        <span className="search-term"> {searchTerm} </span>
+      </p>
+
       <div className="swipers-wrapper searching-swiper">
         <p>Músicas</p>
         {globalSearchResult && (

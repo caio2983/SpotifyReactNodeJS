@@ -7,10 +7,11 @@ import HeaderSearchResults from "./HeaderSearchResults";
 import { useGlobalContext } from "../../../GlobalContext";
 
 export default function Header() {
-  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const { setIsSearching } = useGlobalContext();
-  const { setGlobalSearchResult } = useGlobalContext();
+  const { setGlobalSearchResult, setSearchTerm, searchTerm } =
+    useGlobalContext();
+
   const navigate = useNavigate();
 
   const fetchSearchResults = async (query) => {
@@ -59,7 +60,7 @@ export default function Header() {
         className="logo-wrapper"
         onClick={() => {
           setIsSearching(false);
-          setSearchTerm("");
+          searchTerm("");
         }}
       >
         <img src={spotifyLogo} alt="Spotify Logo" />
