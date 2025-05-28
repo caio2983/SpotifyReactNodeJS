@@ -10,7 +10,7 @@ export default function LibraryExpanded({ setIsExpanded }) {
   }, []);
 
   const handleClick = () => {
-    setAnimateClass("collapsing");
+    setAnimateClass("collapsed");
 
     setTimeout(() => {
       setIsExpanded(false);
