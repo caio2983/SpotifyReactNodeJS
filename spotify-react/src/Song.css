@@ -109,7 +109,8 @@
   position: fixed;
   top: 20vh;
   bottom: 20vh;
-  right: 0;
+  left: 12px;
+  right: 12px;
   margin-bottom: 20px;
   height: 80vh;
 
@@ -121,7 +122,7 @@
   border-radius: 10px;
   z-index: 102;
   transition: all 0.5s ease;
-  transform-origin: left;
+  transform-origin: right;
   overflow: hidden;
   opacity: 0;
   transform: scaleX(0);
@@ -129,10 +130,10 @@
 
 .song-expanded-container.expanded {
   padding-inline: 0;
-  width: 100%;
+
   transform: scaleX(1);
   opacity: 1;
-  transform-origin: right;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,10 +141,9 @@
 }
 
 .song-expanded-container.collapsed {
-  width: 0;
   opacity: 0;
   transform: scaleX(0);
-  transform-origin: right;
+
   display: flex;
   align-items: center;
   justify-items: left;
