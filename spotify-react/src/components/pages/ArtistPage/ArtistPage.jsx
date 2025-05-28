@@ -47,15 +47,14 @@ export default function ArtistPage() {
 
   // Caso não tenha o artista vindo pelo state, buscar via API usando artistId
   useEffect(() => {
-    if (!artist) {
-      console.log("TESTEEEEE");
-      axios
-        .get(`http://localhost:3000/artist/${artistId}`)
-        .then((response) => {
-          setArtist(response.data);
-        })
-        .catch(console.error);
-    }
+    console.log("TESTEEEEE");
+    axios
+      .get(`http://localhost:3000/artist/${artistId}`)
+      .then((response) => {
+        setArtist(response.data);
+        console.log("ARTISTTTT", response.data);
+      })
+      .catch(console.error);
   }, []);
 
   // Pegar paleta de cores para o header (depende do artista)
@@ -140,18 +139,18 @@ export default function ArtistPage() {
       <header
         className="artist-page-header"
         style={{
-          backgroundColor: artistDominantColor || "#1d1d1e",
-          boxShadow: "0 60px 120px -40px rgba(0, 0, 0, 0.5)",
+          backgroundImage: `url(${artist?.images[0]?.url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          boxShadow: "0 60px 120px -40px rgba(0, 0, 0, 0.1)",
         }}
       >
         <section className="artist-header-content">
-          <figure className="artist-image-wrapper">
-            <img src={artist?.images[1]?.url} className="artist-image" />
-          </figure>
           <div className="artist-header-text">
             <h1 className="artist-title artist-text-glow">{artist?.name}</h1>
             <span className="artist-followers">
-              {artist?.followers?.total} seguidores
+              {artist?.followers?.total?.toLocaleString("pt-BR")} seguidores
             </span>
             <div className="artist-details"></div>
           </div>
