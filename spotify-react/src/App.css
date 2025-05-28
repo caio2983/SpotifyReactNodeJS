@@ -288,3 +288,8 @@
   border-bottom-left-radius: 6px;
   z-index: 10;
 }
+
+.playlist-card-text-loading {
+  width: 80%;
+  margin-right: 5%;
+}

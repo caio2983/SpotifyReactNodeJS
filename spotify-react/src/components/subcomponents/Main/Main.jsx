@@ -6,11 +6,13 @@ import { Routes, Route, Link } from "react-router-dom";
 import PlaylistPage from "../../pages/PlaylistPage/PlaylistPage";
 import SwiperSpotify from "../SwiperSpotify";
 import ArtistPage from "../../pages/ArtistPage/ArtistPage";
+import PlaylistCardSkeleton from "./PlaylistCardSkeleton";
 
 export default function Main() {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
   const [initialArtists, setInitialArtists] = useState([]);
   const [initialTracks, setInitialTracks] = useState([]);
+  const [playlistCardsLoading, setPlaylistCardsLoading] = useState(true);
   const [playlistGradientColor, setPlaylistGradientColor] = useState(null);
   const [initialGradientColor, setInitialGradientColor] = useState(null);
   const gradientRef = useRef(null);
@@ -26,13 +28,16 @@ export default function Main() {
 
   useEffect(() => {
     console.log("Requisição para playlists disparada");
+
     axios
       .get("http://localhost:3000/initial-playlists")
       .then((response) => {
         setInitialPlaylists(response.data);
+        setPlaylistCardsLoading(false);
       })
       .catch((error) => {
         console.error(error);
+        setPlaylistCardsLoading(false);
       });
   }, []);
 
@@ -86,21 +91,26 @@ export default function Main() {
               />
 
               <div className="playlist-cards">
-                {initialPlaylists.map((playlist, index) => (
-                  <Link
-                    to={`/playlist/${playlist.id}`}
-                    state={{ playlist }}
-                    key={playlist.id}
-                  >
-                    <PlaylistCard
-                      playlist={playlist}
-                      index={index}
-                      setPlaylistGradientColor={setPlaylistGradientColor}
-                      setInitialGradientColor={setInitialGradientColor}
-                      gradientRef={gradientRef}
-                    />
-                  </Link>
-                ))}
+                {playlistCardsLoading &&
+                  Array.from({ length: 8 }).map((_, index) => (
+                    <PlaylistCardSkeleton key={index} />
+                  ))}
+                {!playlistCardsLoading &&
+                  initialPlaylists.map((playlist, index) => (
+                    <Link
+                      to={`/playlist/${playlist.id}`}
+                      state={{ playlist }}
+                      key={playlist.id}
+                    >
+                      <PlaylistCard
+                        playlist={playlist}
+                        index={index}
+                        setPlaylistGradientColor={setPlaylistGradientColor}
+                        setInitialGradientColor={setInitialGradientColor}
+                        gradientRef={gradientRef}
+                      />
+                    </Link>
+                  ))}
               </div>
             </div>
 
@@ -115,7 +125,7 @@ export default function Main() {
         }
       />
 
-      <Route path="/playlist/:id" element={<PlaylistPage />} />
+      <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
       <Route path="/artist/:artistId" element={<ArtistPage></ArtistPage>} />
     </Routes>
   );
