@@ -27,6 +27,7 @@ export default function Main() {
   }
 
   useEffect(() => {
+    setPlaylistCardsLoading(true);
     console.log("Requisição para playlists disparada");
 
     axios
