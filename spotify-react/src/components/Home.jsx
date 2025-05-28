@@ -26,7 +26,7 @@ export default function Home() {
 
     if (dragging === "library") {
       setLibraryWidth((prev) => {
-        const newWidth = Math.max(4, Math.min(25, prev + deltaPercent));
+        const newWidth = Math.max(6, Math.min(25, prev + deltaPercent));
         return newWidth;
       });
     }
@@ -82,7 +82,7 @@ export default function Home() {
       </div>
 
       {/* SONG */}
-      <div className="resizable" style={{ width: `${songWidth}%` }}>
+      <div className="resizable " style={{ width: `${songWidth}%` }}>
         {isSongExpanded && (
           <SongExpanded
             setIsSongExpanded={setIsSongExpanded}
