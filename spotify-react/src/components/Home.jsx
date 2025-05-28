@@ -8,6 +8,7 @@ import Song from "./subcomponents/Song/Song";
 import SongExpanded from "./subcomponents/Song/SongExpanded";
 import axios from "axios";
 import Library from "./subcomponents/Library/Library";
+import SearchingPage from "./pages/SearchingPage/SearchingPage";
 
 export default function Home() {
   const { songSelected, setSong, nextSongs, setNextSongs } = useGlobalContext();
@@ -18,6 +19,7 @@ export default function Home() {
   const [libraryWidth, setLibraryWidth] = useState(25);
   const [songWidth, setSongWidth] = useState(25);
   const [dragging, setDragging] = useState(null);
+  const { isSearching } = useGlobalContext();
 
   const handleMouseMove = (e) => {
     if (!dragging) return;
@@ -78,7 +80,8 @@ export default function Home() {
 
       {/* MAIN */}
       <div className="resizable main" style={{ width: `${mainWidth}%` }}>
-        <Main />
+        {isSearching && <SearchingPage></SearchingPage>}
+        {!isSearching && <Main></Main>}
       </div>
 
       {/* SONG */}

@@ -5,6 +5,8 @@ const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
 
 export function GlobalProvider({ children }) {
+  const [isSearching, setIsSearching] = useState(false);
+  const [globalSearchResult, setGlobalSearchResult] = useState(null);
   const [songSelected, setSong] = useState(null);
   const [nextSongs, setNextSongs] = useState({
     nextsongs: [],
@@ -19,6 +21,10 @@ export function GlobalProvider({ children }) {
         setSong,
         nextSongs,
         setNextSongs,
+        isSearching,
+        setIsSearching,
+        globalSearchResult,
+        setGlobalSearchResult,
       }}
     >
       {children}

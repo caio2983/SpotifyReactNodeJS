@@ -12,10 +12,12 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useGlobalContext } from "../../GlobalContext";
 
 export default function SwiperSpotify({ type, data, album }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
+  const { setGlobalSearchResult } = useGlobalContext();
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -45,7 +47,7 @@ export default function SwiperSpotify({ type, data, album }) {
         }}
       >
         <Link
-          to={`/${type === "circle" ? "artist" : "track"}/${item.id}`}
+          to={`/${type === "circle" ? "artist" : "track"}/${item?.id}`}
           state={{ item }}
         >
           <div
@@ -68,7 +70,9 @@ export default function SwiperSpotify({ type, data, album }) {
                   src={
                     type === "circle"
                       ? item.images?.[1]?.url ?? item.album?.images?.[1]?.url
-                      : item.album?.images?.[1]?.url ?? item.images?.[1]?.url
+                      : item?.album?.images?.[1]?.url ??
+                        item?.images?.[1]?.url ??
+                        item?.images?.[0]?.url
                   }
                   alt="image"
                 />
@@ -77,7 +81,7 @@ export default function SwiperSpotify({ type, data, album }) {
               </div>
 
               <div className="slide-text-wrapper">
-                <span className="slide-name">{item.name}</span>
+                <span className="slide-name">{item?.name}</span>
                 <span className="slide-artist">
                   {type === "circle"
                     ? "Artista"
@@ -108,7 +112,7 @@ export default function SwiperSpotify({ type, data, album }) {
       >
         <Swiper
           spaceBetween={0}
-          slidesPerView={4}
+          slidesPerView={4.35}
           slidesPerGroup={2}
           modules={[Navigation]}
           loop={false}
