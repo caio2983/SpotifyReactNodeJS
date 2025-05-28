@@ -29,7 +29,7 @@ export default function Header() {
       };
 
       setGlobalSearchResult(cleanedData);
-      console.log("SEARCHHHH", cleanedData);
+      setIsSearching(false);
     } catch (error) {
       console.error("Erro ao buscar resultados:", error);
     }

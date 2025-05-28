@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Skeleton from "@mui/material/Skeleton";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -17,7 +18,7 @@ import { useGlobalContext } from "../../GlobalContext";
 export default function SwiperSpotify({ type, data, album }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
-  const { setGlobalSearchResult } = useGlobalContext();
+  const { setGlobalSearchResult, isSearching } = useGlobalContext();
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -25,6 +26,10 @@ export default function SwiperSpotify({ type, data, album }) {
   const swiperRef = useRef(null);
 
   const totalSlides = data?.length ?? 0;
+
+  const maxSlidesPerView = 4.35;
+  const slidesPerViewValue =
+    totalSlides < maxSlidesPerView ? totalSlides : maxSlidesPerView;
 
   function renderSlides() {
     if (!Array.isArray(data) || totalSlides === 0) {
@@ -66,26 +71,72 @@ export default function SwiperSpotify({ type, data, album }) {
                   type === "circle" ? "slide-circle" : "slide-square"
                 }`}
               >
-                <img
-                  src={
-                    type === "circle"
-                      ? item.images?.[1]?.url ?? item.album?.images?.[1]?.url
-                      : item?.album?.images?.[1]?.url ??
-                        item?.images?.[1]?.url ??
-                        item?.images?.[0]?.url
-                  }
-                  alt="image"
-                />
+                {isSearching && (
+                  <Skeleton
+                    variant="rectangular"
+                    sx={{
+                      bgcolor: "#888888",
+                    }}
+                  ></Skeleton>
+                )}
+
+                {isSearching ? (
+                  <Skeleton
+                    variant="rectangular"
+                    sx={{
+                      width: "100%",
+                      height: "100%",
+                      bgcolor: "#888888",
+                      borderRadius: type === "circle" ? "50%" : "8px",
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={
+                      type === "circle"
+                        ? item.images?.[1]?.url ?? item.album?.images?.[1]?.url
+                        : item?.album?.images?.[1]?.url ??
+                          item?.images?.[1]?.url ??
+                          item?.images?.[0]?.url
+                    }
+                    alt="image"
+                  />
+                )}
 
                 <div className="slider-image-circle-box-shadow"></div>
               </div>
 
               <div className="slide-text-wrapper">
-                <span className="slide-name">{item?.name}</span>
+                <span className="slide-name">
+                  {isSearching ? (
+                    <Skeleton
+                      variant="text"
+                      sx={{
+                        width: "100px",
+                        height: "100%",
+                        bgcolor: "#888888",
+                      }}
+                    />
+                  ) : (
+                    item?.name
+                  )}
+                </span>
+
                 <span className="slide-artist">
-                  {type === "circle"
-                    ? "Artista"
-                    : item?.artists?.[0]?.name || "Desconhecido"}
+                  {isSearching ? (
+                    <Skeleton
+                      variant="text"
+                      sx={{
+                        width: "50px",
+                        height: "100%",
+                        bgcolor: "#888888",
+                      }}
+                    />
+                  ) : type === "circle" ? (
+                    "Artista"
+                  ) : (
+                    item?.artists?.[0]?.name || "Desconhecido"
+                  )}
                 </span>
               </div>
             </div>
@@ -112,7 +163,7 @@ export default function SwiperSpotify({ type, data, album }) {
       >
         <Swiper
           spaceBetween={0}
-          slidesPerView={4.35}
+          slidesPerView={slidesPerViewValue}
           slidesPerGroup={2}
           modules={[Navigation]}
           loop={false}
