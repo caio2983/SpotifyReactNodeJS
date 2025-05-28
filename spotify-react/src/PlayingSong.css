@@ -36,6 +36,11 @@
   flex-direction: column;
 }
 
+.playlist-songs {
+  position: relative;
+  height: fit-content;
+}
+
 .playing-controls {
   width: 40%;
   height: 50%;

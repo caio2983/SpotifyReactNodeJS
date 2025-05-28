@@ -26,8 +26,16 @@ html {
   box-sizing: border-box;
 
   margin: 0;
-  padding-inline: 12px;
+
   background-color: black;
+}
+
+body {
+  margin-inline: 12px;
+}
+
+app-container {
+  height: 90vh;
 }
 
 a {
