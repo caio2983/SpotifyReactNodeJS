@@ -6,6 +6,7 @@ import axios from "axios";
 import ArtistSong from "./ArtistSong";
 import { useGlobalContext } from "../../../GlobalContext";
 import SwiperSpotify from "../../subcomponents/SwiperSpotify";
+import ArtistSongSkeleton from "./ArtistSongSkeleton";
 
 export default function ArtistPage() {
   const location = useLocation();
@@ -24,6 +25,7 @@ export default function ArtistPage() {
     compilation: [],
   });
   const { nextSongs, setNextSongs } = useGlobalContext();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [selectedAlbumType, setSelectedAlbumType] = useState(null);
 
@@ -47,12 +49,12 @@ export default function ArtistPage() {
 
   // Caso não tenha o artista vindo pelo state, buscar via API usando artistId
   useEffect(() => {
-    console.log("TESTEEEEE");
+    setIsLoading(true);
     axios
       .get(`http://localhost:3000/artist/${artistId}`)
       .then((response) => {
         setArtist(response.data);
-        console.log("ARTISTTTT", response.data);
+        setIsLoading(false);
       })
       .catch(console.error);
   }, []);
@@ -185,17 +187,21 @@ export default function ArtistPage() {
             <div className="artist-popular-tracks">
               <span>Populares</span>
               <div className="artist-popular-tracks-wrapper">
-                {popularTracks?.tracks
-                  ?.slice(0, showAllTracks ? 10 : 5)
-                  .map((track, index) => (
-                    <ArtistSong
-                      key={index + 1}
-                      track={track}
-                      index={index + 1}
-                      tracks={popularTracks.tracks}
-                      artist_id={artist?.id}
-                    />
-                  ))}
+                {isLoading
+                  ? Array(showAllTracks ? 10 : 5)
+                      .fill(null)
+                      .map((_, index) => <ArtistSongSkeleton key={index} />)
+                  : popularTracks?.tracks
+                      ?.slice(0, showAllTracks ? 10 : 5)
+                      .map((track, index) => (
+                        <ArtistSong
+                          key={index + 1}
+                          track={track}
+                          index={index + 1}
+                          tracks={popularTracks.tracks}
+                          artist_id={artist?.id}
+                        />
+                      ))}
               </div>
               {popularTracks?.tracks?.length > 5 && (
                 <button
