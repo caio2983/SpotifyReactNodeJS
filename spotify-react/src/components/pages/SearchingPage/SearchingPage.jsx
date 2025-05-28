@@ -15,7 +15,8 @@ export default function SearchingPage() {
         <p>Músicas</p>
         {globalSearchResult && (
           <SwiperSpotify
-            type="square"
+            format="square"
+            type="track"
             data={globalSearchResult?.tracks.items || []}
             album={true}
           />
@@ -26,7 +27,8 @@ export default function SearchingPage() {
         <p>Artistas</p>
         {globalSearchResult && (
           <SwiperSpotify
-            type="circle"
+            format="circle"
+            type="artist"
             data={globalSearchResult?.artists.items || []}
             album={true}
           />
@@ -37,7 +39,8 @@ export default function SearchingPage() {
         <p>Playlists</p>
         {globalSearchResult && (
           <SwiperSpotify
-            type="square"
+            format="square"
+            type="playlist"
             data={globalSearchResult?.playlists.items || []}
             album={true}
             playlist={true}
@@ -49,7 +52,8 @@ export default function SearchingPage() {
         <p>Álbuns</p>
         {globalSearchResult && (
           <SwiperSpotify
-            type="square"
+            format="square"
+            type="album"
             data={globalSearchResult?.albums.items || []}
             album={true}
           />
