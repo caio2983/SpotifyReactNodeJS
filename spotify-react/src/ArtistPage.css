@@ -165,6 +165,12 @@
   height: 100%;
 }
 
+.album-button.active {
+  background-color: #fff;
+  color: #121212;
+  font-weight: 600;
+}
+
 .song-list-container {
   display: flex;
   flex-direction: column;

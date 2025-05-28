@@ -25,7 +25,7 @@ export default function ArtistPage() {
   });
   const { nextSongs, setNextSongs } = useGlobalContext();
 
-  const [selectedAlbumType, setSelectedAlbumType] = useState("album");
+  const [selectedAlbumType, setSelectedAlbumType] = useState(null);
 
   function separateAlbums(albums) {
     const result = {
@@ -37,7 +37,6 @@ export default function ArtistPage() {
 
     for (const album of albums) {
       const type = album.album_type;
-
       if (Object.prototype.hasOwnProperty.call(result, type)) {
         result[type].push(album);
       }
@@ -67,7 +66,7 @@ export default function ArtistPage() {
       .getPalette()
       .then((palette) => {
         if (palette?.Vibrant?.hex) {
-          const darkerColor = darkenHexColor(palette.Vibrant.hex, 0.2);
+          const darkerColor = darkenHexColor(palette.DarkVibrant.hex, 0.1);
           const evenDarkerColor = darkenHexColor(palette.Vibrant.hex, 0.3);
           setGradientColor(evenDarkerColor);
           setDominantColor(darkerColor);
@@ -95,9 +94,14 @@ export default function ArtistPage() {
       .get(`http://localhost:3000/artist-albums/${artist.id}`)
       .then((response) => {
         const separated_albums = separateAlbums(response.data.items);
-
-        console.log(separated_albums);
         setAlbums(separated_albums);
+
+        const firstAvailableType = Object.keys(separated_albums).find(
+          (key) => separated_albums[key].length > 0
+        );
+        if (firstAvailableType) {
+          setSelectedAlbumType(firstAvailableType);
+        }
       })
       .catch(console.error);
   }, [artist]);
