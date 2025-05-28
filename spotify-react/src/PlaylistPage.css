@@ -2,8 +2,8 @@
   width: 60%;
   height: 100vh;
   overflow-y: auto;
-  background-color: #1d1d1e;
-  border: 1px solid #1d1d1e;
+  background-color: #121212;
+  border: 1px solid #121212;
   border-radius: 6px;
   display: flex;
   z-index: 15;
@@ -126,7 +126,9 @@
   overflow: hidden;
 }
 .playlist-owner-image-wrapper img {
-  object-fit: contain;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
 
 .playlist-details {

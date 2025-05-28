@@ -113,13 +113,13 @@
 .slide-name {
   font-family: "SpotifyMixRegular";
   margin-top: 12px;
-  font-size: 20px;
+  font-size: 1.35em;
   max-width: 200px;
 }
 
 .slide-artist {
   font-family: "SpotifyMixRegular";
-  font-size: 16px;
+  font-size: 1.15em;
   color: #b3b3b3;
 }
 
@@ -135,7 +135,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #1d1d1e;
+  background-color: #121212;
   border: none;
   color: white;
   font-size: 20px;

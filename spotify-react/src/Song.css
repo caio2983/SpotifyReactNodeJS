@@ -1,7 +1,7 @@
 .song-container {
   width: 30%;
-  background-color: #1d1d1e;
-  border: 1px solid #1d1d1e;
+  background-color: #121212;
+  border: 1px solid #121212;
   border-radius: 6px;
   height: 80vh;
   z-index: 100;
@@ -111,8 +111,8 @@
   top: 0;
   right: 0;
   height: 100%;
-  background-color: #1d1d1e;
-  border: 1px solid #1d1d1e;
+  background-color: #121212;
+  border: 1px solid #121212;
   border-radius: 10px;
   z-index: 102;
   transition: all 0.5s ease;
