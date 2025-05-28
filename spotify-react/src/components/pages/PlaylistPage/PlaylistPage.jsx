@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Vibrant } from "node-vibrant/browser";
 import parse from "html-react-parser";
 import PlaylistTools from "./PlaylistTools";
@@ -8,17 +8,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PlaylistSong from "./PlaylistSong";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { useGlobalContext } from "../../../GlobalContext";
+import axios from "axios";
 
 export default function PlaylistPage() {
   const location = useLocation();
-  const { playlist } = location.state || {};
+
+  const [playlist, setPlaylist] = useState(location.state?.item || null);
   const [playlistDominantColor, setDominantColor] = useState(null);
   const [gradientColor, setGradientColor] = useState(null);
   const { nextSongs, setNextSongs } = useGlobalContext();
 
-  const [miniImgSrc, setMiniImgSrc] = useState(
-    playlist.owner.images[1]?.url || playlist.image[0]?.url
-  );
+  const { playlistId } = useParams();
+
+  // const [miniImgSrc, setMiniImgSrc] = useState(
+  //   playlist?.images[0]?.url || playlist?.owner
+  // );
 
   function hexToRgb(hex, alpha = 1) {
     const cleanHex = hex.replace("#", "");
@@ -30,8 +34,8 @@ export default function PlaylistPage() {
 
   useEffect(() => {
     setNextSongs({
-      nextsongs: playlist.tracks.items,
-      id: playlist.id,
+      nextsongs: playlist?.tracks.items,
+      id: playlist?.id,
     });
   }, [playlist]);
 
@@ -57,19 +61,33 @@ export default function PlaylistPage() {
   }
 
   useEffect(() => {
-    if (playlist?.image?.[0]?.url) {
-      Vibrant.from(playlist.image[0].url)
+    if (playlist?.images?.[0]?.url) {
+      Vibrant.from(playlist.images[0].url)
         .getPalette()
         .then((palette) => {
-          if (palette?.Vibrant?.hex) {
-            const darkerColor = darkenHexColor(palette.Vibrant.hex, 0.1);
-            const evenDarkerColor = darkenHexColor(palette.Vibrant.hex, 0.5);
-            setGradientColor(evenDarkerColor);
-            setDominantColor(darkerColor);
-          }
+          console.log("palette", palette);
+
+          const darkerColor = darkenHexColor(palette.DarkVibrant.hex, 0.1);
+
+          setGradientColor(darkerColor);
+          setDominantColor(hexToRgb(palette.DarkVibrant.hex));
         });
     }
   }, [playlist]);
+
+  // Caso não tenha a playlist vindo pelo state, buscar via API usando playlistId ( que é ujm parâmetro passado na url)
+  useEffect(() => {
+    if (!playlist) {
+      console.log("TESTEEEEE");
+      axios
+        .get(`http://localhost:3000/playlist/${playlistId}`)
+        .then((response) => {
+          setPlaylist(response.data);
+          console.log("PLAYLISTTTT", response.data);
+        })
+        .catch(console.error);
+    }
+  }, []);
 
   return (
     <div className="main-container playlist-container">
@@ -82,18 +100,23 @@ export default function PlaylistPage() {
       >
         <section className="playlist-header-content">
           <figure className="playlist-image-wrapper">
-            <img src={playlist.image[0]?.url} className="playlist-image" />
+            <img src={playlist?.images[0]?.url} className="playlist-image" />
           </figure>
           <div className="playlist-header-text">
             <h1 className="playlist-title playlist-text-glow">
-              {playlist.name}
+              {playlist?.name}
             </h1>
             <span className="playlist-description ">
-              {parse(playlist.description)}
+              {playlist && parse(playlist.description)}
             </span>
             <div className="playlist-details">
               <figure className="playlist-owner-image-wrapper">
-                <img src={miniImgSrc} />
+                <img
+                  src={
+                    (playlist && playlist.owner.images?.[0]?.url) ||
+                    (playlist && playlist?.images[0]?.url)
+                  }
+                />
               </figure>
               <Link>
                 <span className="playlist-text-glow playlist-owner-name">
@@ -103,11 +126,11 @@ export default function PlaylistPage() {
               <span className="separation-ball"></span>
 
               <span className="playlist-description">
-                {playlist.tracks.total} músicas
+                {playlist?.tracks.total} músicas
               </span>
               <span className="separation-ball"></span>
               <span className="playlist-description">
-                {playlist.followers.total} seguidores
+                {playlist?.followers.total} seguidores
               </span>
             </div>
           </div>
@@ -119,11 +142,16 @@ export default function PlaylistPage() {
         className="playlist-songs"
         style={{
           background: gradientColor
-            ? `linear-gradient(0deg, 
-                rgba(29, 29, 30, 1) 0%, 
-                ${hexToRgb(gradientColor, 0.5)} 110%)`
+            ? `linear-gradient(
+                to bottom,
+          
+                ${hexToRgb(gradientColor, 0.5)} 0%,
+                ${hexToRgb(gradientColor, 0.3)} 20%,
+                ${hexToRgb(gradientColor, 0.1)} 35%,
+           transparent 50%
+              )`
             : "#1d1d1e",
-          height: "100vh",
+          height: "auto",
         }}
       >
         <div className="songs-overlay"></div>
@@ -144,7 +172,7 @@ export default function PlaylistPage() {
           </div>
 
           <div className="song-list-container">
-            {playlist.tracks.items.map((song, index) => (
+            {playlist?.tracks.items.map((song, index) => (
               <PlaylistSong
                 key={index}
                 image={song.track.album.images[2].url}

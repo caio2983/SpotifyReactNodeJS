@@ -159,11 +159,15 @@ export default function ArtistPage() {
         className="artist-songs"
         style={{
           background: gradientColor
-            ? `linear-gradient(0deg, 
-                rgba(29, 29, 30, 1) 0%, 
-                ${hexToRgb(gradientColor, 0.5)} 110%)`
+            ? `linear-gradient(
+                to bottom,
+                ${hexToRgb(gradientColor, 0.5)} 0%,
+                ${hexToRgb(gradientColor, 0.3)} 20%,
+                ${hexToRgb(gradientColor, 0.1)} 35%,
+                transparent 50%
+              )`
             : "#1d1d1e",
-          height: "100vh",
+          height: "auto",
         }}
       >
         <div className="songs-overlay"></div>
