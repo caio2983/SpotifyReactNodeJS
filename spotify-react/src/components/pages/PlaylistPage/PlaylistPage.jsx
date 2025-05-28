@@ -33,6 +33,10 @@ export default function PlaylistPage() {
   }
 
   useEffect(() => {
+    console.log(playlist);
+  }, [playlist]);
+
+  useEffect(() => {
     setNextSongs({
       nextsongs: playlist?.tracks.items,
       id: playlist?.id,
@@ -62,7 +66,7 @@ export default function PlaylistPage() {
 
   useEffect(() => {
     if (playlist?.images?.[0]?.url) {
-      Vibrant.from(playlist.images[0].url)
+      Vibrant.from(playlist?.images?.[0]?.url)
         .getPalette()
         .then((palette) => {
           console.log("palette", palette);
@@ -77,16 +81,13 @@ export default function PlaylistPage() {
 
   // Caso não tenha a playlist vindo pelo state, buscar via API usando playlistId ( que é ujm parâmetro passado na url)
   useEffect(() => {
-    if (!playlist) {
-      console.log("TESTEEEEE");
-      axios
-        .get(`http://localhost:3000/playlist/${playlistId}`)
-        .then((response) => {
-          setPlaylist(response.data);
-          console.log("PLAYLISTTTT", response.data);
-        })
-        .catch(console.error);
-    }
+    axios
+      .get(`http://localhost:3000/playlist/${playlistId}`)
+      .then((response) => {
+        setPlaylist(response.data);
+        console.log("PLAYLISTTTT", response.data);
+      })
+      .catch(console.error);
   }, []);
 
   return (
@@ -126,11 +127,11 @@ export default function PlaylistPage() {
               <span className="separation-ball"></span>
 
               <span className="playlist-description">
-                {playlist?.tracks.total} músicas
+                {playlist?.tracks?.total} músicas
               </span>
               <span className="separation-ball"></span>
               <span className="playlist-description">
-                {playlist?.followers.total} seguidores
+                {playlist?.followers?.total} seguidores
               </span>
             </div>
           </div>
@@ -145,9 +146,9 @@ export default function PlaylistPage() {
             ? `linear-gradient(
                 to bottom,
           
-                ${hexToRgb(gradientColor, 0.5)} 0%,
-                ${hexToRgb(gradientColor, 0.3)} 20%,
-                ${hexToRgb(gradientColor, 0.1)} 35%,
+                ${hexToRgb(gradientColor, 0.6)} 0%,
+                ${hexToRgb(gradientColor, 0.2)} 10%,
+                ${hexToRgb(gradientColor, 0.1)} 15%,
            transparent 50%
               )`
             : "#1d1d1e",
@@ -172,7 +173,7 @@ export default function PlaylistPage() {
           </div>
 
           <div className="song-list-container">
-            {playlist?.tracks.items.map((song, index) => (
+            {playlist?.tracks?.items?.map((song, index) => (
               <PlaylistSong
                 key={index}
                 image={song.track.album.images[2].url}

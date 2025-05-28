@@ -15,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../../GlobalContext";
 
-export default function SwiperSpotify({ type, data, album }) {
+export default function SwiperSpotify({ format, data, album, type }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
   const { setGlobalSearchResult, isSearching } = useGlobalContext();
@@ -51,10 +51,7 @@ export default function SwiperSpotify({ type, data, album }) {
           width: "fit-content",
         }}
       >
-        <Link
-          to={`/${type === "circle" ? "artist" : "track"}/${item?.id}`}
-          state={{ item }}
-        >
+        <Link to={`/${type}/${item?.id}`} state={{ item }}>
           <div
             className="slide-rectangle"
             onMouseEnter={(e) =>
@@ -68,7 +65,7 @@ export default function SwiperSpotify({ type, data, album }) {
             <div className="slide-content">
               <div
                 className={`${
-                  type === "circle" ? "slide-circle" : "slide-square"
+                  format === "circle" ? "slide-circle" : "slide-square"
                 }`}
               >
                 {isSearching && (
@@ -87,13 +84,13 @@ export default function SwiperSpotify({ type, data, album }) {
                       width: "100%",
                       height: "100%",
                       bgcolor: "#888888",
-                      borderRadius: type === "circle" ? "50%" : "8px",
+                      borderRadius: format === "circle" ? "50%" : "8px",
                     }}
                   />
                 ) : (
                   <img
                     src={
-                      type === "circle"
+                      format === "circle"
                         ? item.images?.[1]?.url ?? item.album?.images?.[1]?.url
                         : item?.album?.images?.[1]?.url ??
                           item?.images?.[1]?.url ??
@@ -132,7 +129,7 @@ export default function SwiperSpotify({ type, data, album }) {
                         bgcolor: "#888888",
                       }}
                     />
-                  ) : type === "circle" ? (
+                  ) : format === "circle" ? (
                     "Artista"
                   ) : (
                     item?.artists?.[0]?.name || "Desconhecido"
@@ -150,7 +147,7 @@ export default function SwiperSpotify({ type, data, album }) {
     <div className="swiper-component-container">
       {!album && (
         <p className="swiper-title">
-          {type === "circle"
+          {format === "circle"
             ? "Seus artistas favoritos"
             : "Suas músicas estão com saudade"}
         </p>
@@ -193,7 +190,7 @@ export default function SwiperSpotify({ type, data, album }) {
             totalSlides < 5 ? "disabled" : ""
           }`}
           aria-label="Previous slide"
-          type="button"
+          format="button"
           disabled={totalSlides < 5}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
@@ -205,7 +202,7 @@ export default function SwiperSpotify({ type, data, album }) {
             totalSlides < 5 ? "disabled" : ""
           }`}
           aria-label="Next slide"
-          type="button"
+          format="button"
           disabled={totalSlides < 5}
         >
           <FontAwesomeIcon icon={faChevronRight} />

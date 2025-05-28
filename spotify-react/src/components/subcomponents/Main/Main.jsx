@@ -8,6 +8,7 @@ import SwiperSpotify from "../SwiperSpotify";
 import ArtistPage from "../../pages/ArtistPage/ArtistPage";
 import PlaylistCardSkeleton from "./PlaylistCardSkeleton";
 import SearchingPage from "../../pages/SearchingPage/SearchingPage";
+import TrackPage from "../../pages/TrackPage/TrackPage";
 
 export default function Main() {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
@@ -117,10 +118,13 @@ export default function Main() {
             </div>
 
             <div className="swipers-wrapper">
+              {/* Initial Artists swiper */}
               <SwiperSpotify
-                type="circle"
+                format="circle"
+                type="artist"
                 data={initialArtists}
               ></SwiperSpotify>
+              {/* Initial Tracks swiper */}
               <SwiperSpotify type="square" data={initialTracks}></SwiperSpotify>
             </div>
           </div>
@@ -133,6 +137,7 @@ export default function Main() {
         path="/search/:searchInput"
         element={<SearchingPage></SearchingPage>}
       />
+      <Route path="/track/:trackId" element={<TrackPage></TrackPage>} />
     </Routes>
   );
 }
