@@ -1,7 +1,5 @@
 .playlist-page {
-  width: 60%;
-  height: 100vh;
-  overflow-y: auto;
+  width: 100%;
   background-color: #121212;
   border: 1px solid #121212;
   border-radius: 6px;
@@ -13,6 +11,8 @@
 
 .playlist-container {
   gap: 0 !important;
+  position: relative;
+  height: auto;
 }
 
 .playlist-page-header {
@@ -51,9 +51,10 @@
 
   position: absolute;
   z-index: 0;
-  box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.59) inset;
-  -webkit-box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.59) inset;
-  -moz-box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.59) inset;
+  box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.2) inset;
+  -webkit-box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.2) inset;
+  -moz-box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.2) inset;
+  opacity: 0.5;
 }
 
 .playlist-header-content {
@@ -81,11 +82,6 @@
 
 .playlist-text-glow {
   text-shadow: rgba(255, 255, 255, 0.26) 0px 0px 5px;
-}
-
-.playlist-songs {
-  position: relative;
-  height: fit-content;
 }
 
 .songs-overlay {
@@ -154,12 +150,16 @@
 }
 
 .playlist-tools-container {
+  margin-bottom: 24px;
+  margin-top: 24px;
   padding: 16px 56px;
-  height: 150px;
+  height: 100px;
   width: 100%;
   display: flex;
   align-items: center;
   z-index: 100;
+  position: sticky;
+  top: 0;
 }
 
 .tools-wrapper {

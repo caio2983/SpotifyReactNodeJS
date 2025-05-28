@@ -71,7 +71,7 @@ export default function PlaylistPage() {
         .then((palette) => {
           console.log("palette", palette);
 
-          const darkerColor = darkenHexColor(palette.DarkVibrant.hex, 0.1);
+          const darkerColor = palette.DarkVibrant.hex;
 
           setGradientColor(darkerColor);
           setDominantColor(hexToRgb(palette.DarkVibrant.hex));
@@ -92,13 +92,7 @@ export default function PlaylistPage() {
 
   return (
     <div className="main-container playlist-container">
-      <header
-        className="playlist-page-header"
-        style={{
-          backgroundColor: playlistDominantColor || "#1d1d1e",
-          boxShadow: "0 60px 120px -40px rgba(0, 0, 0, 0.5)",
-        }}
-      >
+      <header className="playlist-page-header">
         <section className="playlist-header-content">
           <figure className="playlist-image-wrapper">
             <img src={playlist?.images[0]?.url} className="playlist-image" />
@@ -136,7 +130,12 @@ export default function PlaylistPage() {
             </div>
           </div>
         </section>
-        <div className="playlist-header-overlay"></div>
+        <div
+          className="playlist-header-overlay"
+          style={{
+            backgroundColor: playlistDominantColor || "#1d1d1e",
+          }}
+        ></div>
       </header>
 
       <div
@@ -145,14 +144,12 @@ export default function PlaylistPage() {
           background: gradientColor
             ? `linear-gradient(
                 to bottom,
-          
-                ${hexToRgb(gradientColor, 0.6)} 0%,
+             ${hexToRgb(gradientColor, 0.6)} 0%,
                 ${hexToRgb(gradientColor, 0.2)} 10%,
                 ${hexToRgb(gradientColor, 0.1)} 15%,
            transparent 50%
               )`
             : "#1d1d1e",
-          height: "auto",
         }}
       >
         <div className="songs-overlay"></div>
