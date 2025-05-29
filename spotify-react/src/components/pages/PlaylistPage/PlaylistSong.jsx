@@ -24,7 +24,6 @@ export default function PlaylistSong({ index, image, song, playlist }) {
 
   function clickSong() {
     setSong(song);
-    console.log("CLICKED SONG !!!", playlist);
 
     setNextSongs({
       nextsongs: playlist.tracks.items,
