@@ -24,7 +24,7 @@ export default function ArtistPage() {
     appears_on: [],
     compilation: [],
   });
-  const { nextSongs, setNextSongs } = useGlobalContext();
+  const { nextSongs, setNextSongs, setSong } = useGlobalContext();
   const [isLoading, setIsLoading] = useState(false);
 
   const [selectedAlbumType, setSelectedAlbumType] = useState(null);
@@ -107,6 +107,17 @@ export default function ArtistPage() {
       .catch(console.error);
   }, [artist]);
 
+  function handleClick() {
+    console.log("Popular tracks", popularTracks.tracks);
+    setSong(popularTracks?.tracks[0]);
+
+    setNextSongs({
+      nextsongs: popularTracks.tracks,
+      id: artist.id,
+      type: "artist",
+    });
+  }
+
   function hexToRgb(hex, alpha) {
     const cleanHex = hex.replace("#", "");
     const r = parseInt(cleanHex.substring(0, 2), 16);
@@ -177,7 +188,7 @@ export default function ArtistPage() {
       >
         <div className="songs-overlay"></div>
         <div className="artist-tools-wrapper">
-          <div className="play-button-green">
+          <div className="play-button-green" onClick={handleClick}>
             <span>▶</span>
           </div>
           <button>Seguir</button>
