@@ -226,9 +226,9 @@ export default function PlaylistPage() {
             !isLoading && gradientColor
               ? `linear-gradient(
                 to bottom,
-             ${hexToRgb(gradientColor, 0.6)} 0%,
-                ${hexToRgb(gradientColor, 0.2)} 10%,
-                ${hexToRgb(gradientColor, 0.1)} 15%,
+             ${hexToRgb(gradientColor, 0.3)} 0%,
+                ${hexToRgb(gradientColor, 0.3)} 10%,
+                ${hexToRgb(gradientColor, 0.1)} 20%,
            transparent 50%
               )`
               : "#1d1d1e",
@@ -236,7 +236,13 @@ export default function PlaylistPage() {
       >
         <div className="songs-overlay"></div>
 
-        <PlaylistTools />
+        <PlaylistTools
+          playSongs={{
+            nextsongs: playlist?.tracks.items,
+            id: playlist?.id,
+          }}
+          type={"playlist"}
+        />
 
         <div className="songs-heading-container">
           <div className="songs-heading">
