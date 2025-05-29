@@ -1,15 +1,62 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../../../GlobalContext";
 import SwiperSpotify from "../../subcomponents/SwiperSpotify";
+import axios from "axios";
+import { SyncLoader } from "react-spinners";
 
 export default function SearchingPage() {
-  const { globalSearchResult, searchTerm } = useGlobalContext();
+  const { globalSearchResult, setGlobalSearchResult, setSearchTerm } =
+    useGlobalContext();
 
-  return (
+  const { query } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setSearchTerm(query);
+
+    const fetchSearchResults = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/search/${query}`
+        );
+
+        const cleanedData = {
+          ...response.data,
+          playlists: {
+            ...response.data.playlists,
+            items:
+              response.data.playlists?.items?.filter((item) => item !== null) ||
+              [],
+          },
+        };
+
+        setGlobalSearchResult(cleanedData);
+      } catch (error) {
+        console.error("Erro ao buscar resultados:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (query) {
+      fetchSearchResults();
+    }
+  }, [query]);
+
+  return isLoading ? (
+    <SyncLoader
+      color="#b3b3b3"
+      className="searching-loading"
+      size={30}
+      speedMultiplier={0.7}
+    />
+  ) : (
     <div className="main-container searching-container">
       <p className="showing-results">
         Mostrando resultados para:
-        <span className="search-term"> {searchTerm} </span>
+        <span className="search-term"> {query} </span>
       </p>
 
       <div className="swipers-wrapper searching-swiper">

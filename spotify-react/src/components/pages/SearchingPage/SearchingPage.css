@@ -30,3 +30,9 @@
   overflow-wrap: anywhere;
   white-space: normal;
 }
+
+.searching-loading {
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+}

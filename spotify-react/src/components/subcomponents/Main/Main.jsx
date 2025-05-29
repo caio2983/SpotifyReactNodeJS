@@ -149,7 +149,7 @@ export default function Main() {
 
       <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
       <Route path="/artist/:artistId" element={<ArtistPage />} />
-      <Route path="/search/:searchInput" element={<SearchingPage />} />
+      <Route path="/search/:query" element={<SearchingPage />} />
       <Route path="/track/:trackId" element={<TrackPage />} />
     </Routes>
   );
