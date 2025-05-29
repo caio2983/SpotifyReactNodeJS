@@ -39,14 +39,15 @@ export default function Playing() {
   }, [songSelected, nextSongs]);
 
   function handleNextClick() {
-    console.log(nextSongs);
-
     if (nextSongs?.type == "playlist") {
       let current_number = nextSongs.nextsongs.findIndex(
         (item) => item.track.id === songSelected.id
       );
 
-      const next_song_index = current_number + 1;
+      let next_song_index = current_number + 1;
+      if (next_song_index == nextSongs.nextsongs.length) {
+        next_song_index = 0;
+      }
       const next_song_id = nextSongs.nextsongs[next_song_index].track.id;
 
       axios
@@ -74,9 +75,10 @@ export default function Playing() {
         (item) => item.id === songSelected.id
       );
 
-      console.log("NEXT SONG ARTIST !!!!!");
-
-      const next_song_index = current_number + 1;
+      let next_song_index = current_number + 1;
+      if (next_song_index == nextSongs.nextsongs.length) {
+        next_song_index = 0;
+      }
       const next_song_id = nextSongs.nextsongs[next_song_index].id;
 
       axios
