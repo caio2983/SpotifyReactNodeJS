@@ -9,6 +9,9 @@ import PlaylistSong from "./PlaylistSong";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { useGlobalContext } from "../../../GlobalContext";
 import axios from "axios";
+import ArtistSongSkeleton from "../ArtistPage/ArtistSongSkeleton";
+import PlaylistSongSkeleton from "./PlaylistSongSkeleton";
+import { Skeleton } from "@mui/material";
 
 export default function PlaylistPage() {
   const location = useLocation();
@@ -17,12 +20,9 @@ export default function PlaylistPage() {
   const [playlistDominantColor, setDominantColor] = useState(null);
   const [gradientColor, setGradientColor] = useState(null);
   const { nextSongs, setNextSongs } = useGlobalContext();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { playlistId } = useParams();
-
-  // const [miniImgSrc, setMiniImgSrc] = useState(
-  //   playlist?.images[0]?.url || playlist?.owner
-  // );
 
   function hexToRgb(hex, alpha = 1) {
     const cleanHex = hex.replace("#", "");
@@ -79,13 +79,13 @@ export default function PlaylistPage() {
     }
   }, [playlist]);
 
-  // Caso não tenha a playlist vindo pelo state, buscar via API usando playlistId ( que é ujm parâmetro passado na url)
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`http://localhost:3000/playlist/${playlistId}`)
       .then((response) => {
         setPlaylist(response.data);
-        console.log("PLAYLISTTTT", response.data);
+        setIsLoading(false);
       })
       .catch(console.error);
   }, []);
@@ -94,67 +94,149 @@ export default function PlaylistPage() {
     <div className="main-container playlist-container">
       <header className="playlist-page-header">
         <section className="playlist-header-content">
-          <figure className="playlist-image-wrapper">
-            <img src={playlist?.images[0]?.url} className="playlist-image" />
+          <figure
+            className="playlist-image-wrapper"
+            style={{
+              boxShadow: isLoading
+                ? "none"
+                : "13px 10px 103px -18px rgba(0, 0, 0, 0.89)",
+              WebkitBoxShadow: isLoading
+                ? "none"
+                : "13px 10px 103px -18px rgba(0, 0, 0, 0.89)",
+              MozBoxShadow: isLoading
+                ? "none"
+                : "13px 10px 103px -18px rgba(0, 0, 0, 0.89)",
+            }}
+          >
+            {isLoading ? (
+              <Skeleton
+                variant="rectangular"
+                sx={{
+                  bgcolor: "#888888",
+                  borderRadius: "4px",
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+            ) : (
+              <img src={playlist?.images[0]?.url} className="playlist-image" />
+            )}
           </figure>
           <div className="playlist-header-text">
             <h1 className="playlist-title playlist-text-glow">
-              {playlist?.name}
+              {isLoading ? (
+                <Skeleton
+                  variant="text"
+                  sx={{
+                    bgcolor: "#888888",
+                  }}
+                  width={350}
+                />
+              ) : (
+                playlist?.name
+              )}
             </h1>
-            <span className="playlist-description ">
-              {playlist && parse(playlist.description)}
+            <span className="playlist-description">
+              {isLoading ? (
+                <Skeleton
+                  variant="text"
+                  sx={{
+                    bgcolor: "#888888",
+                  }}
+                  width={200}
+                />
+              ) : (
+                playlist && parse(playlist.description)
+              )}
             </span>
             <div className="playlist-details">
               <figure className="playlist-owner-image-wrapper">
-                <img
-                  src={
-                    (playlist && playlist.owner.images?.[0]?.url) ||
-                    (playlist && playlist?.images[0]?.url)
-                  }
-                />
+                {isLoading ? (
+                  <Skeleton
+                    variant="rectangular"
+                    sx={{
+                      bgcolor: "#888888",
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "50%",
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={
+                      (playlist && playlist.owner.images?.[0]?.url) ||
+                      (playlist && playlist?.images[0]?.url)
+                    }
+                    alt="Playlist"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "50%",
+                    }}
+                  />
+                )}
               </figure>
-              <Link>
-                <span className="playlist-text-glow playlist-owner-name">
-                  {playlist?.owner?.display_name}
-                </span>
-              </Link>
-              <span className="separation-ball"></span>
 
-              <span className="playlist-description">
-                {playlist?.tracks?.total} músicas
-              </span>
-              <span className="separation-ball"></span>
-              <span className="playlist-description">
-                {playlist?.followers?.total} seguidores
-              </span>
+              {isLoading ? (
+                <Skeleton
+                  variant="text"
+                  sx={{
+                    bgcolor: "#888888",
+                    width: 250,
+                    display: "inline-block",
+                    verticalAlign: "middle",
+                    borderRadius: 1,
+                  }}
+                />
+              ) : (
+                <>
+                  <Link to={`/artist/${playlist?.owner?.id}`}>
+                    <span className="playlist-text-glow playlist-owner-name">
+                      {playlist?.owner?.display_name}
+                    </span>
+                  </Link>
+                  <span className="separation-ball"></span>
+                  <span className="playlist-description">
+                    {playlist?.tracks?.total} músicas
+                  </span>
+                  <span className="separation-ball"></span>
+                  <span className="playlist-description">
+                    {playlist?.followers?.total} seguidores
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </section>
-        <div
-          className="playlist-header-overlay"
-          style={{
-            backgroundColor: playlistDominantColor || "#1d1d1e",
-          }}
-        ></div>
+
+        {!isLoading && (
+          <div
+            className="playlist-header-overlay"
+            style={{
+              backgroundColor: playlistDominantColor || "#1d1d1e",
+            }}
+          ></div>
+        )}
       </header>
 
       <div
         className="playlist-songs"
         style={{
-          background: gradientColor
-            ? `linear-gradient(
+          background:
+            !isLoading && gradientColor
+              ? `linear-gradient(
                 to bottom,
              ${hexToRgb(gradientColor, 0.6)} 0%,
                 ${hexToRgb(gradientColor, 0.2)} 10%,
                 ${hexToRgb(gradientColor, 0.1)} 15%,
            transparent 50%
               )`
-            : "#1d1d1e",
+              : "#1d1d1e",
         }}
       >
         <div className="songs-overlay"></div>
 
-        <PlaylistTools></PlaylistTools>
+        <PlaylistTools />
 
         <div className="songs-heading-container">
           <div className="songs-heading">
@@ -165,20 +247,24 @@ export default function PlaylistPage() {
             <div className="column heading-album">Álbum</div>
             <div className="column heading-added">Adicionada em</div>
             <div className="column heading-duration">
-              <FontAwesomeIcon icon={faClock}></FontAwesomeIcon>
+              <FontAwesomeIcon icon={faClock} />
             </div>
           </div>
 
           <div className="song-list-container">
-            {playlist?.tracks?.items?.map((song, index) => (
-              <PlaylistSong
-                key={index}
-                image={song.track.album.images[2].url}
-                index={index}
-                song={song.track}
-                playlist={playlist}
-              />
-            ))}
+            {isLoading
+              ? Array.from({ length: 10 }).map((_, index) => (
+                  <PlaylistSongSkeleton key={index} />
+                ))
+              : playlist?.tracks?.items?.map((song, index) => (
+                  <PlaylistSong
+                    key={index}
+                    image={song.track.album.images[2].url}
+                    index={index}
+                    song={song.track}
+                    playlist={playlist}
+                  />
+                ))}
           </div>
         </div>
       </div>
