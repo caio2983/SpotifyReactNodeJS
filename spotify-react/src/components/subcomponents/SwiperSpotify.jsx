@@ -32,17 +32,6 @@ export default function SwiperSpotify({ format, data, album, type, loading }) {
     totalSlides < maxSlidesPerView ? totalSlides : maxSlidesPerView;
 
   function renderSlides() {
-    if (!Array.isArray(data) || totalSlides === 0) {
-      console.log("RENDER SLIDES ERROR", data);
-      return (
-        <SwiperSlide>
-          <div className="slide-rectangle" style={{ textAlign: "center" }}>
-            <p>Carregando artistas...</p>
-          </div>
-        </SwiperSlide>
-      );
-    }
-
     return data.map((item, i) => (
       <SwiperSlide
         key={i}

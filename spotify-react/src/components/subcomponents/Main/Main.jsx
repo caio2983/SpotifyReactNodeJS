@@ -9,14 +9,18 @@ import ArtistPage from "../../pages/ArtistPage/ArtistPage";
 import PlaylistCardSkeleton from "./PlaylistCardSkeleton";
 import SearchingPage from "../../pages/SearchingPage/SearchingPage";
 import TrackPage from "../../pages/TrackPage/TrackPage";
-
 export default function Main() {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
   const [initialArtists, setInitialArtists] = useState([]);
   const [initialTracks, setInitialTracks] = useState([]);
+
   const [playlistCardsLoading, setPlaylistCardsLoading] = useState(true);
+  const [artistsLoading, setArtistsLoading] = useState(true);
+  const [albumsLoading, setAlbumsLoading] = useState(true);
+
   const [playlistGradientColor, setPlaylistGradientColor] = useState(null);
   const [initialGradientColor, setInitialGradientColor] = useState(null);
+
   const gradientRef = useRef(null);
 
   function hexToRgb(hex) {
@@ -45,26 +49,34 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
+    setArtistsLoading(true);
     console.log("Requisição para artistas disparada");
+
     axios
       .get("http://localhost:3000/initial-artists")
       .then((response) => {
         setInitialArtists(response.data.artists);
+        setArtistsLoading(false);
       })
       .catch((error) => {
         console.error("Erro ao buscar artistas:", error);
+        setArtistsLoading(false);
       });
   }, []);
 
   useEffect(() => {
-    console.log("Requisição para artistas disparada");
+    setAlbumsLoading(true);
+    console.log("Requisição para faixas disparada");
+
     axios
       .get("http://localhost:3000/initial-tracks")
       .then((response) => {
         setInitialTracks(response.data.tracks);
+        setAlbumsLoading(false);
       })
       .catch((error) => {
-        console.error("Erro ao buscar artistas:", error);
+        console.error("Erro ao buscar faixas:", error);
+        setAlbumsLoading(false);
       });
   }, []);
 
@@ -118,26 +130,27 @@ export default function Main() {
             </div>
 
             <div className="swipers-wrapper">
-              {/* Initial Artists swiper */}
               <SwiperSpotify
                 format="circle"
                 type="artist"
                 data={initialArtists}
-              ></SwiperSpotify>
-              {/* Initial Tracks swiper */}
-              <SwiperSpotify type="square" data={initialTracks}></SwiperSpotify>
+                loading={artistsLoading}
+              />
+
+              <SwiperSpotify
+                type="square"
+                data={initialTracks}
+                loading={albumsLoading}
+              />
             </div>
           </div>
         }
       />
 
       <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
-      <Route path="/artist/:artistId" element={<ArtistPage></ArtistPage>} />
-      <Route
-        path="/search/:searchInput"
-        element={<SearchingPage></SearchingPage>}
-      />
-      <Route path="/track/:trackId" element={<TrackPage></TrackPage>} />
+      <Route path="/artist/:artistId" element={<ArtistPage />} />
+      <Route path="/search/:searchInput" element={<SearchingPage />} />
+      <Route path="/track/:trackId" element={<TrackPage />} />
     </Routes>
   );
 }
