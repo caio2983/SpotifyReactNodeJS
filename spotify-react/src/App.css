@@ -172,6 +172,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  padding-left: 32px;
 }
 
 /* Inside main container styles */
