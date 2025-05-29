@@ -15,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../../GlobalContext";
 
-export default function SwiperSpotify({ format, data, album, type }) {
+export default function SwiperSpotify({ format, data, album, type, loading }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
   const { setGlobalSearchResult, isSearching } = useGlobalContext();
@@ -68,16 +68,7 @@ export default function SwiperSpotify({ format, data, album, type }) {
                   format === "circle" ? "slide-circle" : "slide-square"
                 }`}
               >
-                {isSearching && (
-                  <Skeleton
-                    variant="rectangular"
-                    sx={{
-                      bgcolor: "#888888",
-                    }}
-                  ></Skeleton>
-                )}
-
-                {isSearching ? (
+                {isSearching || loading ? (
                   <Skeleton
                     variant="rectangular"
                     sx={{
@@ -99,13 +90,12 @@ export default function SwiperSpotify({ format, data, album, type }) {
                     alt="image"
                   />
                 )}
-
                 <div className="slider-image-circle-box-shadow"></div>
               </div>
 
               <div className="slide-text-wrapper">
                 <span className="slide-name">
-                  {isSearching ? (
+                  {isSearching || loading ? (
                     <Skeleton
                       variant="text"
                       sx={{
@@ -120,7 +110,7 @@ export default function SwiperSpotify({ format, data, album, type }) {
                 </span>
 
                 <span className="slide-artist">
-                  {isSearching ? (
+                  {isSearching || loading ? (
                     <Skeleton
                       variant="text"
                       sx={{

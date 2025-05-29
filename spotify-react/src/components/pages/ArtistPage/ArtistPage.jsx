@@ -243,6 +243,7 @@ export default function ArtistPage() {
             type="square"
             data={albums?.[selectedAlbumType] || []}
             album={true}
+            loading={isLoading}
           />
         </div>
 
@@ -253,6 +254,7 @@ export default function ArtistPage() {
               type="square"
               data={albums.appears_on}
               album={true}
+              loading={isLoading}
             />
           </div>
         )}
@@ -265,6 +267,7 @@ export default function ArtistPage() {
                 type="square"
                 data={albums[selectedAlbumType] || []}
                 album={true}
+                loading={isLoading}
               />
             )}
           </div>
