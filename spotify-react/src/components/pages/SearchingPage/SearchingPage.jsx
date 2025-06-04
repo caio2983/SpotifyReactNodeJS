@@ -32,6 +32,8 @@ export default function SearchingPage() {
           },
         };
 
+        console.log("Playlists data", response.data.playlists);
+
         setGlobalSearchResult(cleanedData);
       } catch (error) {
         console.error("Erro ao buscar resultados:", error);

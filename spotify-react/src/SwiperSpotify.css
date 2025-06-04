@@ -20,7 +20,7 @@
 }
 
 .slide-rectangle {
-  width: 230px;
+  width: fit-content;
   height: 100%;
   display: flex;
   align-items: center;

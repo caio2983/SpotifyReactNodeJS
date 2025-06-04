@@ -37,7 +37,6 @@ export default function SwiperSpotify({ format, data, album, type, loading }) {
         key={i}
         style={{
           height: "100%",
-          width: "fit-content",
         }}
       >
         <Link to={`/${type}/${item?.id}`} state={{ item }}>
@@ -111,7 +110,9 @@ export default function SwiperSpotify({ format, data, album, type, loading }) {
                   ) : format === "circle" ? (
                     "Artista"
                   ) : (
-                    item?.artists?.[0]?.name || "Desconhecido"
+                    item?.artists?.[0]?.name ||
+                    item?.owner?.display_name ||
+                    "Desconhecido"
                   )}
                 </span>
               </div>
@@ -138,7 +139,7 @@ export default function SwiperSpotify({ format, data, album, type, loading }) {
         onMouseLeave={() => setIsHover(false)}
       >
         <Swiper
-          spaceBetween={0}
+          spaceBetween={20}
           slidesPerView={slidesPerViewValue}
           slidesPerGroup={2}
           modules={[Navigation]}
