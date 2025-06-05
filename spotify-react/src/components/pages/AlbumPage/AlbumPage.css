@@ -1,7 +1,102 @@
 .album-container {
   gap: 0 !important;
-  padding: 48px 0px 28px 56px;
+
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+.album-page-header {
+  min-height: 350px;
+  height: auto;
+
+  width: 100%;
+
+  padding-inline: 32px;
+  position: relative;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.album-header-content {
+  width: 100%;
+  position: relative;
+  display: flex;
+  gap: 36px;
+  z-index: 20;
+  padding: 16px 0;
+}
+
+.album-image-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+
+  overflow: hidden;
+  z-index: 15;
+  box-shadow: 13px 10px 103px -18px rgba(0, 0, 0, 0.89);
+  margin: 0;
+}
+
+.album-image-wrapper img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+
+  z-index: 15;
+}
+
+.album-header-overlay {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.9)
+  );
+  z-index: 0;
+}
+
+.album-title {
+  margin: 0;
+  color: white;
+  z-index: 10000;
+  font-size: 6rem;
+
+  font-weight: 800;
+}
+
+.album-header-text {
+  margin-left: 12px;
+  width: 60%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.album-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.album-owner-image-wrapper {
+  height: 32px;
+  width: 32px;
+  margin: 0;
+}
+
+.album-description {
+  text-align: end;
+}
+
+.album-label {
+  color: white;
+  font-size: 0.875;
 }
