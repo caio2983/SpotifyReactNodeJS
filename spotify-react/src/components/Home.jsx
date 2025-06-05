@@ -80,7 +80,7 @@ export default function Home() {
 
       {/* MAIN */}
       <div className="resizable main" style={{ width: `${mainWidth}%` }}>
-        <Main></Main>
+        <Main currentWidth={mainWidth}></Main>
       </div>
 
       {/* SONG */}

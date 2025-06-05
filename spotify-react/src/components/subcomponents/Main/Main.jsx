@@ -9,7 +9,8 @@ import ArtistPage from "../../pages/ArtistPage/ArtistPage";
 import PlaylistCardSkeleton from "./PlaylistCardSkeleton";
 import SearchingPage from "../../pages/SearchingPage/SearchingPage";
 import TrackPage from "../../pages/TrackPage/TrackPage";
-export default function Main() {
+import AlbumPage from "../../pages/AlbumPage/AlbumPage";
+export default function Main({ currentWidth }) {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
   const [initialArtists, setInitialArtists] = useState([]);
   const [initialTracks, setInitialTracks] = useState([]);
@@ -135,12 +136,14 @@ export default function Main() {
                 type="artist"
                 data={initialArtists}
                 loading={artistsLoading}
+                currentWidth={currentWidth}
               />
 
               <SwiperSpotify
                 type="square"
                 data={initialTracks}
                 loading={albumsLoading}
+                currentWidth={currentWidth}
               />
             </div>
           </div>
@@ -151,6 +154,7 @@ export default function Main() {
       <Route path="/artist/:artistId" element={<ArtistPage />} />
       <Route path="/search/:query" element={<SearchingPage />} />
       <Route path="/track/:trackId" element={<TrackPage />} />
+      <Route path="/album/:albumId" element={<AlbumPage />} />
     </Routes>
   );
 }

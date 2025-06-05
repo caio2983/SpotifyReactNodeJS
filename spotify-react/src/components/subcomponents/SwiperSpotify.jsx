@@ -15,7 +15,14 @@ import {
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../../GlobalContext";
 
-export default function SwiperSpotify({ format, data, album, type, loading }) {
+export default function SwiperSpotify({
+  format,
+  data,
+  album,
+  type,
+  loading,
+  currentWidth,
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
   const { setGlobalSearchResult, isSearching } = useGlobalContext();
@@ -27,9 +34,14 @@ export default function SwiperSpotify({ format, data, album, type, loading }) {
 
   const totalSlides = data?.length ?? 0;
 
-  const maxSlidesPerView = 4.35;
+  const maxSlidesPerView = currentWidth > 65 ? 6 : currentWidth > 50 ? 4.35 : 4;
+
   const slidesPerViewValue =
     totalSlides < maxSlidesPerView ? totalSlides : maxSlidesPerView;
+
+  useEffect(() => {
+    console.log(currentWidth);
+  }, [currentWidth]);
 
   function renderSlides() {
     return data.map((item, i) => (
