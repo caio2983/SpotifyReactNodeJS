@@ -122,7 +122,7 @@ app.get("/get-album/:id", async (req, res) => {
     const { id } = req.params;
 
     if (!id) {
-      return res.status(400).json({ error: "ID da música é obrigatório" });
+      return res.status(400).json({ error: "ID do álbum é obrigatório" });
     }
 
     const album = await getAlbum(id);
