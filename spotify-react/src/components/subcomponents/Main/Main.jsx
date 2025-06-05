@@ -106,7 +106,13 @@ export default function Main({ currentWidth }) {
                 className="main-container-gradient"
               />
 
-              <div className="playlist-cards">
+              <div
+                className="playlist-cards"
+                style={{
+                  gridTemplateColumns:
+                    currentWidth < 70 ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
+                }}
+              >
                 {playlistCardsLoading &&
                   Array.from({ length: 8 }).map((_, index) => (
                     <PlaylistCardSkeleton key={index} />
@@ -132,18 +138,20 @@ export default function Main({ currentWidth }) {
 
             <div className="swipers-wrapper">
               <SwiperSpotify
+                type="square"
+                data={initialTracks}
+                loading={albumsLoading}
+                currentWidth={currentWidth}
+                slidesPerViewProp={4.35}
+              />
+
+              <SwiperSpotify
                 format="circle"
                 type="artist"
                 data={initialArtists}
                 loading={artistsLoading}
                 currentWidth={currentWidth}
-              />
-
-              <SwiperSpotify
-                type="square"
-                data={initialTracks}
-                loading={albumsLoading}
-                currentWidth={currentWidth}
+                slidesPerViewProp={4.35}
               />
             </div>
           </div>

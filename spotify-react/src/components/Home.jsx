@@ -35,7 +35,7 @@ export default function Home() {
 
     if (dragging === "song") {
       setSongWidth((prev) => {
-        const newWidth = Math.max(20, Math.min(25, prev - deltaPercent));
+        const newWidth = Math.max(20, Math.min(26, prev - deltaPercent));
         return newWidth;
       });
     }

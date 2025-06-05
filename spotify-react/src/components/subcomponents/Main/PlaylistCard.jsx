@@ -63,6 +63,7 @@ export default function PlaylistCard({
       }}
       className="playlist-card"
     >
+      <div className="playlist-card-background"></div>
       {isHovered ? <span className="playlist-card-hovered"></span> : ""}
 
       {playlist.image?.[0]?.url ? (

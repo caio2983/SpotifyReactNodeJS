@@ -22,6 +22,7 @@ export default function SwiperSpotify({
   type,
   loading,
   currentWidth,
+  slidesPerViewProp,
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
@@ -50,6 +51,7 @@ export default function SwiperSpotify({
         style={{
           height: "100%",
         }}
+        className="slide"
       >
         <Link to={`/${type}/${item?.id}`} state={{ item }}>
           <div
@@ -152,15 +154,16 @@ export default function SwiperSpotify({
       >
         <Swiper
           spaceBetween={20}
-          slidesPerView={slidesPerViewValue}
+          slidesPerView={slidesPerViewProp || slidesPerViewValue}
           slidesPerGroup={2}
           modules={[Navigation]}
-          loop={false}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
           }}
-          style={{ height: "100%" }}
+          style={{
+            height: "100%",
+          }}
           onInit={(swiper) => {
             swiperRef.current = swiper;
             swiper.params.navigation.prevEl = prevRef.current;
