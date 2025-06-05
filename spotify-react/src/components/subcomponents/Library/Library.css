@@ -1,0 +1,86 @@
+.library-container {
+  margin: 24px 12px 12px 24px;
+  position: relative;
+}
+
+.library-container:hover .song-expand-button {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.library-container:hover .your-library {
+  margin-left: 44px;
+}
+
+.library-container-header {
+  display: flex;
+  align-items: center;
+}
+
+.your-library {
+  font-family: "SpotifyMixBold";
+  font-size: 1.25rem;
+  color: white;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+.library-tools {
+  height: 100px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.library-buttons-wrapper {
+  height: 50%;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+}
+
+.library-search-wrapper {
+  height: 50%;
+  display: flex;
+  align-items: end;
+}
+
+.library-expanded-container {
+  position: fixed;
+  top: 20vh;
+  bottom: 20vh;
+  left: 12px;
+  right: 12px;
+  margin-bottom: 20px;
+  height: 80vh;
+
+  display: flex;
+  align-self: center;
+
+  background-color: #121212;
+  border: 1px solid #121212;
+  border-radius: 10px;
+  z-index: 102;
+  transition: all 0.5s ease;
+  transform-origin: left;
+  overflow: hidden;
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.library-expanded-container.expanded {
+  padding-inline: 0;
+  transform: scaleX(1);
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.library-expanded-container.collapsed {
+  opacity: 0;
+  transform: scaleX(0);
+  display: flex;
+  align-items: center;
+  justify-items: left;
+}

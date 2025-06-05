@@ -7,6 +7,7 @@
 @import "./components/pages/AlbumPage/AlbumPage.css";
 @import "./components/pages/SearchingPage/SearchingPage.css";
 @import "./components//pages/TrackPage/TrackPage.css";
+@import "./components/subcomponents/Library/Library.css";
 @font-face {
   font-family: "SpotifyMixBold";
   src: url("./assets/fonts/SpotifyMix-Bold.ttf") format("truetype");
@@ -87,46 +88,6 @@
 
 .resizer:hover {
   background-color: #555;
-}
-.library-expanded-container {
-  position: fixed;
-  top: 20vh;
-  bottom: 20vh;
-  left: 12px;
-  right: 12px;
-  margin-bottom: 20px;
-  height: 80vh;
-
-  display: flex;
-  align-self: center;
-
-  background-color: #121212;
-  border: 1px solid #121212;
-  border-radius: 10px;
-  z-index: 102;
-  transition: all 0.5s ease;
-  transform-origin: left;
-  overflow: hidden;
-  opacity: 0;
-  transform: scaleX(0);
-}
-
-.library-expanded-container.expanded {
-  padding-inline: 0;
-  transform: scaleX(1);
-  opacity: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.library-expanded-container.collapsed {
-  opacity: 0;
-  transform: scaleX(0);
-  display: flex;
-  align-items: center;
-  justify-items: left;
 }
 
 .main-container {
