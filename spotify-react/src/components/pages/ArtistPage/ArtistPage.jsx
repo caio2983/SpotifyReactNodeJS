@@ -9,7 +9,6 @@ import SwiperSpotify from "../../subcomponents/SwiperSpotify";
 import ArtistSongSkeleton from "./ArtistSongSkeleton";
 
 export default function ArtistPage() {
-  const location = useLocation();
   const { artistId } = useParams();
 
   // Inicializa artist com o item do location.state, se existir, ou null
