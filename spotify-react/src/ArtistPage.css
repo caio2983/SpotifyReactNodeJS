@@ -86,7 +86,8 @@
 .artist-header-text h1 {
   color: white;
   z-index: 10000;
-  font-size: 4.5rem;
+  font-size: 7rem;
+
   font-weight: 800;
 }
 
