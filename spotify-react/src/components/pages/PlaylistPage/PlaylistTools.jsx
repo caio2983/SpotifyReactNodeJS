@@ -1,20 +1,31 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGlobalContext } from "../../../GlobalContext";
+import axios from "axios";
 
 export default function PlaylistTools({ playSongs, type }) {
   const { setNextSongs, setSong } = useGlobalContext();
 
   function handleClick() {
-    setNextSongs(playSongs);
+    // setNextSongs(playSongs);
     console.log(playSongs);
 
-    setSong(playSongs?.nextsongs?.[0].track);
+    if (type == "album") {
+      console.log("AAAAAAAAAAA", playSongs);
+      axios
+        .get(`http://localhost:3000/get-track/${playSongs?.nextsongs?.[0].id}`)
+        .then((response) => {
+          const track = response.data;
+          setSong(track);
+        });
+    } else {
+      setSong(playSongs?.nextsongs?.[0].track);
+    }
 
     setNextSongs({
       nextsongs: playSongs.nextsongs,
       id: playSongs.id,
-      type: "playlist",
+      type: { type },
     });
   }
 

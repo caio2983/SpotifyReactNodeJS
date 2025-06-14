@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Vibrant } from "node-vibrant/browser";
 import { Skeleton } from "@mui/material";
+import PlaylistTools from "../PlaylistPage/PlaylistTools";
 
 export default function AlbumPage() {
   const { albumId } = useParams();
@@ -199,7 +200,14 @@ export default function AlbumPage() {
           ></div>
         )}
       </header>
-      Album
+      <PlaylistTools
+        playSongs={{
+          nextsongs: album?.tracks?.items,
+          id: album?.id,
+          type: "album",
+        }}
+        type={"album"}
+      ></PlaylistTools>
     </div>
   );
 }

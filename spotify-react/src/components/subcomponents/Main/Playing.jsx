@@ -39,6 +39,7 @@ export default function Playing() {
   }, [songSelected, nextSongs]);
 
   function handleNextClick() {
+    console.log(nextSongs);
     if (nextSongs?.type == "playlist") {
       let current_number = nextSongs.nextsongs.findIndex(
         (item) => item.track.id === songSelected.id
@@ -56,11 +57,11 @@ export default function Playing() {
           const track = response.data;
           setSong(track);
         });
-    } else if (nextSongs?.type == "album") {
+    } else if (nextSongs?.type.type == "album") {
       let current_number = nextSongs.nextsongs.findIndex(
         (item) => item.id === songSelected.id
       );
-
+      console.log("teste album");
       const next_song_index = current_number + 1;
       const next_song_id = nextSongs.nextsongs[next_song_index].id;
 
