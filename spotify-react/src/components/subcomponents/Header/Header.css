@@ -168,14 +168,27 @@
   height: 70px;
   width: 70px;
   border-radius: 4px;
-  background-color: red;
 }
 
 .result-artist-picture {
   height: 70px;
   width: 70px;
-  background-color: blue;
+
   border-radius: 50%;
+}
+
+.result-artist-picture img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.result-nonArtist-picture img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .result-details {

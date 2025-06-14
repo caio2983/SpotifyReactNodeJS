@@ -1,7 +1,7 @@
 @import "./Song.css";
 @import "./PlaylistPage.css";
 @import "./PlayingSong.css";
-@import "./Header.css";
+@import "./components/subcomponents/Header/Header.css";
 @import "./SwiperSpotify.css";
 @import "./ArtistPage.css";
 @import "./components/pages/AlbumPage/AlbumPage.css";

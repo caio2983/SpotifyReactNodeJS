@@ -207,11 +207,13 @@ app.get("/recentsearches", async (req, res) => {
 app.post("/recentsearches", (req, res) => {
   const newSearch = req.body;
 
-  if (!newSearch) {
+  if (!newSearch || !newSearch.id || !newSearch.type) {
     return res.status(400).json({ erro: "invalid search" });
   }
 
-  if (!searches.includes(newSearch)) {
+  const exists = searches.some((item) => item.id === newSearch.id);
+
+  if (!exists) {
     searches.push(newSearch);
   }
 
