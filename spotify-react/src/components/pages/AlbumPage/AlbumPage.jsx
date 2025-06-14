@@ -37,9 +37,9 @@ export default function AlbumPage() {
           throw new Error("Artista não encontrado no álbum.");
         }
       })
-      .then((artistResponse) => {
-        console.log("ARTISTA", artistResponse.data);
-        setArtistImage(artistResponse.data.images[2].url);
+      .then((albumResponse) => {
+        console.log("ALBUM", albumResponse.data);
+        setArtistImage(albumResponse.data.images[2].url);
       })
       .catch((error) => {
         console.error("Erro ao buscar dados:", error);
