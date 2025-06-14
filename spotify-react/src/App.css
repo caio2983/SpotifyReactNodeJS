@@ -57,7 +57,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid #1e1e1e;
+  border: 1px solid transparent;
   border-radius: 6px;
   position: relative;
 }
@@ -96,7 +96,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #121212;
-  border: 1px solid #121212;
+  border: 1px solid transparent;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
