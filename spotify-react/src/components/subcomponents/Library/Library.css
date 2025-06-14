@@ -92,3 +92,31 @@
   align-items: center;
   padding: 16px;
 }
+
+.library-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(179, 179, 179);
+  cursor: pointer;
+}
+
+.icon-default {
+  position: absolute;
+  transition: opacity 0.2s ease;
+  opacity: 1;
+}
+
+.icon-hover {
+  position: absolute;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+
+.library-icon:hover .icon-default {
+  opacity: 0;
+}
+
+.library-icon:hover .icon-hover {
+  opacity: 1;
+}
