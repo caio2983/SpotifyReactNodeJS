@@ -4,6 +4,10 @@ import axios from "axios";
 import { Vibrant } from "node-vibrant/browser";
 import { Skeleton } from "@mui/material";
 import PlaylistTools from "../PlaylistPage/PlaylistTools";
+import PlaylistSongSkeleton from "../PlaylistPage/PlaylistSongSkeleton";
+import PlaylistSong from "../PlaylistPage/PlaylistSong";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 export default function AlbumPage() {
   const { albumId } = useParams();
@@ -12,6 +16,7 @@ export default function AlbumPage() {
   const [album, setAlbum] = useState([]);
   const [albumDominantColor, setDominantColor] = useState(null);
   const [gradientColor, setGradientColor] = useState(null);
+  const [playlist, setPlaylist] = useState([]);
 
   const [artistImage, setArtistImage] = useState("");
 
@@ -43,6 +48,26 @@ export default function AlbumPage() {
         setIsLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    if (album?.tracks?.items?.length > 0) {
+      const fetchTrackDetails = async () => {
+        try {
+          const trackPromises = album.tracks.items.map((track) =>
+            axios.get(`http://localhost:3000/get-track/${track.id}`)
+          );
+          const trackResponses = await Promise.all(trackPromises);
+          const fullTracks = trackResponses.map((res) => res.data);
+          console.log("FULL TRACKSSSS", fullTracks);
+          setPlaylist(fullTracks);
+        } catch (error) {
+          console.error("Erro ao buscar detalhes das faixas:", error);
+        }
+      };
+
+      fetchTrackDetails();
+    }
+  }, [album]);
 
   function hexToRgb(hex, alpha = 1) {
     const cleanHex = hex.replace("#", "");
@@ -200,14 +225,60 @@ export default function AlbumPage() {
           ></div>
         )}
       </header>
-      <PlaylistTools
-        playSongs={{
-          nextsongs: album?.tracks?.items,
-          id: album?.id,
-          type: "album",
+      <div className="songs-overlay"></div>
+      <div
+        className="playlist-songs"
+        style={{
+          background:
+            !isLoading && gradientColor
+              ? `linear-gradient(
+                to bottom,
+             ${hexToRgb(gradientColor, 0.3)} 0%,
+                ${hexToRgb(gradientColor, 0.3)} 10%,
+                ${hexToRgb(gradientColor, 0.1)} 20%,
+           transparent 50%
+              )`
+              : "#1d1d1e",
         }}
-        type={"album"}
-      ></PlaylistTools>
+      >
+        <PlaylistTools
+          playSongs={{
+            nextsongs: album?.tracks?.items,
+            id: album?.id,
+            type: "album",
+          }}
+          type={"album"}
+        ></PlaylistTools>
+        <div className="songs-heading-container">
+          <div className="songs-heading">
+            <div className="column heading-title">
+              <span className="hashtag">#</span>
+              <span className="title">Título</span>
+            </div>
+            <div className="column heading-album">Álbum</div>
+            <div className="column heading-added">Adicionada em</div>
+            <div className="column heading-duration">
+              <FontAwesomeIcon icon={faClock} />
+            </div>
+          </div>
+
+          <div className="song-list-container">
+            {isLoading
+              ? Array.from({ length: 10 }).map((_, index) => (
+                  <PlaylistSongSkeleton key={index} />
+                ))
+              : playlist?.map((song, index) => (
+                  <PlaylistSong
+                    key={index}
+                    image={song.album.images[2].url}
+                    index={index}
+                    song={song}
+                    playlist={playlist}
+                  />
+                ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
