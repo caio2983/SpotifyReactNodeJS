@@ -19,7 +19,10 @@ export default function NonArtistResultCard({ data }) {
   return (
     <div className="result-card">
       <div className="result-nonArtist-picture">
-        <img src={data?.album?.images?.[1]?.url} alt={data?.name} />
+        <img
+          src={data?.album?.images?.[1]?.url || data?.images?.[1]?.url}
+          alt={data?.name}
+        />
       </div>
       <div className="result-details">
         <span className="result-name">{data?.name}</span>
