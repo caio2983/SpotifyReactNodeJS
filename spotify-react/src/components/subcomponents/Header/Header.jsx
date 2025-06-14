@@ -5,6 +5,8 @@ import spotifyLogo from "../../../assets/spotifyLogo.png";
 import { Link, useNavigate } from "react-router-dom";
 import HeaderRecentSearchResults from "./HeaderRecentSearchResults";
 import { useGlobalContext } from "../../../GlobalContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
   const [searchResults, setSearchResults] = useState([]);
@@ -68,7 +70,9 @@ export default function Header() {
       </Link>
 
       <div className="input-wrapper">
-        <div className="semi-circle semi-circle-1"></div>
+        <div className="semi-circle semi-circle-1">
+          <FontAwesomeIcon icon={faMagnifyingGlass} size="xl"></FontAwesomeIcon>
+        </div>
 
         <div className="input-and-results">
           <input
