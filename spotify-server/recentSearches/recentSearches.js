@@ -1,8 +1,4 @@
-let searches = {};
-
-async function getRecentSearches() {
-  const ids = [];
-}
+let searches = [];
 
 module.exports = {
   searches,

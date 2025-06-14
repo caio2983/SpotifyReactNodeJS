@@ -8,23 +8,12 @@ import { useGlobalContext } from "../../../GlobalContext";
 
 export default function Header() {
   const [searchResults, setSearchResults] = useState([]);
-  const [recentsearches, setRecentSearches] = useState([]);
+
   const { setIsSearching } = useGlobalContext();
-  const { setGlobalSearchResult, setSearchTerm, searchTerm } =
+  const { setGlobalSearchResult, setSearchTerm, searchTerm, recentSearches } =
     useGlobalContext();
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/recentsearches")
-      .then((response) => {
-        setRecentSearches(response);
-      })
-      .catch((error) => {
-        console.error("Erro ao conseguir busxas recentes:", error);
-      });
-  }, []);
 
   const fetchSearchResults = async (query) => {
     try {
@@ -88,10 +77,9 @@ export default function Header() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-
-          <HeaderRecentSearchResults
-            recentSearchResults={recentsearches}
-          ></HeaderRecentSearchResults>
+          {recentSearches.length > 0 && (
+            <HeaderRecentSearchResults></HeaderRecentSearchResults>
+          )}
         </div>
 
         <div className="semi-circle semi-circle-2"></div>

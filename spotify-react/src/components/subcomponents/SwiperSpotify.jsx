@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Skeleton from "@mui/material/Skeleton";
-
+import axios from "axios";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -23,10 +23,12 @@ export default function SwiperSpotify({
   loading,
   currentWidth,
   slidesPerViewProp,
+  search,
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
-  const { setGlobalSearchResult, isSearching } = useGlobalContext();
+  const { setGlobalSearchResult, isSearching, setRecentSearches } =
+    useGlobalContext();
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -34,15 +36,22 @@ export default function SwiperSpotify({
   const swiperRef = useRef(null);
 
   const totalSlides = data?.length ?? 0;
+  function sendRecentSearch(data) {
+    axios
+      .post("http://localhost:3000/recentsearches", data)
+      .then((response) => {
+        console.log("Busca recente enviada com sucesso:", response.data);
 
-  const maxSlidesPerView = currentWidth > 60 ? 6 : currentWidth > 45 ? 4.35 : 4;
-
-  const slidesPerViewValue =
-    totalSlides < maxSlidesPerView ? totalSlides : maxSlidesPerView;
-
-  useEffect(() => {
-    console.log(currentWidth);
-  }, [currentWidth]);
+        return axios.get("http://localhost:3000/recentsearches");
+      })
+      .then((getResponse) => {
+        console.log("Busca atualizada de searches:", getResponse.data);
+        setRecentSearches(getResponse.data);
+      })
+      .catch((error) => {
+        console.error("Erro ao enviar ou buscar buscas recentes:", error);
+      });
+  }
 
   function renderSlides() {
     return data.map((item, i) => (
@@ -50,10 +59,15 @@ export default function SwiperSpotify({
         key={i}
         style={{
           height: "100%",
+          width: "250px",
         }}
         className="slide"
       >
-        <Link to={`/${type}/${item?.id}`} state={{ item }}>
+        <Link
+          to={`/${type}/${item?.id}`}
+          state={{ item }}
+          {...(search ? { onClick: () => sendRecentSearch(item) } : {})}
+        >
           <div
             className="slide-rectangle"
             onMouseEnter={(e) =>
@@ -154,9 +168,7 @@ export default function SwiperSpotify({
       >
         <Swiper
           spaceBetween={0}
-          slidesPerView={
-            slidesPerViewProp ? slidesPerViewProp : slidesPerViewValue
-          }
+          slidesPerView={"auto"}
           slidesPerGroup={2}
           modules={[Navigation]}
           navigation={{

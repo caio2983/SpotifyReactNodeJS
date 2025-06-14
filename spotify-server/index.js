@@ -19,6 +19,7 @@ const { searches } = require("./recentSearches/recentSearches");
 const app = express();
 const PORT = 3000;
 app.use(cors());
+app.use(express.json());
 
 // const token = process.env.SPOTIFY_TOKEN;
 const clientId = process.env.SPOTIFY_CLIENT_ID;
@@ -201,6 +202,20 @@ app.get("/playlist/:id", async (req, res) => {
 
 app.get("/recentsearches", async (req, res) => {
   res.json(searches);
+});
+
+app.post("/recentsearches", (req, res) => {
+  const newSearch = req.body;
+
+  if (!newSearch) {
+    return res.status(400).json({ erro: "invalid search" });
+  }
+
+  if (!searches.includes(newSearch)) {
+    searches.push(newSearch);
+  }
+
+  res.status(201).json({ mensagem: "new search added", newSearch });
 });
 
 app.listen(PORT, () => {

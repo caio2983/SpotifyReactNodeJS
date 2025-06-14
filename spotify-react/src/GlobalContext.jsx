@@ -14,6 +14,7 @@ export function GlobalProvider({ children }) {
     id: null,
     type: null,
   });
+  const [recentSearches, setRecentSearches] = useState([]);
 
   return (
     <GlobalContext.Provider
@@ -28,6 +29,8 @@ export function GlobalProvider({ children }) {
         setGlobalSearchResult,
         searchTerm,
         setSearchTerm,
+        recentSearches,
+        setRecentSearches,
       }}
     >
       {children}
