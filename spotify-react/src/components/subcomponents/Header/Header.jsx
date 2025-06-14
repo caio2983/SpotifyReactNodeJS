@@ -3,16 +3,28 @@ import axios from "axios";
 import debounce from "lodash.debounce";
 import spotifyLogo from "../../../assets/spotifyLogo.png";
 import { Link, useNavigate } from "react-router-dom";
-import HeaderSearchResults from "./HeaderSearchResults";
+import HeaderRecentSearchResults from "./HeaderRecentSearchResults";
 import { useGlobalContext } from "../../../GlobalContext";
 
 export default function Header() {
   const [searchResults, setSearchResults] = useState([]);
+  const [recentsearches, setRecentSearches] = useState([]);
   const { setIsSearching } = useGlobalContext();
   const { setGlobalSearchResult, setSearchTerm, searchTerm } =
     useGlobalContext();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/recentsearches")
+      .then((response) => {
+        setRecentSearches(response);
+      })
+      .catch((error) => {
+        console.error("Erro ao conseguir busxas recentes:", error);
+      });
+  }, []);
 
   const fetchSearchResults = async (query) => {
     try {
@@ -77,7 +89,9 @@ export default function Header() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
 
-          <HeaderSearchResults />
+          <HeaderRecentSearchResults
+            recentSearchResults={recentsearches}
+          ></HeaderRecentSearchResults>
         </div>
 
         <div className="semi-circle semi-circle-2"></div>

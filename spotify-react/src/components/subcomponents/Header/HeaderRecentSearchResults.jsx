@@ -2,7 +2,7 @@ import React from "react";
 import ArtistResultCard from "./SearchResultsCards/ArtistResultCard";
 import NonArtistResultCard from "./SearchResultsCards/NonArtistResultCard";
 
-export default function HeaderSearchResults() {
+export default function HeaderRecentSearchResults({ recentSearchResults }) {
   return (
     <div className="header-search-results">
       <div className="search-results-container">

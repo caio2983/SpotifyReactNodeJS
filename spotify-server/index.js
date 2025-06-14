@@ -14,6 +14,7 @@ const {
 const { getArtistAlbums } = require("./resultTypes/artists/artistAlbums");
 const { getArtist } = require("./resultTypes/artists/getArtist");
 const { getPlaylist } = require("./resultTypes/playlists/getPlaylist");
+const { searches } = require("./recentSearches/recentSearches");
 
 const app = express();
 const PORT = 3000;
@@ -196,6 +197,10 @@ app.get("/playlist/:id", async (req, res) => {
     console.error("Erro ao buscar a playlist:", err);
     res.status(500).json({ error: "erro ao conseguir a playlist " });
   }
+});
+
+app.get("/recentsearches", async (req, res) => {
+  res.json(searches);
 });
 
 app.listen(PORT, () => {
