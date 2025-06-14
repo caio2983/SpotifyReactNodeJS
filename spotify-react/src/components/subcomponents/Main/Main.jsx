@@ -138,7 +138,7 @@ export default function Main({ currentWidth }) {
 
             <div className="swipers-wrapper">
               <SwiperSpotify
-                type="square"
+                type="track"
                 data={initialTracks}
                 loading={albumsLoading}
                 currentWidth={currentWidth}

@@ -7,17 +7,15 @@ export default function PlaylistTools({ playSongs, type }) {
   const { setNextSongs, setSong } = useGlobalContext();
 
   function handleClick() {
-    // setNextSongs(playSongs);
-    console.log(playSongs);
-
     if (type == "album") {
-      console.log("AAAAAAAAAAA", playSongs);
       axios
         .get(`http://localhost:3000/get-track/${playSongs?.nextsongs?.[0].id}`)
         .then((response) => {
           const track = response.data;
           setSong(track);
         });
+    } else if (type == "track") {
+      setSong(playSongs.nextsongs);
     } else {
       setSong(playSongs?.nextsongs?.[0].track);
     }
@@ -35,11 +33,7 @@ export default function PlaylistTools({ playSongs, type }) {
         <div className="play-button-green" onClick={handleClick}>
           <span>▶</span>
         </div>
-        <span>+ button</span>
-        <span>3 points</span>
       </div>
-
-      <div className="list-options">List</div>
     </div>
   );
 }
