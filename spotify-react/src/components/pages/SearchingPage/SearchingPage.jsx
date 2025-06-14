@@ -69,6 +69,7 @@ export default function SearchingPage() {
             type="track"
             data={globalSearchResult?.tracks.items || []}
             album={true}
+            search={true}
           />
         )}
       </div>
@@ -81,6 +82,7 @@ export default function SearchingPage() {
             type="artist"
             data={globalSearchResult?.artists.items || []}
             album={true}
+            search={true}
           />
         )}
       </div>
@@ -94,6 +96,7 @@ export default function SearchingPage() {
             data={globalSearchResult?.playlists.items || []}
             album={true}
             playlist={true}
+            search={true}
           />
         )}
       </div>
@@ -106,6 +109,7 @@ export default function SearchingPage() {
             type="album"
             data={globalSearchResult?.albums.items || []}
             album={true}
+            search={true}
           />
         )}
       </div>
