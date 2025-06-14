@@ -1,6 +1,6 @@
 .searching-container {
   gap: 0 !important;
-  padding: 24px 0px 28px 56px;
+  padding: 24px 0px 28px 0px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -12,6 +12,8 @@
   color: white;
   display: block;
   margin: 0;
+
+  padding-left: 56px;
 }
 
 .showing-results {
@@ -20,6 +22,7 @@
   color: white;
   padding-right: 24px;
   max-width: 95%;
+  padding-left: 56px;
 }
 
 .search-term {
