@@ -11,10 +11,6 @@ export default function Song({ setIsSongExpanded }) {
 
   const { songSelected, setSong } = useGlobalContext();
 
-  useEffect(() => {
-    console.log("SONGSSS", songSelected);
-  }, [songSelected]);
-
   return (
     <div className="song-container">
       <div className="song-header">
