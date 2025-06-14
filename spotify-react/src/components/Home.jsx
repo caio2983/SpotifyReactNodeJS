@@ -73,7 +73,7 @@ export default function Home() {
       {/* LIBRARY */}
       <div className="resizable" style={{ width: `${libraryWidth}%` }}>
         {isExpanded && <LibraryExpanded setIsExpanded={setIsExpanded} />}
-        <Library setIsExpanded={setIsExpanded} />
+        <Library setIsExpanded={setIsExpanded} currentWidth={libraryWidth} />
         {/* DRAGGER entre LIBRARY e MAIN */}
         <div className="resizer" onMouseDown={() => setDragging("library")} />
       </div>
