@@ -35,7 +35,7 @@ export default function SwiperSpotify({
 
   const totalSlides = data?.length ?? 0;
 
-  const maxSlidesPerView = currentWidth > 65 ? 6 : currentWidth > 50 ? 4.35 : 4;
+  const maxSlidesPerView = currentWidth > 60 ? 6 : currentWidth > 45 ? 4.35 : 4;
 
   const slidesPerViewValue =
     totalSlides < maxSlidesPerView ? totalSlides : maxSlidesPerView;
@@ -153,8 +153,10 @@ export default function SwiperSpotify({
         onMouseLeave={() => setIsHover(false)}
       >
         <Swiper
-          spaceBetween={20}
-          slidesPerView={slidesPerViewProp || slidesPerViewValue}
+          spaceBetween={0}
+          slidesPerView={
+            slidesPerViewProp ? slidesPerViewProp : slidesPerViewValue
+          }
           slidesPerGroup={2}
           modules={[Navigation]}
           navigation={{

@@ -142,7 +142,6 @@ export default function Main({ currentWidth }) {
                 data={initialTracks}
                 loading={albumsLoading}
                 currentWidth={currentWidth}
-                slidesPerViewProp={4.35}
               />
 
               <SwiperSpotify
@@ -151,7 +150,6 @@ export default function Main({ currentWidth }) {
                 data={initialArtists}
                 loading={artistsLoading}
                 currentWidth={currentWidth}
-                slidesPerViewProp={4.35}
               />
             </div>
           </div>

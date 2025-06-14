@@ -20,7 +20,6 @@
 }
 
 .slide-rectangle {
-  width: fit-content;
   height: 100%;
   display: flex;
   align-items: center;
@@ -33,15 +32,10 @@
 }
 
 .slide-content {
-  width: 200px;
   height: 100%;
-  max-width: 330px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  max-width: 300px;
 
   text-align: left;
-  margin: 16px;
 }
 
 .slide-circle {
