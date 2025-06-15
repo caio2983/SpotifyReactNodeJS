@@ -5,11 +5,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ArtistResultCard from "../Header/SearchResultsCards/ArtistResultCard";
 import NonArtistResultCard from "../Header/SearchResultsCards/NonArtistResultCard";
 import LibrarySmall from "./LibrarySmall";
+import { useGlobalContext } from "../../../GlobalContext";
+import { useEffect } from "react";
+import axios from "axios";
 
-export default function Library({ setIsExpanded, currentWidth }) {
+export default function Library({ setIsExpanded, currentWidth, data }) {
   const handleClick = () => {
     setIsExpanded(true);
   };
+
+  const { libraryReloadSignal } = useGlobalContext();
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3000/library").then((res) => {
+      setItems(res.data);
+    });
+  }, [libraryReloadSignal]);
+
+  function teste() {
+    console.log("ITEMSSSS", items);
+  }
 
   return (
     <>
@@ -30,7 +45,7 @@ export default function Library({ setIsExpanded, currentWidth }) {
 
           <div className="library-tools">
             <div className="library-buttons-wrapper">
-              <button>Playlists</button>
+              <button onClick={teste}>Playlists</button>
               <button>Músicas</button>
               <button>Artistas</button>
             </div>
@@ -40,9 +55,15 @@ export default function Library({ setIsExpanded, currentWidth }) {
           </div>
 
           <div className="results-list">
-            <ArtistResultCard></ArtistResultCard>
+            {items.map((item, index) => {
+              const { type } = item;
 
-            <NonArtistResultCard></NonArtistResultCard>
+              return type === "artist" ? (
+                <ArtistResultCard key={index} data={item} />
+              ) : (
+                <NonArtistResultCard key={index} data={item} />
+              );
+            })}
           </div>
         </div>
       )}

@@ -186,12 +186,15 @@ export default function ArtistPage() {
         }}
       >
         <div className="songs-overlay"></div>
-        <div className="artist-tools-wrapper">
-          <div className="play-button-green" onClick={handleClick}>
-            <span>▶</span>
-          </div>
-          <button>Seguir</button>
-        </div>
+        <PlaylistTools
+          playSongs={{
+            nextsongs: artist,
+            id: artist?.id,
+            type: "artist",
+          }}
+          type={"artist"}
+          data={artist}
+        ></PlaylistTools>
         <div className="songs-heading-container artist-songs-heading">
           <div className="song-list-container">
             <div className="artist-popular-tracks">

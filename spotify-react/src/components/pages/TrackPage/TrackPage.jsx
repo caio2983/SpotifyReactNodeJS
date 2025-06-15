@@ -216,6 +216,7 @@ export default function TrackPage() {
             type: "track",
           }}
           type={"track"}
+          data={track}
         ></PlaylistTools>
 
         <div className="track-content">

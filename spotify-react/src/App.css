@@ -255,3 +255,22 @@
   width: 80%;
   margin-right: 5%;
 }
+
+.add-item-to-library {
+  color: #b3b3b3;
+  transition: transform 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.add-item-to-library:hover {
+  color: #1db954;
+  transform: scale(1.1);
+}
+
+.add-item-to-library:active {
+  transform: scale(0.95);
+}

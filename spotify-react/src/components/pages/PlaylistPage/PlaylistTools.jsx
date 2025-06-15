@@ -2,8 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGlobalContext } from "../../../GlobalContext";
 import axios from "axios";
+import AddToLibrary from "../../subcomponents/AddToLibrary";
 
-export default function PlaylistTools({ playSongs, type }) {
+export default function PlaylistTools({ playSongs, type, data }) {
   const { setNextSongs, setSong } = useGlobalContext();
 
   function handleClick() {
@@ -33,6 +34,7 @@ export default function PlaylistTools({ playSongs, type }) {
         <div className="play-button-green" onClick={handleClick}>
           <span>▶</span>
         </div>
+        <AddToLibrary data={data}></AddToLibrary>
       </div>
     </div>
   );

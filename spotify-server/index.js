@@ -15,6 +15,7 @@ const { getArtistAlbums } = require("./resultTypes/artists/artistAlbums");
 const { getArtist } = require("./resultTypes/artists/getArtist");
 const { getPlaylist } = require("./resultTypes/playlists/getPlaylist");
 const { searches } = require("./recentSearches/recentSearches");
+const { user_library } = require("./library/library");
 
 const app = express();
 const PORT = 3000;
@@ -171,7 +172,7 @@ app.get("/artist-albums/:id", async (req, res) => {
 app.get("/artist/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("IDDDDD", id);
+
     if (!id) {
       return res.status(400).json({ error: "ID do artista é obrigatório" });
     }
@@ -187,7 +188,7 @@ app.get("/artist/:id", async (req, res) => {
 app.get("/playlist/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("IDDDDD", id);
+
     if (!id) {
       return res.status(400).json({ error: "ID da playlist é obrigatório" });
     }
@@ -218,6 +219,26 @@ app.post("/recentsearches", (req, res) => {
   }
 
   res.status(201).json({ mensagem: "new search added", newSearch });
+});
+
+app.post("/library", async (req, res) => {
+  const library_item = req.body;
+
+  if (!library_item || !library_item.id || !library_item.type) {
+    return res.status(400).json({ erro: "invalid library item" });
+  }
+
+  const exists = user_library.some((item) => item.id === library_item.id);
+
+  if (!exists) {
+    user_library.push(library_item);
+  }
+
+  res.status(201).json({ mensagem: "new item added to library", library_item });
+});
+
+app.get("/library", async (req, res) => {
+  res.json(user_library);
 });
 
 app.listen(PORT, () => {

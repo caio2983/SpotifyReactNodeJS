@@ -15,6 +15,11 @@ export function GlobalProvider({ children }) {
     type: null,
   });
   const [recentSearches, setRecentSearches] = useState([]);
+  const [libraryReloadSignal, setLibraryReloadSignal] = useState(0);
+
+  function signalLibraryReload() {
+    setLibraryReloadSignal((prev) => prev + 1);
+  }
 
   return (
     <GlobalContext.Provider
@@ -31,6 +36,8 @@ export function GlobalProvider({ children }) {
         setSearchTerm,
         recentSearches,
         setRecentSearches,
+        libraryReloadSignal,
+        signalLibraryReload,
       }}
     >
       {children}
