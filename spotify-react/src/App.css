@@ -274,3 +274,8 @@
 .add-item-to-library:active {
   transform: scale(0.95);
 }
+
+.add-item-to-libary-selected {
+  color: #1db954;
+  transform: scale(1.2);
+}
