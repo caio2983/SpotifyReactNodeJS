@@ -250,7 +250,7 @@ export default function ArtistPage() {
             })}
           </div>
           <SwiperSpotify
-            type="square"
+            type="album"
             data={albums?.[selectedAlbumType] || []}
             album={true}
             loading={isLoading}
@@ -261,7 +261,7 @@ export default function ArtistPage() {
           <div className="swipers-wrapper artist-appears-on">
             <p className="discography">Aparece em</p>
             <SwiperSpotify
-              type="square"
+              type="album"
               data={albums.appears_on}
               album={true}
               loading={isLoading}
@@ -274,7 +274,7 @@ export default function ArtistPage() {
             <p className="discography">Com {artist?.name}</p>
             {selectedAlbumType && (
               <SwiperSpotify
-                type="square"
+                type="album"
                 data={albums[selectedAlbumType] || []}
                 album={true}
                 loading={isLoading}
