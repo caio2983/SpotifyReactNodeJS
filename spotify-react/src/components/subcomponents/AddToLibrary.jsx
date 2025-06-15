@@ -12,7 +12,7 @@ export default function AddToLibrary({ data }) {
     try {
       const response = await axios.get("http://localhost:3000/library");
       const libraryItems = response.data;
-      const found = libraryItems.some((item) => item.id === data.id);
+      const found = libraryItems.some((item) => item.id === data?.id);
       setIsSelected(found);
     } catch (error) {
       console.error("Erro ao verificar biblioteca:", error);
@@ -21,7 +21,7 @@ export default function AddToLibrary({ data }) {
 
   useEffect(() => {
     checkIfFavorited();
-  }, [signalLibraryReload, data.id]);
+  }, [signalLibraryReload, data?.id]);
 
   async function addItem() {
     try {

@@ -242,6 +242,7 @@ export default function PlaylistPage() {
             id: playlist?.id,
           }}
           type={"playlist"}
+          data={playlist}
         />
 
         <div className="songs-heading-container">
