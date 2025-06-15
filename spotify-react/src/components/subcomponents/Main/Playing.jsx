@@ -40,7 +40,7 @@ export default function Playing() {
 
   function handleNextClick() {
     console.log(nextSongs);
-    if (nextSongs?.type == "playlist") {
+    if (nextSongs?.type.type == "playlist") {
       let current_number = nextSongs.nextsongs.findIndex(
         (item) => item.track.id === songSelected.id
       );
@@ -56,6 +56,7 @@ export default function Playing() {
         .then((response) => {
           const track = response.data;
           setSong(track);
+          console.log("aaaaaaaaadasda", response.data);
         });
     } else if (nextSongs?.type.type == "album") {
       let current_number = nextSongs.nextsongs.findIndex(
