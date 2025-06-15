@@ -22,7 +22,7 @@ export default function ArtistResultCard({ data }) {
         <img src={data?.images?.[1]?.url} alt={data?.name} />
       </div>
       <div className="result-details">
-        <span className="result-name">Artist</span>
+        <span className="result-name">Artista</span>
         <span className="result-artist">{data?.name}</span>
       </div>
     </div>
