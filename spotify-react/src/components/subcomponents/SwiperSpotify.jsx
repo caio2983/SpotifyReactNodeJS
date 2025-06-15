@@ -59,7 +59,7 @@ export default function SwiperSpotify({
         key={i}
         style={{
           height: "100%",
-          width: "250px",
+          width: "220px",
         }}
         className="slide"
       >
