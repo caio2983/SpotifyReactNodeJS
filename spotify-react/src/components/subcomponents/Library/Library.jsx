@@ -107,7 +107,7 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
                 className={selectedType === "all" ? "active" : ""}
                 onClick={() => setSelectedType("all")}
               >
-                Todos
+                Tudo
               </button>
             </div>
 

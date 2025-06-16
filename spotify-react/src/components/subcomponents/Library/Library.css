@@ -110,6 +110,29 @@
   margin-left: 12px;
 }
 
+.library-buttons-wrapper button {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  padding: 6px 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 20px;
+
+  transition: background 0.2s, color 0.2s;
+  font-family: "SpotifyMixBold";
+}
+
+.library-buttons-wrapper button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.library-buttons-wrapper button.active {
+  background: #b3b3b3;
+  color: #000000;
+  font-weight: bold;
+}
+
 .library-search-wrapper {
   height: 80%;
   display: flex;
