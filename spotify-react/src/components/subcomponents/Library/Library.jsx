@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import LibraryExpanded from "./LibraryExpanded";
 import {
   faArrowsLeftRightToLine,
@@ -9,20 +9,23 @@ import ArtistResultCard from "../Header/SearchResultsCards/ArtistResultCard";
 import NonArtistResultCard from "../Header/SearchResultsCards/NonArtistResultCard";
 import LibrarySmall from "./LibrarySmall";
 import { useGlobalContext } from "../../../GlobalContext";
-import { useEffect } from "react";
 import axios from "axios";
 
 export default function Library({ setIsExpanded, currentWidth, data }) {
   const handleClick = () => {
     setIsExpanded(true);
   };
+
   const inputRef = useRef(null);
   const wrapperRef = useRef(null);
   const [searchWord, setSearchWord] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const [selectedType, setSelectedType] = useState("all");
   const { libraryReloadSignal } = useGlobalContext();
+
   const [allItems, setAllItems] = useState([]);
   const [items, setItems] = useState([]);
+
   useEffect(() => {
     axios.get("http://localhost:3000/library").then((res) => {
       setAllItems(res.data);
@@ -49,15 +52,20 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
   useEffect(() => {
     const searchLower = searchWord.trim().toLowerCase();
 
-    if (searchLower === "") {
-      setItems(allItems);
-    } else {
-      const filtered = allItems.filter((item) => {
-        return item.name.toLowerCase().includes(searchLower);
-      });
-      setItems(filtered);
+    let filtered = [...allItems];
+
+    if (selectedType !== "all") {
+      filtered = filtered.filter((item) => item.type === selectedType);
     }
-  }, [searchWord, allItems]);
+
+    if (searchLower !== "") {
+      filtered = filtered.filter((item) =>
+        item.name.toLowerCase().includes(searchLower)
+      );
+    }
+
+    setItems(filtered);
+  }, [searchWord, allItems, selectedType]);
 
   return (
     <>
@@ -71,16 +79,36 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
               onClick={handleClick}
               className="song-expand-button library-expand-button"
               size="xl"
-            ></FontAwesomeIcon>
-
+            />
             <span className="your-library">Sua Biblioteca</span>
           </div>
 
           <div className="library-tools">
             <div className="library-buttons-wrapper">
-              <button>Playlists</button>
-              <button>Músicas</button>
-              <button>Artistas</button>
+              <button
+                className={selectedType === "playlist" ? "active" : ""}
+                onClick={() => setSelectedType("playlist")}
+              >
+                Playlists
+              </button>
+              <button
+                className={selectedType === "track" ? "active" : ""}
+                onClick={() => setSelectedType("track")}
+              >
+                Músicas
+              </button>
+              <button
+                className={selectedType === "artist" ? "active" : ""}
+                onClick={() => setSelectedType("artist")}
+              >
+                Artistas
+              </button>
+              <button
+                className={selectedType === "all" ? "active" : ""}
+                onClick={() => setSelectedType("all")}
+              >
+                Todos
+              </button>
             </div>
 
             <div className="glass-and-input">
@@ -93,7 +121,7 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
               />
 
               <div
-                className={` library-input-wrapper animated-search ${
+                className={`library-input-wrapper animated-search ${
                   showSearch ? "expanded" : "collapsed"
                 }`}
                 ref={wrapperRef}
