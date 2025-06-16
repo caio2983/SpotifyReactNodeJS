@@ -16,21 +16,21 @@
 }
 
 .playlist-page-header {
-  padding-bottom: 16px;
   width: 100%;
-  padding-top: 32px;
-  padding-inline: 24px;
+  /* padding-top: 32px;
+  padding-inline: 24px; */
+  /* padding-bottom: 16px; */
   position: relative;
   z-index: 15;
 }
 
 .playlist-image-wrapper {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   z-index: 15;
-
   margin: 0;
+  margin-left: 20px;
 }
 
 .playlist-image-wrapper img {
@@ -58,15 +58,18 @@
   display: flex;
   gap: 36px;
   z-index: 20;
+  height: 350px;
+  align-items: center;
 }
 
 .playlist-header-text {
-  margin-left: 12px;
+  margin-left: 4px;
   width: 60%;
   z-index: 20;
   display: flex;
   flex-direction: column;
   align-self: flex-end;
+  margin-bottom: 30px;
   gap: 12px;
 }
 

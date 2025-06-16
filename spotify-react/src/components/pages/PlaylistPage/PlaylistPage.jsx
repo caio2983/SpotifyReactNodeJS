@@ -72,7 +72,7 @@ export default function PlaylistPage() {
   return (
     <div className="main-container playlist-container">
       <header className="playlist-page-header">
-        <section className="playlist-header-content">
+        <div className="playlist-header-content">
           <figure
             className="playlist-image-wrapper"
             style={{
@@ -186,7 +186,7 @@ export default function PlaylistPage() {
               )}
             </div>
           </div>
-        </section>
+        </div>
 
         {!isLoading && (
           <div
