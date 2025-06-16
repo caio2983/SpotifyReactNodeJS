@@ -43,27 +43,6 @@ export default function PlaylistPage() {
     });
   }, [playlist]);
 
-  function darkenHexColor(hex, amount) {
-    hex = hex.replace("#", "");
-
-    var num = parseInt(hex, 16);
-    var r = (num >> 16) & 0xff;
-    var g = (num >> 8) & 0xff;
-    var b = num & 0xff;
-
-    r = Math.max(0, Math.floor(r * (1 - amount)));
-    g = Math.max(0, Math.floor(g * (1 - amount)));
-    b = Math.max(0, Math.floor(b * (1 - amount)));
-
-    var darkHex =
-      "#" +
-      r.toString(16).padStart(2, "0") +
-      g.toString(16).padStart(2, "0") +
-      b.toString(16).padStart(2, "0");
-
-    return darkHex;
-  }
-
   useEffect(() => {
     if (playlist?.images?.[0]?.url) {
       Vibrant.from(playlist?.images?.[0]?.url)
@@ -71,10 +50,10 @@ export default function PlaylistPage() {
         .then((palette) => {
           console.log("palette", palette);
 
-          const darkerColor = palette.DarkVibrant.hex;
+          const darkerColor = palette.Vibrant.hex;
 
           setGradientColor(darkerColor);
-          setDominantColor(hexToRgb(palette.DarkVibrant.hex));
+          setDominantColor(hexToRgb(palette.Vibrant.hex));
         });
     }
   }, [playlist]);
@@ -123,7 +102,7 @@ export default function PlaylistPage() {
             )}
           </figure>
           <div className="playlist-header-text">
-            <h1 className="playlist-title playlist-text-glow">
+            <h1 className="playlist-title ">
               {isLoading ? (
                 <Skeleton
                   variant="text"

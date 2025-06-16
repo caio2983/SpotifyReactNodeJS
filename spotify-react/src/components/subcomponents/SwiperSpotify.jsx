@@ -27,40 +27,32 @@ export default function SwiperSpotify({
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHover, setIsHover] = useState(false);
+
   const { setGlobalSearchResult, isSearching, setRecentSearches } =
     useGlobalContext();
 
+  const swiperRef = useRef(null); // Swiper instance
+  const swiperDomRef = useRef(null); // DOM element que contém o swiper
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
-  const swiperRef = useRef(null);
-
   const totalSlides = data?.length ?? 0;
-  function sendRecentSearch(data) {
-    axios
-      .post("http://localhost:3000/recentsearches", data)
-      .then((response) => {
-        console.log("Busca recente enviada com sucesso:", response.data);
 
-        return axios.get("http://localhost:3000/recentsearches");
-      })
-      .then((getResponse) => {
-        console.log("Busca atualizada de searches:", getResponse.data);
-        setRecentSearches(getResponse.data);
-      })
-      .catch((error) => {
-        console.error("Erro ao enviar ou buscar buscas recentes:", error);
-      });
+  function sendRecentSearch(item) {
+    axios
+      .post("http://localhost:3000/recentsearches", item)
+      .then(() => axios.get("http://localhost:3000/recentsearches"))
+      .then((res) => setRecentSearches(res.data))
+      .catch((error) =>
+        console.error("Erro ao enviar ou buscar buscas recentes:", error)
+      );
   }
 
   function renderSlides() {
     return data.map((item, i) => (
       <SwiperSlide
         key={i}
-        style={{
-          height: "100%",
-          width: "220px",
-        }}
+        style={{ height: "100%", width: "220px" }}
         className="slide"
       >
         <Link
@@ -80,9 +72,9 @@ export default function SwiperSpotify({
           >
             <div className="slide-content">
               <div
-                className={`${
+                className={
                   format === "circle" ? "slide-circle" : "slide-square"
-                }`}
+                }
               >
                 {isSearching || loading ? (
                   <Skeleton
@@ -124,22 +116,17 @@ export default function SwiperSpotify({
                     item?.name
                   )}
                 </span>
-
                 <span className="slide-artist">
                   {isSearching || loading ? (
                     <Skeleton
                       variant="text"
-                      sx={{
-                        width: "50px",
-                        height: "100%",
-                        bgcolor: "#888888",
-                      }}
+                      sx={{ width: "50px", height: "100%", bgcolor: "#888888" }}
                     />
                   ) : format === "circle" ? (
                     "Artista"
                   ) : (
-                    item?.artists?.[0]?.name ||
-                    item?.owner?.display_name ||
+                    item?.artists?.[0]?.name ??
+                    item?.owner?.display_name ??
                     "Desconhecido"
                   )}
                 </span>
@@ -160,13 +147,18 @@ export default function SwiperSpotify({
             : "Suas músicas estão com saudade"}
         </p>
       )}
+
       <div
-        className="main-swiper"
+        className={`main-swiper ${
+          activeIndex === 0 ? "main-swiper-initial" : "main-swiper-no-padding"
+        }`}
+        ref={swiperDomRef}
         style={{ position: "relative" }}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
         <Swiper
+          parallax={true}
           slideFullyVisibleClass="swiper-fully"
           slideVisibleClass="swiper-partially"
           watchSlidesProgress={true}
@@ -178,11 +170,9 @@ export default function SwiperSpotify({
             prevEl: prevRef.current,
             nextEl: nextRef.current,
           }}
-          style={{
-            height: "100%",
-          }}
           onInit={(swiper) => {
             swiperRef.current = swiper;
+            setActiveIndex(swiper.activeIndex);
             swiper.params.navigation.prevEl = prevRef.current;
             swiper.params.navigation.nextEl = nextRef.current;
             swiper.navigation.init();
@@ -192,6 +182,7 @@ export default function SwiperSpotify({
             setActiveIndex(swiper.realIndex);
             swiper.navigation.update();
           }}
+          style={{ height: "100%" }}
         >
           {renderSlides()}
         </Swiper>
@@ -202,7 +193,6 @@ export default function SwiperSpotify({
             totalSlides < 5 ? "disabled" : ""
           }`}
           aria-label="Previous slide"
-          format="button"
           disabled={totalSlides < 5}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
@@ -214,7 +204,6 @@ export default function SwiperSpotify({
             totalSlides < 5 ? "disabled" : ""
           }`}
           aria-label="Next slide"
-          format="button"
           disabled={totalSlides < 5}
         >
           <FontAwesomeIcon icon={faChevronRight} />
