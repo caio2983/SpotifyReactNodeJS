@@ -1,11 +1,11 @@
 .playing-container {
   width: 100%;
-  height: 12vh;
+  height: 11vh;
   position: fixed;
   z-index: 100;
   bottom: 0;
   left: 0;
-  padding: 16px 24px;
+  padding: 0px 24px;
   display: flex;
   align-items: center;
 }
@@ -21,7 +21,8 @@
 }
 
 .playing-details {
-  height: 100%;
+  height: auto;
+
   width: 25%;
   display: flex;
   align-items: center;
@@ -34,7 +35,7 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .playlist-songs {
@@ -106,10 +107,9 @@
 }
 
 .playing-image {
-  width: 80px;
-  height: 80px;
-  min-width: 70px;
-  min-height: 70px;
+  align-self: center;
+  width: 70px;
+  height: 70px;
 }
 
 .playing-image img {
