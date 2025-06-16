@@ -36,7 +36,7 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
             <FontAwesomeIcon
               icon={faArrowsLeftRightToLine}
               onClick={handleClick}
-              className="song-expand-button"
+              className="song-expand-button library-expand-button"
               size="xl"
             ></FontAwesomeIcon>
 

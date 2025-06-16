@@ -17,6 +17,11 @@
   align-items: center;
 }
 
+.library-expand-button {
+  top: 3.25px;
+  bottom: 0;
+}
+
 .your-library {
   font-family: "SpotifyMixBold";
   font-size: 1.25rem;
