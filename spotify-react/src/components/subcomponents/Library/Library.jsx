@@ -17,6 +17,7 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
     setIsExpanded(true);
   };
   const inputRef = useRef(null);
+  const wrapperRef = useRef(null);
   const [searchWord, setSearchWord] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const { libraryReloadSignal } = useGlobalContext();
@@ -32,6 +33,22 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
       inputRef.current.focus();
     }
   };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setShowSearch(false);
+      }
+    }
+
+    if (showSearch) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showSearch]);
 
   return (
     <>
@@ -60,9 +77,9 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
             <div className="glass-and-input">
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
-                size="xl"
+                size="l"
                 className="library-magnifying-glass"
-                onClick={() => setShowSearch(true)}
+                onClick={() => setShowSearch((prev) => !prev)}
                 style={{ cursor: "pointer" }}
               />
 
@@ -70,12 +87,13 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
                 className={` library-input-wrapper animated-search ${
                   showSearch ? "expanded" : "collapsed"
                 }`}
+                ref={wrapperRef}
               >
-                <div className="input-and-results">
+                <div className="input-and-results library-input-and-results">
                   <input
                     ref={inputRef}
                     type="text"
-                    className="search-input"
+                    className="search-input library-search-input"
                     value={searchWord}
                     onChange={(e) => setSearchWord(e.target.value)}
                   />
