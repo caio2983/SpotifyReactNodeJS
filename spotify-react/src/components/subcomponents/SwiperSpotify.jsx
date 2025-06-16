@@ -167,6 +167,9 @@ export default function SwiperSpotify({
         onMouseLeave={() => setIsHover(false)}
       >
         <Swiper
+          slideFullyVisibleClass="swiper-fully"
+          slideVisibleClass="swiper-partially"
+          watchSlidesProgress={true}
           spaceBetween={0}
           slidesPerView={"auto"}
           slidesPerGroup={2}
