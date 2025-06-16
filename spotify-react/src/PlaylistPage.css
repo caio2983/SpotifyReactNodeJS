@@ -49,9 +49,7 @@
 
   position: absolute;
   z-index: 0;
-  box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.2) inset;
-  -webkit-box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.2) inset;
-  -moz-box-shadow: 16px -152px 324px -22px rgba(0, 0, 0, 0.2) inset;
+
   opacity: 0.5;
 }
 
