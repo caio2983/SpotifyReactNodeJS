@@ -170,22 +170,25 @@ export default function ArtistPage() {
         <div className="artist-header-overlay"></div>
       </header>
 
-      <div
-        className="artist-songs"
-        style={{
-          background: gradientColor
-            ? `linear-gradient(
-                to bottom,
-                ${hexToRgb(gradientColor, 0.5)} 0%,
-                ${hexToRgb(gradientColor, 0.3)} 10%,
-                ${hexToRgb(gradientColor, 0.1)} 20%,
-                transparent 50%
-              )`
-            : "#1d1d1e",
-          height: "auto",
-        }}
-      >
-        <div className="songs-overlay"></div>
+      <div className="artist-songs">
+        <div
+          className="songs-overlay"
+          style={{
+            background:
+              !isLoading && gradientColor
+                ? `linear-gradient(
+            to bottom,
+            ${hexToRgb(gradientColor, 0.6)} 0%,
+            ${hexToRgb(gradientColor, 0.4)} 25%,
+            ${hexToRgb(gradientColor, 0.25)} 50%,
+            ${hexToRgb(gradientColor, 0.15)} 70%,
+            ${hexToRgb(gradientColor, 0.0)} 85%,
+            transparent 100%
+          )`
+                : "#1d1d1e",
+          }}
+        ></div>
+
         <PlaylistTools
           playSongs={{
             nextsongs: artist,
