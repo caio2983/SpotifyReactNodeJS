@@ -3,6 +3,15 @@
   display: flex;
   align-items: center;
   height: 330px;
+  transition: padding-left 0.3s ease;
+}
+
+.main-swiper-initial {
+  padding-left: 40px;
+}
+
+.main-swiper-no-padding {
+  padding-left: 0;
 }
 
 .swiper-component-container {
@@ -16,7 +25,7 @@
   font-family: "SpotifyMixBold";
   font-size: xx-large;
   color: white;
-  padding-left: 56px;
+  padding-left: 40px;
 }
 
 .slide-rectangle {
