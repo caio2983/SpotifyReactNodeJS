@@ -227,6 +227,7 @@ export default function AlbumPage() {
       </header>
 
       <div className="playlist-songs">
+        <div className="songs-overlay"></div>
         <div
           className="songs-overlay"
           style={{
@@ -234,12 +235,14 @@ export default function AlbumPage() {
               !isLoading && gradientColor
                 ? `linear-gradient(
             to bottom,
-            ${hexToRgb(gradientColor, 0.6)} 0%,
-            ${hexToRgb(gradientColor, 0.4)} 25%,
-            ${hexToRgb(gradientColor, 0.25)} 50%,
-            ${hexToRgb(gradientColor, 0.15)} 70%,
-            ${hexToRgb(gradientColor, 0.0)} 85%,
-            transparent 100%
+            ${hexToRgb(gradientColor, 0.5)} 0%,
+            ${hexToRgb(gradientColor, 0.4)} 15%,
+            ${hexToRgb(gradientColor, 0.3)} 30%,
+            ${hexToRgb(gradientColor, 0.2)} 50%,
+            ${hexToRgb(gradientColor, 0.12)} 70%,
+            ${hexToRgb(gradientColor, 0.08)} 85%,
+            ${hexToRgb(gradientColor, 0.04)} 95%,
+            rgba(18, 18, 18, 0.2) 120%
           )`
                 : "#1d1d1e",
           }}
