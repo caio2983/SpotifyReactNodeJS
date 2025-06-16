@@ -21,18 +21,14 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
   const [searchWord, setSearchWord] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const { libraryReloadSignal } = useGlobalContext();
+  const [allItems, setAllItems] = useState([]);
   const [items, setItems] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:3000/library").then((res) => {
+      setAllItems(res.data);
       setItems(res.data);
     });
   }, [libraryReloadSignal]);
-
-  const handleFocusInput = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -49,6 +45,19 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showSearch]);
+
+  useEffect(() => {
+    const searchLower = searchWord.trim().toLowerCase();
+
+    if (searchLower === "") {
+      setItems(allItems);
+    } else {
+      const filtered = allItems.filter((item) => {
+        return item.name.toLowerCase().includes(searchLower);
+      });
+      setItems(filtered);
+    }
+  }, [searchWord, allItems]);
 
   return (
     <>
