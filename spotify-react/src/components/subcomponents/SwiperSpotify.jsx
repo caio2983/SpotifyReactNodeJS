@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
+  faCircleChevronLeft,
+  faCircleChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../../GlobalContext";
@@ -31,8 +33,8 @@ export default function SwiperSpotify({
   const { setGlobalSearchResult, isSearching, setRecentSearches } =
     useGlobalContext();
 
-  const swiperRef = useRef(null); // Swiper instance
-  const swiperDomRef = useRef(null); // DOM element que contém o swiper
+  const swiperRef = useRef(null);
+  const swiperDomRef = useRef(null);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -187,27 +189,29 @@ export default function SwiperSpotify({
           {renderSlides()}
         </Swiper>
 
-        <button
+        <FontAwesomeIcon
+          icon={faCircleChevronLeft}
           ref={prevRef}
-          className={`custom-swiper-button prev ${isHover ? "visible" : ""} ${
-            totalSlides < 5 ? "disabled" : ""
-          }`}
+          className={`custom-swiper-button prev ${
+            isHover && activeIndex > 0 ? "visible" : ""
+          } ${totalSlides < 5 ? "disabled" : ""}`}
           aria-label="Previous slide"
+          style={{ color: "#b3b3b3" }}
           disabled={totalSlides < 5}
-        >
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </button>
+        />
 
-        <button
+        <FontAwesomeIcon
+          icon={faCircleChevronRight}
           ref={nextRef}
-          className={`custom-swiper-button next ${isHover ? "visible" : ""} ${
-            totalSlides < 5 ? "disabled" : ""
-          }`}
+          className={`custom-swiper-button next ${
+            isHover && swiperRef.current && !swiperRef.current.isEnd
+              ? "visible"
+              : ""
+          } ${totalSlides < 5 ? "disabled" : ""}`}
           aria-label="Next slide"
+          style={{ color: "#b3b3b3" }}
           disabled={totalSlides < 5}
-        >
-          <FontAwesomeIcon icon={faChevronRight} />
-        </button>
+        />
       </div>
     </div>
   );
