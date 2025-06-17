@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PlaylistTools from "../PlaylistPage/PlaylistTools";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Vibrant } from "node-vibrant/browser";
 import axios from "axios";
 import ArtistSong from "./ArtistSong";
@@ -25,7 +25,7 @@ export default function ArtistPage() {
   });
   const { nextSongs, setNextSongs, setSong } = useGlobalContext();
   const [isLoading, setIsLoading] = useState(false);
-
+  const scrollContainerRef = useRef(null);
   const [selectedAlbumType, setSelectedAlbumType] = useState(null);
 
   function separateAlbums(albums) {
@@ -147,7 +147,7 @@ export default function ArtistPage() {
   }
 
   return (
-    <div className="main-container artist-container">
+    <div className="main-container artist-container" ref={scrollContainerRef}>
       <header
         className="artist-page-header"
         style={{
@@ -197,6 +197,8 @@ export default function ArtistPage() {
           }}
           type={"artist"}
           data={artist}
+          scrollContainerRef={scrollContainerRef}
+          playlistDominantColor={artistDominantColor}
         ></PlaylistTools>
         <div className="songs-heading-container artist-songs-heading">
           <div className="song-list-container">
