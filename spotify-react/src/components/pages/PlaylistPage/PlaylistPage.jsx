@@ -170,11 +170,10 @@ export default function PlaylistPage() {
                 />
               ) : (
                 <>
-                  <Link to={`/artist/${playlist?.owner?.id}`}>
-                    <span className="playlist-text-glow playlist-owner-name">
-                      {playlist?.owner?.display_name}
-                    </span>
-                  </Link>
+                  <span className=" playlist-owner-name">
+                    {playlist?.owner?.display_name}
+                  </span>
+
                   <span className="separation-ball"></span>
                   <span className="playlist-description">
                     {playlist?.tracks?.total} músicas

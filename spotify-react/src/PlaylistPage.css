@@ -136,6 +136,7 @@
 }
 
 .playlist-owner-name {
+  font-family: "SpotifyMixMedium", monospace;
   margin-left: 8px;
   color: white;
 }
