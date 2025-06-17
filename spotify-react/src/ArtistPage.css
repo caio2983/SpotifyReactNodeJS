@@ -251,20 +251,18 @@
   margin-bottom: 64px;
 }
 
-.artist-discography {
-  padding-left: 24px;
-}
-
-.artist-discography p {
+.discography {
   font-family: "SpotifyMixBold";
   font-size: 2.05rem;
   color: white;
   display: block;
   margin: 0;
+  padding-left: 24px;
 }
 
 .albuns-buttons {
   display: flex;
   align-items: center;
   gap: 16px;
+  padding-left: 24px;
 }

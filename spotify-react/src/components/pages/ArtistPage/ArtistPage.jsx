@@ -262,32 +262,6 @@ export default function ArtistPage() {
             loading={isLoading}
           />
         </div>
-
-        {albums?.appears_on && albums.appears_on.length > 0 && (
-          <div className="swipers-wrapper artist-appears-on">
-            <p className="discography">Aparece em</p>
-            <SwiperSpotify
-              type="album"
-              data={albums.appears_on}
-              album={true}
-              loading={isLoading}
-            />
-          </div>
-        )}
-
-        {albums?.compilation && albums.compilation.length > 0 && (
-          <div className="swipers-wrapper artist-compilation">
-            <p className="discography">Com {artist?.name}</p>
-            {selectedAlbumType && (
-              <SwiperSpotify
-                type="album"
-                data={albums[selectedAlbumType] || []}
-                album={true}
-                loading={isLoading}
-              />
-            )}
-          </div>
-        )}
       </div>
     </div>
   );
