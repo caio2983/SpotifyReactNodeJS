@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Vibrant } from "node-vibrant/browser";
@@ -12,6 +12,7 @@ export default function TrackPage() {
   const [trackDominantColor, setDominantColor] = useState(null);
   const [gradientColor, setGradientColor] = useState(null);
   const [playlist, setPlaylist] = useState([]);
+  const scrollContainerRef = useRef(null);
 
   const [artistImage, setArtistImage] = useState("");
 
@@ -73,16 +74,14 @@ export default function TrackPage() {
       .getPalette()
       .then((palette) => {
         console.log("palette", palette);
-
         const darkerColor = palette.DarkVibrant.hex;
-
         setGradientColor(darkerColor);
         setDominantColor(hexToRgb(palette.DarkVibrant.hex));
       });
   }, [track]);
 
   return (
-    <div className="main-container track-container">
+    <div className="main-container track-container" ref={scrollContainerRef}>
       <header className=" album-page-header">
         <section className="album-header-content">
           <figure
@@ -218,6 +217,8 @@ export default function TrackPage() {
             id: track?.id,
             type: "track",
           }}
+          scrollContainerRef={scrollContainerRef}
+          playlistDominantColor={trackDominantColor}
           type={"track"}
           data={track}
         ></PlaylistTools>
