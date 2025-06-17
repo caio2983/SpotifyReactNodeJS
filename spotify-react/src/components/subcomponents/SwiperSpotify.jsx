@@ -188,7 +188,6 @@ export default function SwiperSpotify({
         >
           {renderSlides()}
         </Swiper>
-
         <FontAwesomeIcon
           icon={faCircleChevronLeft}
           ref={prevRef}
@@ -199,7 +198,6 @@ export default function SwiperSpotify({
           style={{ color: "#b3b3b3" }}
           disabled={totalSlides < 5}
         />
-
         <FontAwesomeIcon
           icon={faCircleChevronRight}
           ref={nextRef}

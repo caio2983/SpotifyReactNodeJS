@@ -3,15 +3,16 @@
   display: flex;
   align-items: center;
   height: 330px;
-  transition: padding-left 0.3s ease;
 }
 
 .main-swiper-initial {
-  padding-left: 40px;
+  transform: translateX(40px);
+  transition: transform 0.3s ease;
 }
 
 .main-swiper-no-padding {
-  padding-left: 0;
+  transform: translateX(0px);
+  transition: transform 0.3s ease;
 }
 
 .swiper-component-container {
@@ -178,7 +179,7 @@
   transform: translateX(-20px) translateY(-50%);
 }
 .custom-swiper-button.next {
-  right: 10px;
+  right: 50px;
   transform: translateX(20px) translateY(-50%);
 }
 .custom-swiper-button.visible.prev {
