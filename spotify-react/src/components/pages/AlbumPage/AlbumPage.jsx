@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Vibrant } from "node-vibrant/browser";
@@ -17,7 +17,7 @@ export default function AlbumPage() {
   const [albumDominantColor, setDominantColor] = useState(null);
   const [gradientColor, setGradientColor] = useState(null);
   const [playlist, setPlaylist] = useState([]);
-
+  const scrollContainerRef = useRef(null);
   const [artistImage, setArtistImage] = useState("");
 
   useEffect(() => {
@@ -77,27 +77,6 @@ export default function AlbumPage() {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
-  function darkenHexColor(hex, amount) {
-    hex = hex.replace("#", "");
-
-    var num = parseInt(hex, 16);
-    var r = (num >> 16) & 0xff;
-    var g = (num >> 8) & 0xff;
-    var b = num & 0xff;
-
-    r = Math.max(0, Math.floor(r * (1 - amount)));
-    g = Math.max(0, Math.floor(g * (1 - amount)));
-    b = Math.max(0, Math.floor(b * (1 - amount)));
-
-    var darkHex =
-      "#" +
-      r.toString(16).padStart(2, "0") +
-      g.toString(16).padStart(2, "0") +
-      b.toString(16).padStart(2, "0");
-
-    return darkHex;
-  }
-
   useEffect(() => {
     if (album?.images?.[0]?.url) {
       Vibrant.from(album?.images?.[0]?.url)
@@ -114,7 +93,7 @@ export default function AlbumPage() {
   }, [album]);
 
   return (
-    <div className="main-container album-container">
+    <div className="main-container album-container" ref={scrollContainerRef}>
       <header className=" album-page-header">
         <section className="album-header-content">
           <figure
@@ -227,7 +206,6 @@ export default function AlbumPage() {
       </header>
 
       <div className="playlist-songs">
-        <div className="songs-overlay"></div>
         <div
           className="songs-overlay"
           style={{
@@ -235,14 +213,12 @@ export default function AlbumPage() {
               !isLoading && gradientColor
                 ? `linear-gradient(
             to bottom,
-            ${hexToRgb(gradientColor, 0.5)} 0%,
-            ${hexToRgb(gradientColor, 0.4)} 15%,
-            ${hexToRgb(gradientColor, 0.3)} 30%,
-            ${hexToRgb(gradientColor, 0.2)} 50%,
-            ${hexToRgb(gradientColor, 0.12)} 70%,
-            ${hexToRgb(gradientColor, 0.08)} 85%,
-            ${hexToRgb(gradientColor, 0.04)} 95%,
-            rgba(18, 18, 18, 0.2) 120%
+            ${hexToRgb(gradientColor, 0.6)} 0%,
+            ${hexToRgb(gradientColor, 0.4)} 25%,
+            ${hexToRgb(gradientColor, 0.25)} 50%,
+            ${hexToRgb(gradientColor, 0.15)} 70%,
+            ${hexToRgb(gradientColor, 0.0)} 85%,
+            transparent 100%
           )`
                 : "#1d1d1e",
           }}
@@ -254,6 +230,8 @@ export default function AlbumPage() {
             type: "album",
           }}
           type={"album"}
+          scrollContainerRef={scrollContainerRef}
+          playlistDominantColor={albumDominantColor}
         ></PlaylistTools>
         <div className="songs-heading-container">
           <div className="songs-heading">
