@@ -7,6 +7,7 @@ import ArtistSong from "./ArtistSong";
 import { useGlobalContext } from "../../../GlobalContext";
 import SwiperSpotify from "../../subcomponents/SwiperSpotify";
 import ArtistSongSkeleton from "./ArtistSongSkeleton";
+import { Skeleton } from "@mui/material";
 
 export default function ArtistPage() {
   const { artistId } = useParams();
@@ -160,10 +161,29 @@ export default function ArtistPage() {
       >
         <section className="artist-header-content">
           <div className="artist-header-text">
-            <h1 className="artist-title artist-text-glow">{artist?.name}</h1>
-            <span className="artist-followers">
-              {artist?.followers?.total?.toLocaleString("pt-BR")} seguidores
-            </span>
+            {isLoading ? (
+              <Skeleton
+                variant="text"
+                sx={{ bgcolor: "#888888" }}
+                width={350}
+                height={100}
+              />
+            ) : (
+              <h1 className="artist-title artist-text-glow">{artist?.name}</h1>
+            )}
+
+            {isLoading ? (
+              <Skeleton
+                variant="text"
+                sx={{ bgcolor: "#888888" }}
+                width={120}
+              />
+            ) : (
+              <span className="artist-followers">
+                {artist?.followers?.total?.toLocaleString("pt-BR")} seguidores
+              </span>
+            )}
+
             <div className="artist-details"></div>
           </div>
         </section>
