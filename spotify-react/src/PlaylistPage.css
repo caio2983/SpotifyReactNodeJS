@@ -152,8 +152,8 @@
 
 .playlist-tools-container {
   margin-bottom: 24px;
-  margin-top: 24px;
-  padding: 16px 56px;
+  margin-top: 0;
+  padding: 24px 56px;
   height: 100px;
   width: 100%;
   display: flex;
@@ -161,6 +161,7 @@
   z-index: 100;
   position: sticky;
   top: 0;
+  transition: background-color 0.3s ease;
 }
 
 .tools-wrapper {

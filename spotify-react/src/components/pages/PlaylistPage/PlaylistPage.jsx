@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Vibrant } from "node-vibrant/browser";
@@ -22,6 +22,7 @@ export default function PlaylistPage() {
   const { nextSongs, setNextSongs } = useGlobalContext();
   const [isLoading, setIsLoading] = useState(false);
 
+  const scrollContainerRef = useRef(null);
   const { playlistId } = useParams();
 
   function hexToRgb(hex, alpha = 1) {
@@ -70,7 +71,7 @@ export default function PlaylistPage() {
   }, []);
 
   return (
-    <div className="main-container playlist-container">
+    <div className="main-container playlist-container" ref={scrollContainerRef}>
       <header className="playlist-page-header">
         <div className="playlist-header-content">
           <figure
@@ -224,6 +225,8 @@ export default function PlaylistPage() {
           }}
           type={"playlist"}
           data={playlist}
+          scrollContainerRef={scrollContainerRef}
+          playlistDominantColor={playlistDominantColor}
         />
 
         <div className="songs-heading-container">
