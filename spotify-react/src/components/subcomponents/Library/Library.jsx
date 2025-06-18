@@ -83,7 +83,7 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
             />
             <span className="your-library">Sua Biblioteca</span>
           </div>
-          {currentWidth}
+
           {currentWidth >= 14.7 && (
             <div className="library-tools">
               <div

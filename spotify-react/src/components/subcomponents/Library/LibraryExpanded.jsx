@@ -80,7 +80,7 @@ export default function LibraryExpanded({ setIsExpanded }) {
           </div>
         </div>
 
-        <div className={"library-buttons-wrapper"}>
+        <div className={"library-buttons-wrapper expanded-buttons-wrapper"}>
           <button
             className={selectedType === "playlist" ? "active" : ""}
             onClick={() => setSelectedType("playlist")}
