@@ -34,12 +34,9 @@ export default function Playing() {
 
     setCurrentNumber(number);
     setNextSongId(next);
-
-    console.log("song changed");
   }, [songSelected, nextSongs]);
 
   function handleNextClick() {
-    console.log(nextSongs);
     if (nextSongs?.type.type == "playlist") {
       let current_number = nextSongs.nextsongs.findIndex(
         (item) => item.track.id === songSelected.id
@@ -56,13 +53,12 @@ export default function Playing() {
         .then((response) => {
           const track = response.data;
           setSong(track);
-          console.log("aaaaaaaaadasda", response.data);
         });
     } else if (nextSongs?.type.type == "album") {
       let current_number = nextSongs.nextsongs.findIndex(
         (item) => item.id === songSelected.id
       );
-      console.log("teste album");
+
       const next_song_index = current_number + 1;
       const next_song_id = nextSongs.nextsongs[next_song_index].id;
 
@@ -72,7 +68,8 @@ export default function Playing() {
           const track = response.data;
           setSong(track);
         });
-    } else if (nextSongs?.type == "artist") {
+    } else if (nextSongs?.type.type == "artist") {
+      console.log("NEXT SONGS", nextSongs);
       let current_number = nextSongs.nextsongs.findIndex(
         (item) => item.id === songSelected.id
       );
