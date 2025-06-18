@@ -63,6 +63,8 @@ export default function LibraryExpanded({ setIsExpanded }) {
                     ? item?.artists?.[0]?.name ??
                       item?.owner?.display_name ??
                       "Artista"
+                    : item.type === "album"
+                    ? item?.artists?.[0]?.name ?? "Álbum"
                     : item?.album?.artists?.[0]?.name ??
                       item?.owner?.display_name ??
                       "Desconhecido"}
