@@ -3,7 +3,7 @@ import {
   faBookOpen,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function LibrarySmall({ setIsExpanded, data }) {
   function handleClick() {
@@ -30,26 +30,27 @@ export default function LibrarySmall({ setIsExpanded, data }) {
       </div>
       <div className="library-small-list">
         {data.map((item, index) => (
-          <div
-            key={index}
-            className={
-              item.type === "artist"
-                ? "library-small-item-artist"
-                : "library-small-item"
-            }
-          >
-            <img
-              src={
+          <Link to={`/${item.type}/${item.id}`} key={index}>
+            <div
+              className={
                 item.type === "artist"
-                  ? item?.images?.[1]?.url
-                  : item?.album?.images?.[1]?.url ||
-                    item?.images?.[1]?.url ||
-                    item?.album?.images?.[0]?.url ||
-                    item?.images?.[0]?.url
+                  ? "library-small-item-artist"
+                  : "library-small-item"
               }
-              alt={item.name}
-            />
-          </div>
+            >
+              <img
+                src={
+                  item.type === "artist"
+                    ? item?.images?.[1]?.url
+                    : item?.album?.images?.[1]?.url ||
+                      item?.images?.[1]?.url ||
+                      item?.album?.images?.[0]?.url ||
+                      item?.images?.[0]?.url
+                }
+                alt={item.name}
+              />
+            </div>
+          </Link>
         ))}
       </div>
     </div>
