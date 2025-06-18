@@ -85,7 +85,6 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
 
           {currentWidth >= 14.7 && (
             <div className="library-tools">
-              <span>{currentWidth}</span>
               <div
                 className={`library-buttons-wrapper ${
                   currentWidth < 19.4 ? "library-buttons-wrapper-small" : ""
