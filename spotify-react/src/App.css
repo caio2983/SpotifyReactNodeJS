@@ -54,7 +54,6 @@
 .resizable {
   height: 100%;
   background-color: #121212;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   border: 1px solid transparent;
@@ -129,7 +128,6 @@
 
   padding: 48px 40px 28px 40px;
 }
-
 .swipers-wrapper {
   display: flex;
   flex-direction: column;
