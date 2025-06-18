@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useGlobalContext } from "../../../../GlobalContext";
+import { Link } from "react-router-dom";
 
 export default function ArtistResultCard({ data }) {
   const { setRecentSearches } = useGlobalContext();
@@ -23,7 +24,9 @@ export default function ArtistResultCard({ data }) {
       </div>
       <div className="result-details">
         <span className="result-name">Artista</span>
-        <span className="result-artist">{data?.name}</span>
+        <Link to={`/artist/${data?.id}`}>
+          <span className="result-artist">{data?.name}</span>
+        </Link>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useGlobalContext } from "../../../../GlobalContext";
+import { Link } from "react-router-dom";
 
 export default function NonArtistResultCard({ data }) {
   const { setRecentSearches } = useGlobalContext();
@@ -30,7 +31,9 @@ export default function NonArtistResultCard({ data }) {
         />
       </div>
       <div className="result-details">
-        <span className="result-name">{data?.name}</span>
+        <Link to={`${data?.type}/${data?.id}`}>
+          <span className="result-name">{data?.name}</span>
+        </Link>
         <span className="result-artist">
           {data?.type === "track"
             ? "Música"
