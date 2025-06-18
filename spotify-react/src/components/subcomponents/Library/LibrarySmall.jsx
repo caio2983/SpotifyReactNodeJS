@@ -3,12 +3,13 @@ import {
   faBookOpen,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function LibrarySmall({ setIsExpanded }) {
+export default function LibrarySmall({ setIsExpanded, data }) {
   function handleClick() {
     setIsExpanded(true);
   }
+
   return (
     <div className="library-small-container">
       <div
@@ -27,16 +28,30 @@ export default function LibrarySmall({ setIsExpanded }) {
           className="icon-hover"
         />
       </div>
-
-      <div
-        style={{ width: "75px", height: "75px", backgroundColor: "red" }}
-      ></div>
-      <div
-        style={{ width: "75px", height: "75px", backgroundColor: "red" }}
-      ></div>
-      <div
-        style={{ width: "75px", height: "75px", backgroundColor: "red" }}
-      ></div>
+      <div className="library-small-list">
+        {data.map((item, index) => (
+          <div
+            key={index}
+            className={
+              item.type === "artist"
+                ? "library-small-item-artist"
+                : "library-small-item"
+            }
+          >
+            <img
+              src={
+                item.type === "artist"
+                  ? item?.images?.[1]?.url
+                  : item?.album?.images?.[1]?.url ||
+                    item?.images?.[1]?.url ||
+                    item?.album?.images?.[0]?.url ||
+                    item?.images?.[0]?.url
+              }
+              alt={item.name}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

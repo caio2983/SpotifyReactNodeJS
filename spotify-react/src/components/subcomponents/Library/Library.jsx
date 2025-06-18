@@ -70,7 +70,7 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
   return (
     <>
       {currentWidth < 12 ? (
-        <LibrarySmall setIsExpanded={setIsExpanded} data={data} />
+        <LibrarySmall setIsExpanded={setIsExpanded} data={items} />
       ) : (
         <div className="library-container">
           <div className="library-container-header">
