@@ -1,20 +1,10 @@
 import React, { useEffect } from "react";
 import { useGlobalContext } from "../../../GlobalContext";
+import { Link } from "react-router-dom";
 
 export default function ArtistSong({ track, index, tracks, artist_id }) {
   const { songSelected, setSong } = useGlobalContext();
   const { nextSongs, setNextSongs } = useGlobalContext();
-
-  // function formatDate(inputDate) {
-  //   const date = new Date(inputDate);
-  //   const now = new Date();
-
-  //   if (differenceInMonths(now, date) <= 1) {
-  //     return formatDistanceToNow(date, { addSuffix: true, locale: ptBR });
-  //   } else {
-  //     return format(date, "d 'de' MMM. 'de' yyyy", { locale: ptBR });
-  //   }
-  // }
 
   function clickSong() {
     setSong(track);
@@ -67,7 +57,9 @@ export default function ArtistSong({ track, index, tracks, artist_id }) {
           <img src={track?.album?.images[2].url}></img>
         </div>
         <div className="name-artist-wrapper">
-          <span className="song-name">{track.name}</span>
+          <Link to={`/track/${track.id}`}>
+            <span className="song-name">{track.name}</span>
+          </Link>
         </div>
       </div>
 
