@@ -160,6 +160,7 @@ export default function SwiperSpotify({
         onMouseLeave={() => setIsHover(false)}
       >
         <Swiper
+          watchOverflow={true}
           parallax={true}
           slideFullyVisibleClass="swiper-fully"
           slideVisibleClass="swiper-partially"

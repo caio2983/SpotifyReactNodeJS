@@ -5,9 +5,17 @@
   height: 330px;
 }
 
+.swiper {
+  margin-left: 0 !important;
+}
+
 .main-swiper-initial {
   transform: translateX(40px);
   transition: transform 0.1s ease;
+}
+
+.main-swiper-initial .custom-swiper-button.next {
+  right: 50px !important;
 }
 
 .main-swiper-no-padding {
@@ -61,7 +69,6 @@
   user-select: none;
 
   position: relative;
-  position: relative;
 
   box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
@@ -79,7 +86,7 @@
   font-size: 16px;
   user-select: none;
   margin: 0 auto;
-  position: relative;
+
   position: relative;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
@@ -163,12 +170,12 @@
 }
 
 .swiper-next-icon {
-  position: relative;
-  right: 3px;
+  position: absolute;
+  right: 10px;
 }
 
 .swiper-previous-icon {
-  position: relative;
+  position: absolute;
   left: 10px;
 }
 
@@ -177,7 +184,7 @@
   transform: translateX(-20px) translateY(-50%);
 }
 .custom-swiper-button.next {
-  right: 50px;
+  right: 10px;
   transform: translateX(20px) translateY(-50%);
 }
 .custom-swiper-button.visible.prev {
