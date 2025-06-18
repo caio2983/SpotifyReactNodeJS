@@ -165,9 +165,11 @@ export default function TrackPage() {
                   />
                 ) : (
                   <>
-                    <span className=" playlist-description  playlist-owner-name">
-                      {artists?.[0]?.name}
-                    </span>
+                    <Link to={`/artist/${artists?.[0]?.id}`}>
+                      <span className=" playlist-description  playlist-owner-name">
+                        {artists?.[0]?.name}
+                      </span>
+                    </Link>
                     <span className="separation-ball"></span>
                     <span className="playlist-description">
                       {track?.album?.name}
