@@ -159,7 +159,7 @@ export default function ArtistPage() {
           boxShadow: "0 60px 120px -40px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <section className="artist-header-content">
+        <div className="artist-header-content">
           <div className="artist-header-text">
             {isLoading ? (
               <Skeleton
@@ -169,7 +169,9 @@ export default function ArtistPage() {
                 height={100}
               />
             ) : (
-              <h1 className="artist-title artist-text-glow">{artist?.name}</h1>
+              <span className="artist-title artist-text-glow">
+                {artist?.name}
+              </span>
             )}
 
             {isLoading ? (
@@ -179,14 +181,14 @@ export default function ArtistPage() {
                 width={120}
               />
             ) : (
-              <span className="artist-followers">
-                {artist?.followers?.total?.toLocaleString("pt-BR")} seguidores
-              </span>
+              <div className="artist-details">
+                <span className="artist-followers">
+                  {artist?.followers?.total?.toLocaleString("pt-BR")} seguidores
+                </span>
+              </div>
             )}
-
-            <div className="artist-details"></div>
           </div>
-        </section>
+        </div>
         <div className="artist-header-overlay"></div>
       </header>
 

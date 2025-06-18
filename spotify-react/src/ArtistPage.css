@@ -64,8 +64,6 @@
   display: flex;
   gap: 36px;
   z-index: 20;
-  margin-bottom: 32px;
-  margin-left: 32px;
 }
 
 .artist-header-text {
@@ -83,7 +81,7 @@
   height: auto;
 }
 
-.artist-header-text h1 {
+.artist-title {
   color: white;
   z-index: 10000;
   font-size: 7rem;
@@ -107,6 +105,7 @@
 }
 
 .artist-title {
+  max-width: 100%;
   font-size: 4em;
   margin: 0;
 }
@@ -116,6 +115,7 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
+  margin-bottom: 16px;
 }
 
 .artist-followers {
