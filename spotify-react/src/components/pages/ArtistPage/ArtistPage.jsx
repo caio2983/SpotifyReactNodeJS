@@ -107,17 +107,6 @@ export default function ArtistPage() {
       .catch(console.error);
   }, [artist]);
 
-  function handleClick() {
-    console.log("Popular tracks", popularTracks.tracks);
-    setSong(popularTracks?.tracks[0]);
-
-    setNextSongs({
-      nextsongs: popularTracks.tracks,
-      id: artist.id,
-      type: "artist",
-    });
-  }
-
   function hexToRgb(hex, alpha) {
     const cleanHex = hex.replace("#", "");
     const r = parseInt(cleanHex.substring(0, 2), 16);
@@ -212,9 +201,10 @@ export default function ArtistPage() {
             }}
           ></div>
         )}
+
         <PlaylistTools
           playSongs={{
-            nextsongs: artist,
+            nextsongs: popularTracks?.tracks,
             id: artist?.id,
             type: "artist",
           }}
