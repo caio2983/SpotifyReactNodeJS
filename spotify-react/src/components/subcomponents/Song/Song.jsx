@@ -3,6 +3,7 @@ import { useGlobalContext } from "../../../GlobalContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsLeftRightToLine } from "@fortawesome/free-solid-svg-icons";
 import { Skeleton } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function Song({ setIsSongExpanded }) {
   const handleClick = () => {
@@ -23,7 +24,7 @@ export default function Song({ setIsSongExpanded }) {
 
         <span className="song-name-header">
           {songSelected ? (
-            songSelected?.name
+            <Link to={`/track/${songSelected.id}`}>{songSelected?.name}</Link>
           ) : (
             <Skeleton
               variant="text"
@@ -62,7 +63,9 @@ export default function Song({ setIsSongExpanded }) {
           <div className="scroll-content">
             <span className="song-name-big">
               {songSelected ? (
-                songSelected?.name
+                <Link to={`/track/${songSelected.id}`}>
+                  {songSelected?.name}
+                </Link>
               ) : (
                 <Skeleton
                   variant="text"
@@ -75,9 +78,12 @@ export default function Song({ setIsSongExpanded }) {
               )}
             </span>
           </div>
+
           <span className="song-artist-big">
             {songSelected ? (
-              songSelected?.artists[0].name
+              <Link to={`/artist/${songSelected?.artists[0]?.id}`}>
+                {songSelected?.artists[0]?.name}
+              </Link>
             ) : (
               <Skeleton
                 variant="text"
