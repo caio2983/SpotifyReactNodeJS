@@ -232,6 +232,7 @@ export default function AlbumPage() {
             type: "album",
           }}
           type={"album"}
+          data={album}
           scrollContainerRef={scrollContainerRef}
           playlistDominantColor={albumDominantColor}
         ></PlaylistTools>
