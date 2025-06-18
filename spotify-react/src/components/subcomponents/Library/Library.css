@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   height: auto;
   overflow-y: auto;
   overflow-x: hidden;
@@ -73,6 +73,10 @@
 
 .library-input-and-results {
   border-radius: 6px;
+}
+
+.results-list {
+  scrollbar-gutter: stable;
 }
 
 .library-magnifying-glass {
@@ -247,7 +251,7 @@
 .library-small-container {
   align-items: center;
   padding-bottom: 8px;
-  scrollbar-gutter: stable;
+
   overflow-y: auto;
 
   min-height: 0;
@@ -260,6 +264,11 @@
   color: rgb(179, 179, 179);
   cursor: pointer;
   margin: 0 auto;
+  position: sticky;
+  top: 0;
+  background-color: #121212;
+  z-index: 100;
+  width: 100% !important;
 }
 
 .icon-default {
