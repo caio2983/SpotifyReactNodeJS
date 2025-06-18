@@ -159,8 +159,11 @@
   height: 80vh;
 
   display: flex;
+  flex-direction: column;
+  padding: 32px;
+  padding-bottom: 0;
+  gap: 24px;
   align-self: center;
-
   background-color: #121212;
   border: 1px solid #121212;
   border-radius: 10px;
@@ -175,10 +178,53 @@
 .library-expanded-container.expanded {
   transform: scaleX(1);
   opacity: 1;
+}
+
+.library-expanded-tools {
+  background-color: green;
+  width: 100%;
+}
+
+.library-expanded-items {
+  width: 100%;
   display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.library-expanded-item-rectangle {
+  width: 300px;
+  height: 425px;
+  border-radius: 8px;
+
+  padding: 8px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: start;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
+}
+
+.library-expanded-item-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  align-self: start;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+
+.library-expanded-item-image-artist {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  align-self: start;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 30px 60px -12px,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+
+.library-expanded-item-title {
+  max-width: 100%;
 }
 
 .library-expanded-container.collapsed {

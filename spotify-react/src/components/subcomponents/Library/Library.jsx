@@ -21,7 +21,7 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
   const [searchWord, setSearchWord] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [selectedType, setSelectedType] = useState("all");
-  const { libraryReloadSignal } = useGlobalContext();
+  const { libraryReloadSignal, setLibraryItems } = useGlobalContext();
 
   const [allItems, setAllItems] = useState([]);
   const [items, setItems] = useState([]);
@@ -30,6 +30,7 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
     axios.get("http://localhost:3000/library").then((res) => {
       setAllItems(res.data);
       setItems(res.data);
+      setLibraryItems(res.data);
     });
   }, [libraryReloadSignal]);
 

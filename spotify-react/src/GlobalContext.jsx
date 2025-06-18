@@ -9,6 +9,7 @@ export function GlobalProvider({ children }) {
   const [globalSearchResult, setGlobalSearchResult] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [songSelected, setSong] = useState(null);
+  const [libraryItems, setLibraryItems] = useState([]);
   const [nextSongs, setNextSongs] = useState({
     nextsongs: [],
     id: null,
@@ -38,6 +39,8 @@ export function GlobalProvider({ children }) {
         setRecentSearches,
         libraryReloadSignal,
         signalLibraryReload,
+        libraryItems,
+        setLibraryItems,
       }}
     >
       {children}
