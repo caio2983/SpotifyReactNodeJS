@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Vibrant } from "node-vibrant/browser";
 import { Skeleton } from "@mui/material";
@@ -28,7 +28,6 @@ export default function AlbumPage() {
       .then((response) => {
         const albumData = response.data;
         setAlbum(albumData);
-        console.log("ALBUM", albumData);
 
         const artistId = albumData?.artists?.[0]?.id;
         if (artistId) {
@@ -38,7 +37,6 @@ export default function AlbumPage() {
         }
       })
       .then((albumResponse) => {
-        console.log("ALBUM", albumResponse.data);
         setArtistImage(albumResponse.data.images[2].url);
       })
       .catch((error) => {
@@ -177,9 +175,11 @@ export default function AlbumPage() {
                   />
                 ) : (
                   <>
-                    <span className=" playlist-description  playlist-owner-name">
-                      {album?.artists?.[0]?.name}
-                    </span>
+                    <Link to={`/artist/${album?.artists?.[0]?.id}`}>
+                      <span className=" playlist-description  playlist-owner-name">
+                        {album?.artists?.[0]?.name}
+                      </span>
+                    </Link>
                     <span className="separation-ball"></span>
                     <span className="playlist-description">
                       {album?.release_date}

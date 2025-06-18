@@ -11,10 +11,8 @@ export default function TrackPage() {
   const [track, setTrack] = useState([]);
   const [trackDominantColor, setDominantColor] = useState(null);
   const [gradientColor, setGradientColor] = useState(null);
-  const [playlist, setPlaylist] = useState([]);
-  const scrollContainerRef = useRef(null);
 
-  const [artistImage, setArtistImage] = useState("");
+  const scrollContainerRef = useRef(null);
 
   const [artists, setArtists] = useState([]);
 
