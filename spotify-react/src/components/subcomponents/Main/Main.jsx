@@ -119,11 +119,7 @@ export default function Main({ currentWidth }) {
                   ))}
                 {!playlistCardsLoading &&
                   initialPlaylists.map((playlist, index) => (
-                    <Link
-                      to={`/playlist/${playlist.id}`}
-                      state={{ playlist }}
-                      key={playlist.id}
-                    >
+                    <Link to={`/playlist/${playlist.id}`} key={playlist.id}>
                       <PlaylistCard
                         playlist={playlist}
                         index={index}

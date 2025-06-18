@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { format, formatDistanceToNow, differenceInMonths } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useGlobalContext } from "../../../GlobalContext";
+import { Link } from "react-router-dom";
 
 export default function PlaylistSong({ index, image, song, playlist }) {
   useEffect(() => {
@@ -46,11 +47,17 @@ export default function PlaylistSong({ index, image, song, playlist }) {
         </div>
 
         <div className="name-artist-wrapper">
-          <span className="song-name">{song.name}</span>
-          <span className="song-artist">{song.artists[0].name}</span>
+          <Link to={`/track/${song.id}`}>
+            <span className="song-name">{song.name}</span>
+          </Link>
+          <Link to={`/artist/${song.artists[0].id}`}>
+            <span className="song-artist">{song.artists[0].name}</span>
+          </Link>
         </div>
       </div>
-      <span className="song-album">{song.album.name}</span>
+      <Link to={`/album/${song.album.id}`}>
+        <span className="song-album">{song.album.name}</span>
+      </Link>
       <span className="song-date">{formatDate(song.album.release_date)}</span>
       <span className="song-duration">
         {Math.floor(song.duration_ms / 60000)}:

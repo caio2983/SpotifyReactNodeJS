@@ -266,6 +266,7 @@
   height: fit-content;
   color: #fff;
   border-radius: 8px;
+  z-index: 100;
 }
 
 .song-card:hover {
