@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Vibrant } from "node-vibrant/browser";
 import { Skeleton } from "@mui/material";
@@ -227,18 +227,22 @@ export default function TrackPage() {
 
         <div className="track-content">
           {artists.map((artist, index) => (
-            <div key={index} className="track-card">
-              <img
-                src={artist?.images?.[2]?.url}
-                alt={artist?.name}
-                className="track-card-artist-image"
-              />
+            <Link to={`/artist/${artist.id}`} key={index}>
+              <div className="track-card">
+                <img
+                  src={artist?.images?.[2]?.url}
+                  alt={artist?.name}
+                  className="track-card-artist-image"
+                />
 
-              <div className="track-card-text">
-                <span>Artista</span>
-                <span>{artist?.name}</span>
+                <div className="track-card-text">
+                  <span>Artista</span>
+                  <Link to={`/artist/${artist.id}`}>
+                    <span>{artist?.name}</span>
+                  </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
