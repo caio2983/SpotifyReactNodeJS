@@ -1,13 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from "../../../GlobalContext";
 import { Link } from "react-router-dom";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function LibraryExpanded({ setIsExpanded }) {
   const [animateClass, setAnimateClass] = useState("collapsed");
   const { libraryItems } = useGlobalContext();
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchWord, setSearchWord] = useState("");
+  const inputRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const [selectedType, setSelectedType] = useState("all");
+
+  const [allItems, setAllItems] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     requestAnimationFrame(() => {
       setAnimateClass("expanded");
+      setAllItems(libraryItems);
+      setItems(libraryItems);
     });
   }, []);
 
@@ -19,13 +31,90 @@ export default function LibraryExpanded({ setIsExpanded }) {
     }, 500);
   };
 
+  useEffect(() => {
+    const searchLower = searchWord.trim().toLowerCase();
+
+    let filtered = [...allItems];
+
+    if (selectedType !== "all") {
+      filtered = filtered.filter((item) => item.type === selectedType);
+    }
+
+    if (searchLower !== "") {
+      filtered = filtered.filter((item) =>
+        item.name.toLowerCase().includes(searchLower)
+      );
+    }
+
+    setItems(filtered);
+  }, [searchWord, allItems, selectedType]);
+
   return (
     <div className={`library-expanded-container ${animateClass}`}>
       <div className="library-expanded-tools">
         <button onClick={handleClick}>Expandir</button>
+        <div className="glass-and-input">
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            size="l"
+            className="library-magnifying-glass"
+            onClick={() => setShowSearch((prev) => !prev)}
+            style={{ cursor: "pointer" }}
+          />
+
+          <div
+            className={`library-input-wrapper animated-search ${
+              showSearch ? "expanded" : "collapsed"
+            }`}
+            ref={wrapperRef}
+          >
+            <div className="input-and-results library-input-and-results">
+              <input
+                ref={inputRef}
+                type="text"
+                className="search-input library-search-input"
+                value={searchWord}
+                onChange={(e) => setSearchWord(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={"library-buttons-wrapper"}>
+          <button
+            className={selectedType === "playlist" ? "active" : ""}
+            onClick={() => setSelectedType("playlist")}
+          >
+            Playlists
+          </button>
+          <button
+            className={selectedType === "track" ? "active" : ""}
+            onClick={() => setSelectedType("track")}
+          >
+            Músicas
+          </button>
+          <button
+            className={selectedType === "artist" ? "active" : ""}
+            onClick={() => setSelectedType("artist")}
+          >
+            Artistas
+          </button>
+          <button
+            className={selectedType === "album" ? "active" : ""}
+            onClick={() => setSelectedType("album")}
+          >
+            Álbuns
+          </button>
+          <button
+            className={selectedType === "all" ? "active" : ""}
+            onClick={() => setSelectedType("all")}
+          >
+            Tudo
+          </button>
+        </div>
       </div>
       <div className="library-expanded-items">
-        {libraryItems.map((item) => (
+        {items.map((item) => (
           <div
             className="library-expanded-item-rectangle"
             key={item.id}

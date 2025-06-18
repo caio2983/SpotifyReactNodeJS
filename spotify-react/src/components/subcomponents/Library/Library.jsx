@@ -83,7 +83,7 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
             />
             <span className="your-library">Sua Biblioteca</span>
           </div>
-
+          {currentWidth}
           {currentWidth >= 14.7 && (
             <div className="library-tools">
               <div
@@ -108,6 +108,12 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
                   onClick={() => setSelectedType("artist")}
                 >
                   Artistas
+                </button>
+                <button
+                  className={selectedType === "album" ? "active" : ""}
+                  onClick={() => setSelectedType("album")}
+                >
+                  Álbuns
                 </button>
                 <button
                   className={selectedType === "all" ? "active" : ""}
@@ -145,7 +151,6 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
               </div>
             </div>
           )}
-
           <div className="results-list">
             {items.map((item, index) =>
               item.type === "artist" ? (
