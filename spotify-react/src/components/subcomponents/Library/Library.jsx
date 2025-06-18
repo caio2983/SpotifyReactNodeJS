@@ -69,8 +69,8 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
 
   return (
     <>
-      {currentWidth < 7 ? (
-        <LibrarySmall setIsExpanded={setIsExpanded}></LibrarySmall>
+      {currentWidth < 12 ? (
+        <LibrarySmall setIsExpanded={setIsExpanded} data={data} />
       ) : (
         <div className="library-container">
           <div className="library-container-header">
@@ -83,72 +83,77 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
             <span className="your-library">Sua Biblioteca</span>
           </div>
 
-          <div className="library-tools">
-            <div className="library-buttons-wrapper">
-              <button
-                className={selectedType === "playlist" ? "active" : ""}
-                onClick={() => setSelectedType("playlist")}
-              >
-                Playlists
-              </button>
-              <button
-                className={selectedType === "track" ? "active" : ""}
-                onClick={() => setSelectedType("track")}
-              >
-                Músicas
-              </button>
-              <button
-                className={selectedType === "artist" ? "active" : ""}
-                onClick={() => setSelectedType("artist")}
-              >
-                Artistas
-              </button>
-              <button
-                className={selectedType === "all" ? "active" : ""}
-                onClick={() => setSelectedType("all")}
-              >
-                Tudo
-              </button>
-            </div>
-
-            <div className="glass-and-input">
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                size="l"
-                className="library-magnifying-glass"
-                onClick={() => setShowSearch((prev) => !prev)}
-                style={{ cursor: "pointer" }}
-              />
-
+          {currentWidth >= 14.7 && (
+            <div className="library-tools">
+              <span>{currentWidth}</span>
               <div
-                className={`library-input-wrapper animated-search ${
-                  showSearch ? "expanded" : "collapsed"
+                className={`library-buttons-wrapper ${
+                  currentWidth < 19.4 ? "library-buttons-wrapper-small" : ""
                 }`}
-                ref={wrapperRef}
               >
-                <div className="input-and-results library-input-and-results">
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    className="search-input library-search-input"
-                    value={searchWord}
-                    onChange={(e) => setSearchWord(e.target.value)}
-                  />
+                <button
+                  className={selectedType === "playlist" ? "active" : ""}
+                  onClick={() => setSelectedType("playlist")}
+                >
+                  Playlists
+                </button>
+                <button
+                  className={selectedType === "track" ? "active" : ""}
+                  onClick={() => setSelectedType("track")}
+                >
+                  Músicas
+                </button>
+                <button
+                  className={selectedType === "artist" ? "active" : ""}
+                  onClick={() => setSelectedType("artist")}
+                >
+                  Artistas
+                </button>
+                <button
+                  className={selectedType === "all" ? "active" : ""}
+                  onClick={() => setSelectedType("all")}
+                >
+                  Tudo
+                </button>
+              </div>
+
+              <div className="glass-and-input">
+                <FontAwesomeIcon
+                  icon={faMagnifyingGlass}
+                  size="l"
+                  className="library-magnifying-glass"
+                  onClick={() => setShowSearch((prev) => !prev)}
+                  style={{ cursor: "pointer" }}
+                />
+
+                <div
+                  className={`library-input-wrapper animated-search ${
+                    showSearch ? "expanded" : "collapsed"
+                  }`}
+                  ref={wrapperRef}
+                >
+                  <div className="input-and-results library-input-and-results">
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      className="search-input library-search-input"
+                      value={searchWord}
+                      onChange={(e) => setSearchWord(e.target.value)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="results-list">
-            {items.map((item, index) => {
-              const { type } = item;
-
-              return type === "artist" ? (
+            {items.map((item, index) =>
+              item.type === "artist" ? (
                 <ArtistResultCard key={index} data={item} />
               ) : (
                 <NonArtistResultCard key={index} data={item} />
-              );
-            })}
+              )
+            )}
           </div>
         </div>
       )}

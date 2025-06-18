@@ -110,6 +110,10 @@
   margin-left: 12px;
 }
 
+.library-buttons-wrapper-small {
+  flex-wrap: wrap;
+}
+
 .library-buttons-wrapper button {
   background: transparent;
   border: none;
