@@ -119,6 +119,14 @@
   display: none;
 }
 
+.simplebar-track.simplebar-horizontal {
+  display: none;
+}
+
+.simplebar-content {
+  overflow-x: hidden;
+}
+
 .main-wrapper {
   display: flex;
   flex-direction: column;

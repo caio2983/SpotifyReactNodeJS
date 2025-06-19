@@ -10,6 +10,8 @@ import NonArtistResultCard from "../Header/SearchResultsCards/NonArtistResultCar
 import LibrarySmall from "./LibrarySmall";
 import { useGlobalContext } from "../../../GlobalContext";
 import axios from "axios";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 export default function Library({ setIsExpanded, currentWidth, data }) {
   const handleClick = () => {
@@ -73,94 +75,96 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
       {currentWidth < 12 ? (
         <LibrarySmall setIsExpanded={setIsExpanded} data={items} />
       ) : (
-        <div className="library-container">
-          <div className="library-container-header">
-            <FontAwesomeIcon
-              icon={faArrowsLeftRightToLine}
-              onClick={handleClick}
-              className="song-expand-button library-expand-button"
-              size="xl"
-            />
-            <span className="your-library">Sua Biblioteca</span>
-          </div>
+        <SimpleBar style={{ maxHeight: "100%" }}>
+          <div className="library-container">
+            <div className="library-container-header">
+              <FontAwesomeIcon
+                icon={faArrowsLeftRightToLine}
+                onClick={handleClick}
+                className="song-expand-button library-expand-button"
+                size="xl"
+              />
+              <span className="your-library">Sua Biblioteca</span>
+            </div>
 
-          {currentWidth >= 14.7 && (
-            <div className="library-tools">
-              <div
-                className={`library-buttons-wrapper ${
-                  currentWidth < 19.4 ? "library-buttons-wrapper-small" : ""
-                }`}
-              >
-                <button
-                  className={selectedType === "playlist" ? "active" : ""}
-                  onClick={() => setSelectedType("playlist")}
-                >
-                  Playlists
-                </button>
-                <button
-                  className={selectedType === "track" ? "active" : ""}
-                  onClick={() => setSelectedType("track")}
-                >
-                  Músicas
-                </button>
-                <button
-                  className={selectedType === "artist" ? "active" : ""}
-                  onClick={() => setSelectedType("artist")}
-                >
-                  Artistas
-                </button>
-                <button
-                  className={selectedType === "album" ? "active" : ""}
-                  onClick={() => setSelectedType("album")}
-                >
-                  Álbuns
-                </button>
-                <button
-                  className={selectedType === "all" ? "active" : ""}
-                  onClick={() => setSelectedType("all")}
-                >
-                  Tudo
-                </button>
-              </div>
-
-              <div className="glass-and-input">
-                <FontAwesomeIcon
-                  icon={faMagnifyingGlass}
-                  size="l"
-                  className="library-magnifying-glass"
-                  onClick={() => setShowSearch((prev) => !prev)}
-                  style={{ cursor: "pointer" }}
-                />
-
+            {currentWidth >= 14.7 && (
+              <div className="library-tools">
                 <div
-                  className={`library-input-wrapper animated-search ${
-                    showSearch ? "expanded" : "collapsed"
+                  className={`library-buttons-wrapper ${
+                    currentWidth < 19.4 ? "library-buttons-wrapper-small" : ""
                   }`}
-                  ref={wrapperRef}
                 >
-                  <div className="input-and-results library-input-and-results">
-                    <input
-                      ref={inputRef}
-                      type="text"
-                      className="search-input library-search-input"
-                      value={searchWord}
-                      onChange={(e) => setSearchWord(e.target.value)}
-                    />
+                  <button
+                    className={selectedType === "playlist" ? "active" : ""}
+                    onClick={() => setSelectedType("playlist")}
+                  >
+                    Playlists
+                  </button>
+                  <button
+                    className={selectedType === "track" ? "active" : ""}
+                    onClick={() => setSelectedType("track")}
+                  >
+                    Músicas
+                  </button>
+                  <button
+                    className={selectedType === "artist" ? "active" : ""}
+                    onClick={() => setSelectedType("artist")}
+                  >
+                    Artistas
+                  </button>
+                  <button
+                    className={selectedType === "album" ? "active" : ""}
+                    onClick={() => setSelectedType("album")}
+                  >
+                    Álbuns
+                  </button>
+                  <button
+                    className={selectedType === "all" ? "active" : ""}
+                    onClick={() => setSelectedType("all")}
+                  >
+                    Tudo
+                  </button>
+                </div>
+
+                <div className="glass-and-input">
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    size="l"
+                    className="library-magnifying-glass"
+                    onClick={() => setShowSearch((prev) => !prev)}
+                    style={{ cursor: "pointer" }}
+                  />
+
+                  <div
+                    className={`library-input-wrapper animated-search ${
+                      showSearch ? "expanded" : "collapsed"
+                    }`}
+                    ref={wrapperRef}
+                  >
+                    <div className="input-and-results library-input-and-results">
+                      <input
+                        ref={inputRef}
+                        type="text"
+                        className="search-input library-search-input"
+                        value={searchWord}
+                        onChange={(e) => setSearchWord(e.target.value)}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
-          <div className="results-list">
-            {items.map((item, index) =>
-              item.type === "artist" ? (
-                <ArtistResultCard key={index} data={item} />
-              ) : (
-                <NonArtistResultCard key={index} data={item} />
-              )
             )}
+            <div className="results-list">
+              {items.map((item, index) =>
+                item.type === "artist" ? (
+                  <ArtistResultCard key={index} data={item} />
+                ) : (
+                  <NonArtistResultCard key={index} data={item} />
+                )
+              )}
+            </div>
           </div>
-        </div>
+        </SimpleBar>
       )}
     </>
   );

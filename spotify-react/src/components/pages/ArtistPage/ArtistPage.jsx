@@ -8,6 +8,8 @@ import { useGlobalContext } from "../../../GlobalContext";
 import SwiperSpotify from "../../subcomponents/SwiperSpotify";
 import ArtistSongSkeleton from "./ArtistSongSkeleton";
 import { Skeleton } from "@mui/material";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 export default function ArtistPage() {
   const { artistId } = useParams();
@@ -137,58 +139,60 @@ export default function ArtistPage() {
   }
 
   return (
-    <div className="main-container artist-container" ref={scrollContainerRef}>
-      <header
-        className="artist-page-header"
-        style={{
-          backgroundImage: `url(${artist?.images[0]?.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          boxShadow: "0 60px 120px -40px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <div className="artist-header-content">
-          <div className="artist-header-text">
-            {isLoading ? (
-              <Skeleton
-                variant="text"
-                sx={{ bgcolor: "#888888" }}
-                width={350}
-                height={100}
-              />
-            ) : (
-              <span className="artist-title artist-text-glow">
-                {artist?.name}
-              </span>
-            )}
-
-            {isLoading ? (
-              <Skeleton
-                variant="text"
-                sx={{ bgcolor: "#888888" }}
-                width={120}
-              />
-            ) : (
-              <div className="artist-details">
-                <span className="artist-followers">
-                  {artist?.followers?.total?.toLocaleString("pt-BR")} seguidores
+    <SimpleBar style={{ maxHeight: "100%" }}>
+      <div className="main-container artist-container" ref={scrollContainerRef}>
+        <header
+          className="artist-page-header"
+          style={{
+            backgroundImage: `url(${artist?.images[0]?.url})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            boxShadow: "0 60px 120px -40px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <div className="artist-header-content">
+            <div className="artist-header-text">
+              {isLoading ? (
+                <Skeleton
+                  variant="text"
+                  sx={{ bgcolor: "#888888" }}
+                  width={350}
+                  height={100}
+                />
+              ) : (
+                <span className="artist-title artist-text-glow">
+                  {artist?.name}
                 </span>
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="artist-header-overlay"></div>
-      </header>
+              )}
 
-      <div className="artist-songs">
-        {!isLoading && (
-          <div
-            className="songs-overlay"
-            style={{
-              background:
-                !isLoading && gradientColor
-                  ? `linear-gradient(
+              {isLoading ? (
+                <Skeleton
+                  variant="text"
+                  sx={{ bgcolor: "#888888" }}
+                  width={120}
+                />
+              ) : (
+                <div className="artist-details">
+                  <span className="artist-followers">
+                    {artist?.followers?.total?.toLocaleString("pt-BR")}{" "}
+                    seguidores
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="artist-header-overlay"></div>
+        </header>
+
+        <div className="artist-songs">
+          {!isLoading && (
+            <div
+              className="songs-overlay"
+              style={{
+                background:
+                  !isLoading && gradientColor
+                    ? `linear-gradient(
             to bottom,
             ${hexToRgb(gradientColor, 0.6)} 0%,
             ${hexToRgb(gradientColor, 0.4)} 25%,
@@ -197,87 +201,88 @@ export default function ArtistPage() {
             ${hexToRgb(gradientColor, 0.0)} 85%,
             transparent 100%
           )`
-                  : "#1d1d1e",
-            }}
-          ></div>
-        )}
+                    : "#1d1d1e",
+              }}
+            ></div>
+          )}
 
-        <PlaylistTools
-          playSongs={{
-            nextsongs: popularTracks?.tracks,
-            id: artist?.id,
-            type: "artist",
-          }}
-          type={"artist"}
-          data={artist}
-          scrollContainerRef={scrollContainerRef}
-          playlistDominantColor={artistDominantColor}
-        ></PlaylistTools>
-        <div className="songs-heading-container artist-songs-heading">
-          <div className="song-list-container">
-            <div className="artist-popular-tracks">
-              <span>Populares</span>
-              <div className="artist-popular-tracks-wrapper">
-                {isLoading
-                  ? Array(showAllTracks ? 10 : 5)
-                      .fill(null)
-                      .map((_, index) => <ArtistSongSkeleton key={index} />)
-                  : popularTracks?.tracks
-                      ?.slice(0, showAllTracks ? 10 : 5)
-                      .map((track, index) => (
-                        <ArtistSong
-                          key={index + 1}
-                          track={track}
-                          index={index + 1}
-                          tracks={popularTracks.tracks}
-                          artist_id={artist?.id}
-                        />
-                      ))}
+          <PlaylistTools
+            playSongs={{
+              nextsongs: popularTracks?.tracks,
+              id: artist?.id,
+              type: "artist",
+            }}
+            type={"artist"}
+            data={artist}
+            scrollContainerRef={scrollContainerRef}
+            playlistDominantColor={artistDominantColor}
+          ></PlaylistTools>
+          <div className="songs-heading-container artist-songs-heading">
+            <div className="song-list-container">
+              <div className="artist-popular-tracks">
+                <span>Populares</span>
+                <div className="artist-popular-tracks-wrapper">
+                  {isLoading
+                    ? Array(showAllTracks ? 10 : 5)
+                        .fill(null)
+                        .map((_, index) => <ArtistSongSkeleton key={index} />)
+                    : popularTracks?.tracks
+                        ?.slice(0, showAllTracks ? 10 : 5)
+                        .map((track, index) => (
+                          <ArtistSong
+                            key={index + 1}
+                            track={track}
+                            index={index + 1}
+                            tracks={popularTracks.tracks}
+                            artist_id={artist?.id}
+                          />
+                        ))}
+                </div>
+                {popularTracks?.tracks?.length > 5 && (
+                  <button
+                    onClick={() => setShowAllTracks(!showAllTracks)}
+                    className="show-more-button"
+                  >
+                    {showAllTracks ? "Mostrar menos" : "Mostrar tudo"}
+                  </button>
+                )}
               </div>
-              {popularTracks?.tracks?.length > 5 && (
-                <button
-                  onClick={() => setShowAllTracks(!showAllTracks)}
-                  className="show-more-button"
-                >
-                  {showAllTracks ? "Mostrar menos" : "Mostrar tudo"}
-                </button>
-              )}
             </div>
           </div>
-        </div>
 
-        <div className="swipers-wrapper artist-discography">
-          <p className="discography">Discografia</p>
-          <div className="albuns-buttons">
-            {["album", "single"].map((key) => {
-              if (!albums[key] || albums[key].length === 0) return null;
+          <div className="swipers-wrapper artist-discography">
+            <p className="discography">Discografia</p>
+            <div className="albuns-buttons">
+              {["album", "single"].map((key) => {
+                if (!albums[key] || albums[key].length === 0) return null;
 
-              const labels = {
-                album: "Álbuns",
-                single: "Singles",
-              };
+                const labels = {
+                  album: "Álbuns",
+                  single: "Singles",
+                };
 
-              return (
-                <button
-                  key={key}
-                  className={`album-button ${
-                    selectedAlbumType === key ? "active" : ""
-                  }`}
-                  onClick={() => setSelectedAlbumType(key)}
-                >
-                  {labels[key]}
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={key}
+                    className={`album-button ${
+                      selectedAlbumType === key ? "active" : ""
+                    }`}
+                    onClick={() => setSelectedAlbumType(key)}
+                  >
+                    {labels[key]}
+                  </button>
+                );
+              })}
+            </div>
+            <SwiperSpotify
+              type="album"
+              data={albums?.[selectedAlbumType] || []}
+              album={true}
+              loading={isLoading}
+            />
           </div>
-          <SwiperSpotify
-            type="album"
-            data={albums?.[selectedAlbumType] || []}
-            album={true}
-            loading={isLoading}
-          />
         </div>
       </div>
-    </div>
+    </SimpleBar>
   );
 }
