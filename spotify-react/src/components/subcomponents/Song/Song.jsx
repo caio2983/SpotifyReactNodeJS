@@ -26,8 +26,8 @@ export default function Song({ setIsSongExpanded, currentWidth }) {
   }, [
     songSelected,
     currentWidth,
-    textRef.current.clientWidth,
-    headerRef.current.clientWidth,
+    textRef.current?.clientWidth,
+    headerRef.current?.clientWidth,
   ]);
 
   return (
