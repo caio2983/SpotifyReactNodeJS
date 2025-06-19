@@ -15,7 +15,7 @@ const { getArtistAlbums } = require("./resultTypes/artists/artistAlbums");
 const { getArtist } = require("./resultTypes/artists/getArtist");
 const { getPlaylist } = require("./resultTypes/playlists/getPlaylist");
 const { searches } = require("./recentSearches/recentSearches");
-const { user_library } = require("./library/library");
+let { user_library } = require("./library/library");
 
 const app = express();
 const PORT = 3000;
@@ -236,6 +236,30 @@ app.post("/library", async (req, res) => {
   }
 
   res.status(201).json({ mensagem: "new item added to library", library_item });
+});
+
+app.post("/remove-library", async (req, res) => {
+  let library_item = req.body;
+
+  if (!library_item || !library_item.id || !library_item.type) {
+    return res.status(400).json({ erro: "invalid library item" });
+  }
+
+  user_library = user_library.filter(
+    (item) => item.id !== library_item.id || item.type !== library_item.type
+  );
+
+  let indexToRemove = user_library.findIndex(
+    (item) => item.id === library_item.id && item.type === library_item.type
+  );
+
+  if (indexToRemove === -1) {
+    return res.status(404).json({ mensagem: "item not found in library" });
+  }
+
+  user_library.splice(indexToRemove, 1);
+
+  res.status(200).json({ mensagem: "item removed from library", library_item });
 });
 
 app.get("/library", async (req, res) => {

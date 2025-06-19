@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useGlobalContext } from "../../../../GlobalContext";
 import { Link } from "react-router-dom";
+import { faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function ArtistResultCard({ data }) {
+export default function ArtistResultCard({ data, onRemove }) {
   const { setRecentSearches } = useGlobalContext();
 
   useEffect(() => {
@@ -28,6 +30,13 @@ export default function ArtistResultCard({ data }) {
           <span className="result-artist">{data?.name}</span>
         </Link>
       </div>
+
+      <FontAwesomeIcon
+        icon={faX}
+        className="remove-icon"
+        size="lg"
+        onClick={() => onRemove()}
+      ></FontAwesomeIcon>
     </div>
   );
 }

@@ -23,7 +23,8 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
   const [searchWord, setSearchWord] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [selectedType, setSelectedType] = useState("all");
-  const { libraryReloadSignal, setLibraryItems } = useGlobalContext();
+  const { libraryReloadSignal, setLibraryItems, signalLibraryReload } =
+    useGlobalContext();
 
   const [allItems, setAllItems] = useState([]);
   const [items, setItems] = useState([]);
@@ -51,6 +52,22 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showSearch]);
+
+  const handleRemoveItem = (idToRemove, typeToRemove) => {
+    axios
+      .post("http://localhost:3000/remove-library", {
+        id: idToRemove,
+        type: typeToRemove,
+      })
+      .then((res) => {
+        console.log("Item removido com sucesso:", res.data);
+      })
+      .catch((err) => {
+        console.error("Erro ao remover item:", err);
+      });
+
+    signalLibraryReload();
+  };
 
   useEffect(() => {
     const searchLower = searchWord.trim().toLowerCase();
@@ -157,9 +174,17 @@ export default function Library({ setIsExpanded, currentWidth, data }) {
             <div className="results-list">
               {items.map((item, index) =>
                 item.type === "artist" ? (
-                  <ArtistResultCard key={index} data={item} />
+                  <ArtistResultCard
+                    key={index}
+                    data={item}
+                    onRemove={() => handleRemoveItem(item.id, item.type)}
+                  />
                 ) : (
-                  <NonArtistResultCard key={index} data={item} />
+                  <NonArtistResultCard
+                    key={index}
+                    data={item}
+                    onRemove={() => handleRemoveItem(item.id, item.type)}
+                  />
                 )
               )}
             </div>

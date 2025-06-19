@@ -208,6 +208,21 @@
   align-items: center;
   justify-content: center;
   padding-inline: 12px;
+  position: relative;
+  cursor: pointer;
+}
+
+.remove-icon {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.result-card:hover .remove-icon {
+  visibility: visible;
 }
 
 .result-card:hover {

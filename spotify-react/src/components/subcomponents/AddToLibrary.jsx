@@ -5,7 +5,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useGlobalContext } from "../../GlobalContext";
 
 export default function AddToLibrary({ data }) {
-  const { signalLibraryReload } = useGlobalContext();
+  const { signalLibraryReload, libraryItems } = useGlobalContext();
   const [isSelected, setIsSelected] = useState(false);
 
   async function checkIfFavorited() {
@@ -21,7 +21,7 @@ export default function AddToLibrary({ data }) {
 
   useEffect(() => {
     checkIfFavorited();
-  }, [signalLibraryReload, data?.id]);
+  }, [signalLibraryReload, data?.id, libraryItems]);
 
   async function addItem() {
     try {
