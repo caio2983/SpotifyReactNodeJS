@@ -1,4 +1,4 @@
-@import "./Song.css";
+@import "./components/subcomponents/Song/Song.css";
 @import "./PlaylistPage.css";
 @import "./PlayingSong.css";
 @import "./components/subcomponents/Header/Header.css";

@@ -91,7 +91,7 @@ export default function Home() {
             selectedSong={songSelected}
           />
         )}
-        <Song setIsSongExpanded={setIsSongExpanded} />
+        <Song setIsSongExpanded={setIsSongExpanded} currentWidth={songWidth} />
 
         {/* DRAGGER entre MAIN e SONG */}
 

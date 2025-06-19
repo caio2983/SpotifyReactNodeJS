@@ -1,39 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from "../../../GlobalContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsLeftRightToLine } from "@fortawesome/free-solid-svg-icons";
 import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export default function Song({ setIsSongExpanded }) {
+export default function Song({ setIsSongExpanded, currentWidth }) {
   const handleClick = () => {
     setIsSongExpanded(true);
   };
 
+  const textRef = useRef(null);
+  const headerRef = useRef(null);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
   const { songSelected, setSong } = useGlobalContext();
+
+  useEffect(() => {
+    if (textRef.current) {
+      if (textRef.current.clientWidth > headerRef.current.clientWidth) {
+        setShouldAnimate(true);
+      } else {
+        setShouldAnimate(false);
+      }
+    }
+  }, [
+    songSelected,
+    currentWidth,
+    textRef.current.clientWidth,
+    headerRef.current.clientWidth,
+  ]);
 
   return (
     <div className="song-container">
-      <div className="song-header">
+      <div
+        className={`song-header ${shouldAnimate ? "song-header-animate" : ""}`}
+        ref={headerRef}
+      >
         <FontAwesomeIcon
           icon={faArrowsLeftRightToLine}
           onClick={handleClick}
-          className="song-expand-button"
+          className={`song-expand-button ${
+            shouldAnimate ? "song-expand-button-animate" : ""
+          }`}
           size="xl"
         ></FontAwesomeIcon>
 
         <span className="song-name-header">
           {songSelected ? (
-            <Link to={`/track/${songSelected.id}`}>{songSelected?.name}</Link>
+            <Link to={`/track/${songSelected.id}`}>
+              <span className="marquee">
+                <span
+                  className={`marquee-inner ${
+                    shouldAnimate ? "marquee-animate" : ""
+                  }`}
+                  ref={textRef}
+                >
+                  {songSelected?.name}
+                  {shouldAnimate && <>&nbsp;&nbsp;{songSelected?.name}</>}
+                </span>
+              </span>
+            </Link>
           ) : (
             <Skeleton
               variant="text"
-              sx={{
-                bgcolor: "#888888",
-                borderRadius: "6px",
-              }}
+              sx={{ bgcolor: "#888888", borderRadius: "6px" }}
               width={250}
-            ></Skeleton>
+            />
           )}
         </span>
       </div>
@@ -57,7 +89,6 @@ export default function Song({ setIsSongExpanded }) {
           ></Skeleton>
         )}
       </div>
-
       <div className="song-title-artist">
         <div className="scroll-wrapper">
           <div className="scroll-content">

@@ -3,7 +3,7 @@
   background-color: #121212;
   border: 1px solid #121212;
   border-radius: 6px;
-  height: 80vh;
+  height: 100%;
   z-index: 100;
   transition: width 0.6s ease-in-out;
   display: flex;
@@ -31,12 +31,16 @@
 .song-expand-button {
   bottom: 6px;
   position: absolute;
-  left: 0;
+  left: 0px;
   transform: translateX(-10px);
   opacity: 0;
   transition: transform 0.3s ease, opacity 0.2s ease;
   color: white;
   cursor: pointer;
+}
+
+.song-expand-button-animate {
+  left: 6px;
 }
 
 .song-container:hover .song-expand-button {
@@ -45,6 +49,7 @@
 }
 
 .song-header {
+  box-sizing: border-box;
   width: 100%;
   height: 5%;
   margin-bottom: 24px;
@@ -55,10 +60,14 @@
   margin: 24px 0 12px 24px;
 }
 
+.song-header-animate {
+  margin-left: 0;
+}
+
 .song-title-artist {
   width: 100%;
   height: 15%;
-
+  margin-top: 24px;
   margin-bottom: 24px;
   padding-inline: 20px;
   display: flex;
@@ -87,18 +96,45 @@
     transform: translateX(-100%);
   }
 }
-
 .song-name-header {
   font-family: "SpotifyMixBold";
   font-size: 2.5rem;
   margin-left: 0;
   transition: margin-left 0.3s ease;
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
   display: block;
+  position: relative;
+}
+
+.song-name-header .marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.song-name-header .marquee-inner {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.song-container:hover .marquee-animate {
+  animation-play-state: paused;
+}
+
+.song-name-header .marquee-animate {
+  animation: marquee-scroll 15s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .song-container:hover .song-name-header {
