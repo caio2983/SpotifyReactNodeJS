@@ -10,6 +10,8 @@ import PlaylistCardSkeleton from "./PlaylistCardSkeleton";
 import SearchingPage from "../../pages/SearchingPage/SearchingPage";
 import TrackPage from "../../pages/TrackPage/TrackPage";
 import AlbumPage from "../../pages/AlbumPage/AlbumPage";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 export default function Main({ currentWidth }) {
   const [initialPlaylists, setInitialPlaylists] = useState([]);
   const [initialArtists, setInitialArtists] = useState([]);
@@ -86,13 +88,14 @@ export default function Main({ currentWidth }) {
       <Route
         path="/"
         element={
-          <div className="main-container ">
-            <div className="main-wrapper">
-              <span
-                ref={gradientRef}
-                style={{
-                  background: playlistGradientColor
-                    ? `linear-gradient(
+          <SimpleBar style={{ maxHeight: "100%" }}>
+            <div className="main-container ">
+              <div className="main-wrapper">
+                <span
+                  ref={gradientRef}
+                  style={{
+                    background: playlistGradientColor
+                      ? `linear-gradient(
                       180deg,
                       rgba(${hexToRgb(playlistGradientColor)}, 0.75) 0%,
                       rgba(${hexToRgb(playlistGradientColor)}, 0.5) 5%,
@@ -100,55 +103,56 @@ export default function Main({ currentWidth }) {
                       rgba(${hexToRgb(playlistGradientColor)}, 0.25) 30%,     
                       rgba(29, 29, 30, 0) 100%
                     )`
-                    : "transparent",
-                  height: "500px",
-                }}
-                className="main-container-gradient"
-              />
+                      : "transparent",
+                    height: "500px",
+                  }}
+                  className="main-container-gradient"
+                />
 
-              <div
-                className="playlist-cards"
-                style={{
-                  gridTemplateColumns:
-                    currentWidth < 70 ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
-                }}
-              >
-                {playlistCardsLoading &&
-                  Array.from({ length: 8 }).map((_, index) => (
-                    <PlaylistCardSkeleton key={index} />
-                  ))}
-                {!playlistCardsLoading &&
-                  initialPlaylists.map((playlist, index) => (
-                    <Link to={`/playlist/${playlist.id}`} key={playlist.id}>
-                      <PlaylistCard
-                        playlist={playlist}
-                        index={index}
-                        setPlaylistGradientColor={setPlaylistGradientColor}
-                        setInitialGradientColor={setInitialGradientColor}
-                        gradientRef={gradientRef}
-                      />
-                    </Link>
-                  ))}
+                <div
+                  className="playlist-cards"
+                  style={{
+                    gridTemplateColumns:
+                      currentWidth < 70 ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
+                  }}
+                >
+                  {playlistCardsLoading &&
+                    Array.from({ length: 8 }).map((_, index) => (
+                      <PlaylistCardSkeleton key={index} />
+                    ))}
+                  {!playlistCardsLoading &&
+                    initialPlaylists.map((playlist, index) => (
+                      <Link to={`/playlist/${playlist.id}`} key={playlist.id}>
+                        <PlaylistCard
+                          playlist={playlist}
+                          index={index}
+                          setPlaylistGradientColor={setPlaylistGradientColor}
+                          setInitialGradientColor={setInitialGradientColor}
+                          gradientRef={gradientRef}
+                        />
+                      </Link>
+                    ))}
+                </div>
+              </div>
+
+              <div className="swipers-wrapper">
+                <SwiperSpotify
+                  type="track"
+                  data={initialTracks}
+                  loading={albumsLoading}
+                  currentWidth={currentWidth}
+                />
+
+                <SwiperSpotify
+                  format="circle"
+                  type="artist"
+                  data={initialArtists}
+                  loading={artistsLoading}
+                  currentWidth={currentWidth}
+                />
               </div>
             </div>
-
-            <div className="swipers-wrapper">
-              <SwiperSpotify
-                type="track"
-                data={initialTracks}
-                loading={albumsLoading}
-                currentWidth={currentWidth}
-              />
-
-              <SwiperSpotify
-                format="circle"
-                type="artist"
-                data={initialArtists}
-                loading={artistsLoading}
-                currentWidth={currentWidth}
-              />
-            </div>
-          </div>
+          </SimpleBar>
         }
       />
 

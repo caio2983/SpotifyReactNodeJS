@@ -61,14 +61,6 @@
   position: relative;
 }
 
-.main {
-  overflow-y: auto;
-}
-
-.resizable.main {
-  overflow-y: auto;
-}
-
 .resizer {
   width: 6px;
   cursor: col-resize;
@@ -92,8 +84,7 @@
 .main-container {
   width: 100%;
   height: auto;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   background-color: #121212;
   border: 1px solid transparent;
   border-radius: 6px;
@@ -103,8 +94,29 @@
   z-index: 10;
   position: relative;
   box-sizing: border-box;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+}
+
+.simplebar-track.simplebar-vertical {
+  width: 8px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: transparent;
+}
+
+.simplebar-scrollbar {
+  background-color: #ccc;
+  border-radius: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.simplebar-scrollable-y.simplebar-scrolling .simplebar-scrollbar {
+  opacity: 1;
+}
+
+.simplebar-scrollbar:before {
+  display: none;
 }
 
 .main-wrapper {
