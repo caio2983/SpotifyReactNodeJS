@@ -53,7 +53,7 @@ export default function LibraryExpanded({ setIsExpanded }) {
   }, [searchWord, allItems, selectedType]);
 
   return (
-    <SimpleBar style={{ maxHeight: "100%" }}>
+    <SimpleBar style={{ maxHeight: "100%", zIndex: 150 }}>
       <div className={`library-expanded-container ${animateClass}`}>
         <div className="library-expanded-tools">
           <button onClick={handleClick}>Expandir</button>
@@ -150,7 +150,7 @@ export default function LibraryExpanded({ setIsExpanded }) {
                   />
                   <div className="library-expanded-item-info">
                     <span className="slide-name library-expanded-item-title ">
-                      <Link to={`/${item.type}/${item.id}`}>{item.name}</Link>
+                      {item.name}
                     </span>
                     <span className="library-expanded-item-info slide-artist">
                       {item.type === "artist"

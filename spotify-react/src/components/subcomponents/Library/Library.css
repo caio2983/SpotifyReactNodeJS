@@ -178,7 +178,7 @@
   background-color: #121212;
   border: 1px solid #121212;
   border-radius: 10px;
-  z-index: 102;
+  z-index: 150;
   transition: all 0.5s ease;
   transform-origin: left;
   overflow: auto;
