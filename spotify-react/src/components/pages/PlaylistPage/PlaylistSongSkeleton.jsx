@@ -3,7 +3,7 @@ import React from "react";
 
 export default function PlaylistSongSkeleton() {
   return (
-    <div className="song-card">
+    <div className="song-row">
       <div className="song-index-album">
         <div className="song-index-number">
           <span className="song-index">
@@ -25,6 +25,7 @@ export default function PlaylistSongSkeleton() {
       <span className="song-date">
         <Skeleton variant="text" sx={{ bgcolor: "#888888" }} />
       </span>
+
       <span className="song-duration">
         <Skeleton variant="text" sx={{ bgcolor: "#888888" }} />
       </span>

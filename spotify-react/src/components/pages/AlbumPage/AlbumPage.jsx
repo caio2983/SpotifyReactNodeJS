@@ -93,8 +93,8 @@ export default function AlbumPage() {
   }, [album]);
 
   return (
-    <SimpleBar style={{ maxHeight: "100%" }}>
-      <div className="main-container album-container" ref={scrollContainerRef}>
+    <div className="main-container playlist-container" ref={scrollContainerRef}>
+      <SimpleBar style={{ maxHeight: "100%", position: "relative", top: 0 }}>
         <header className=" album-page-header">
           <section className="album-header-content">
             <figure
@@ -208,7 +208,7 @@ export default function AlbumPage() {
           )}
         </header>
 
-        <div className="playlist-songs">
+        <div className="playlist-songs" style={{ overflow: "visible" }}>
           {!isLoading && (
             <div
               className="songs-overlay"
@@ -239,20 +239,19 @@ export default function AlbumPage() {
             scrollContainerRef={scrollContainerRef}
             playlistDominantColor={albumDominantColor}
           ></PlaylistTools>
-          <div className="songs-heading-container">
-            <div className="songs-heading">
+
+          <div className="song-list-container">
+            <div className="song-cards-grid">
               <div className="column heading-title">
                 <span className="hashtag">#</span>
                 <span className="title">Título</span>
               </div>
               <div className="column heading-album">Álbum</div>
               <div className="column heading-added">Adicionada em</div>
-              <div className="column heading-duration">
+              <div className="column heading-duration playlist-heading-duration">
                 <FontAwesomeIcon icon={faClock} />
               </div>
-            </div>
-
-            <div className="song-list-container">
+              <div className="border-div"></div>
               {isLoading
                 ? Array.from({ length: 10 }).map((_, index) => (
                     <PlaylistSongSkeleton key={index} />
@@ -269,7 +268,7 @@ export default function AlbumPage() {
             </div>
           </div>
         </div>
-      </div>
-    </SimpleBar>
+      </SimpleBar>
+    </div>
   );
 }

@@ -112,7 +112,7 @@ export default function Song({ setIsSongExpanded, currentWidth }) {
 
           <span className="song-artist-big">
             {songSelected ? (
-              <Link to={`/artist/${songSelected?.artists[0]?.id}`}>
+              <Link to={`/artist/${songSelected?.artists?.[0]?.id}`}>
                 {songSelected?.artists[0]?.name}
               </Link>
             ) : (
