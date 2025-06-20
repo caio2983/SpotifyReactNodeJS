@@ -13,13 +13,12 @@
   gap: 0 !important;
   position: relative;
   height: auto;
+  overflow-y: hidden;
 }
 
 .playlist-page-header {
   width: 100%;
-  /* padding-top: 32px;
-  padding-inline: 24px; */
-  /* padding-bottom: 16px; */
+
   position: relative;
   z-index: 15;
 }
@@ -133,6 +132,10 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
+}
+
+.simplebar-content {
+  overflow: visible !important;
 }
 
 .playlist-owner-name {

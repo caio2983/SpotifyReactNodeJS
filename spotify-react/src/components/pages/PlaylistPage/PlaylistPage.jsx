@@ -9,7 +9,7 @@ import PlaylistSong from "./PlaylistSong";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { useGlobalContext } from "../../../GlobalContext";
 import axios from "axios";
-import ArtistSongSkeleton from "../ArtistPage/ArtistSongSkeleton";
+
 import PlaylistSongSkeleton from "./PlaylistSongSkeleton";
 import { Skeleton } from "@mui/material";
 import SimpleBar from "simplebar-react";
@@ -74,7 +74,7 @@ export default function PlaylistPage() {
 
   return (
     <div className="main-container playlist-container" ref={scrollContainerRef}>
-      <SimpleBar style={{ maxHeight: "100%" }}>
+      <SimpleBar style={{ maxHeight: "100%", position: "relative", top: 0 }}>
         <header className="playlist-page-header">
           <div className="playlist-header-content">
             <figure
@@ -207,7 +207,7 @@ export default function PlaylistPage() {
           )}
         </header>
 
-        <div className="playlist-songs">
+        <div className="playlist-songs" style={{ overflow: "visible" }}>
           {!isLoading && (
             <div
               className="songs-overlay"
