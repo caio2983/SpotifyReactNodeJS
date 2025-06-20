@@ -229,20 +229,13 @@
   padding-inline: 24px;
 }
 
-.songs-heading {
-  display: grid;
-  grid-template-columns: 5fr 2fr 2fr 1fr;
-  align-items: center;
-  padding: 8px 32px 16px 32px;
+.column {
+  padding-bottom: 16px;
   margin-bottom: 12px;
-  color: #d6d8dc;
-  font-family: "SpotifyMixMedium";
-  font-size: large;
-  border-bottom: 1px solid rgba(214, 216, 220, 0.2);
-
   font-family: "SpotifyMixMedium", monospace;
   font-size: larger;
   color: #b3b3b3;
+  border-bottom: 1px solid rgba(214, 216, 220, 0.2);
 }
 
 .heading-duration {
@@ -261,20 +254,40 @@
 }
 
 .song-card {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 4fr 2fr 2fr 1fr;
   align-items: center;
-  gap: 16px;
+  align-content: center;
+  gap: 16px; */
   padding: 8px 32px;
   height: fit-content;
   color: #fff;
   border-radius: 8px;
   z-index: 100;
+  max-height: 100px;
 }
 
 .song-card:hover {
   background-color: rgba(128, 128, 128, 0.3);
   cursor: pointer;
+}
+
+.song-card:hover .song-index {
+  opacity: 0;
+}
+
+.song-card:hover .song-play-triangle {
+  opacity: 1;
+}
+
+.song-cards-grid {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  align-items: center;
+  align-content: center;
+
+  padding: 8px 32px;
+  height: fit-content;
 }
 
 .song-artist {
@@ -350,14 +363,6 @@
   top: 0;
   opacity: 0;
   transition: opacity 0.2s ease;
-}
-
-.song-card:hover .song-index {
-  opacity: 0;
-}
-
-.song-card:hover .song-play-triangle {
-  opacity: 1;
 }
 
 .hashtag {

@@ -193,7 +193,6 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  max-width: 15em;
 }
 
 .artist-tools-wrapper {

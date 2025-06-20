@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { format, formatDistanceToNow, differenceInMonths } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useGlobalContext } from "../../../GlobalContext";
@@ -34,7 +34,7 @@ export default function PlaylistSong({ index, image, song, playlist }) {
   }
 
   return (
-    <div className="song-card">
+    <>
       <div className="song-index-album">
         <div className="song-index-number" onClick={clickSong}>
           <span className="song-index"> {index + 1}</span>
@@ -65,6 +65,6 @@ export default function PlaylistSong({ index, image, song, playlist }) {
           .toString()
           .padStart(2, "0")}
       </span>
-    </div>
+    </>
   );
 }

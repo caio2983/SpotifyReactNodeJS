@@ -239,8 +239,8 @@ export default function PlaylistPage() {
             playlistDominantColor={playlistDominantColor}
           />
 
-          <div className="songs-heading-container">
-            <div className="songs-heading">
+          <div className="song-list-container">
+            <div className="song-cards-grid">
               <div className="column heading-title">
                 <span className="hashtag">#</span>
                 <span className="title">Título</span>
@@ -250,9 +250,6 @@ export default function PlaylistPage() {
               <div className="column heading-duration">
                 <FontAwesomeIcon icon={faClock} />
               </div>
-            </div>
-
-            <div className="song-list-container">
               {isLoading
                 ? Array.from({ length: 10 }).map((_, index) => (
                     <PlaylistSongSkeleton key={index} />
