@@ -247,9 +247,10 @@ export default function PlaylistPage() {
               </div>
               <div className="column heading-album">Álbum</div>
               <div className="column heading-added">Adicionada em</div>
-              <div className="column heading-duration">
+              <div className="column heading-duration playlist-heading-duration">
                 <FontAwesomeIcon icon={faClock} />
               </div>
+              <div className="border-div"></div>
               {isLoading
                 ? Array.from({ length: 10 }).map((_, index) => (
                     <PlaylistSongSkeleton key={index} />

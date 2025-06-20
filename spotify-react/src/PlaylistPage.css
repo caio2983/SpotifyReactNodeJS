@@ -224,22 +224,28 @@
 
 /* Song list styles */
 
-.songs-heading-container {
-  width: 100%;
-  padding-inline: 24px;
-}
-
 .column {
   padding-bottom: 16px;
   margin-bottom: 12px;
   font-family: "SpotifyMixMedium", monospace;
   font-size: larger;
   color: #b3b3b3;
+}
+
+.border-div {
   border-bottom: 1px solid rgba(214, 216, 220, 0.2);
+  width: 98%;
+  z-index: 300;
+  content: "";
+
+  top: 50px;
+  position: absolute;
 }
 
 .heading-duration {
   text-align: right;
+  position: relative;
+  right: 32px;
 }
 
 .heading-title {
@@ -254,11 +260,11 @@
 }
 
 .song-card {
-  /* display: grid;
+  display: grid;
   grid-template-columns: 4fr 2fr 2fr 1fr;
   align-items: center;
   align-content: center;
-  gap: 16px; */
+  gap: 16px;
   padding: 8px 32px;
   height: fit-content;
   color: #fff;
@@ -282,12 +288,26 @@
 
 .song-cards-grid {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: min-content auto auto auto;
+  min-height: 100%;
   align-items: center;
   align-content: center;
+  position: relative;
+  padding: 8px 0px;
 
-  padding: 8px 32px;
-  height: fit-content;
+  width: 100%;
+}
+
+.song-row {
+  display: contents;
+
+  color: #fff;
+  border-radius: 8px;
+}
+
+.song-row:hover > * {
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
 }
 
 .song-artist {
@@ -345,6 +365,13 @@
   position: relative;
 }
 
+.song-index-album-playlist {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 110px;
+}
+
 .song-index {
   opacity: 1;
   transition: opacity 0.2s ease;
@@ -377,9 +404,16 @@
   width: 64px;
 }
 
+.playlist-songs {
+  z-index: 300;
+}
+
 .song-list-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  padding-inline: 32px;
 }
 
 .song-name {
@@ -389,6 +423,12 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
+}
+
+.song-album-playlist {
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .name-artist-wrapper {
