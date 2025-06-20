@@ -240,7 +240,11 @@ export default function PlaylistPage() {
           />
 
           <div className="song-list-container">
-            <div className="song-cards-grid">
+            <div
+              className={`song-cards-grid ${
+                isLoading ? "song-cards-grid-skeleton" : ""
+              }`}
+            >
               <div className="column heading-title">
                 <span className="hashtag">#</span>
                 <span className="title">Título</span>
