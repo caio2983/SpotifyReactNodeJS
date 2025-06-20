@@ -16,18 +16,18 @@ export default function PlaylistSongSkeleton() {
           </span>
         </div>
 
-        <Skeleton variant="text" width={200} sx={{ bgcolor: "#888888" }} />
+        <Skeleton variant="text" width={150} sx={{ bgcolor: "#888888" }} />
       </div>
 
       <span className="song-album">
-        <Skeleton variant="text" sx={{ bgcolor: "#888888" }} />
+        <Skeleton variant="text" width={150} sx={{ bgcolor: "#888888" }} />
       </span>
       <span className="song-date">
-        <Skeleton variant="text" sx={{ bgcolor: "#888888" }} />
+        <Skeleton variant="text" width={150} sx={{ bgcolor: "#888888" }} />
       </span>
 
       <span className="song-duration">
-        <Skeleton variant="text" sx={{ bgcolor: "#888888" }} />
+        <Skeleton variant="text" width={150} sx={{ bgcolor: "#888888" }} />
       </span>
     </div>
   );
