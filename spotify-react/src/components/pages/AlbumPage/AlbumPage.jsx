@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { Vibrant } from "node-vibrant/browser";
@@ -8,6 +8,8 @@ import PlaylistSongSkeleton from "../PlaylistPage/PlaylistSongSkeleton";
 import PlaylistSong from "../PlaylistPage/PlaylistSong";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 export default function AlbumPage() {
   const { albumId } = useParams();
@@ -91,128 +93,129 @@ export default function AlbumPage() {
   }, [album]);
 
   return (
-    <div className="main-container album-container" ref={scrollContainerRef}>
-      <header className=" album-page-header">
-        <section className="album-header-content">
-          <figure
-            className="album-image-wrapper"
-            style={{
-              boxShadow: isLoading
-                ? "none"
-                : "13px 10px 103px -18px rgba(0, 0, 0, 0.89)",
-              WebkitBoxShadow: isLoading
-                ? "none"
-                : "13px 10px 103px -18px rgba(0, 0, 0, 0.89)",
-              MozBoxShadow: isLoading
-                ? "none"
-                : "13px 10px 103px -18px rgba(0, 0, 0, 0.89)",
-            }}
-          >
-            {isLoading ? (
-              <Skeleton
-                variant="rectangular"
-                sx={{
-                  bgcolor: "#888888",
-                  borderRadius: "4px",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            ) : (
-              <img src={album?.images?.[0]?.url} />
-            )}
-          </figure>
-
-          <div className="album-header-text">
-            <span className="playlist-description album-label">Álbum</span>
-            <h1 className="album-title">
+    <SimpleBar style={{ maxHeight: "100%" }}>
+      <div className="main-container album-container" ref={scrollContainerRef}>
+        <header className=" album-page-header">
+          <section className="album-header-content">
+            <figure
+              className="album-image-wrapper"
+              style={{
+                boxShadow: isLoading
+                  ? "none"
+                  : "13px 10px 103px -18px rgba(0, 0, 0, 0.89)",
+                WebkitBoxShadow: isLoading
+                  ? "none"
+                  : "13px 10px 103px -18px rgba(0, 0, 0, 0.89)",
+                MozBoxShadow: isLoading
+                  ? "none"
+                  : "13px 10px 103px -18px rgba(0, 0, 0, 0.89)",
+              }}
+            >
               {isLoading ? (
                 <Skeleton
-                  variant="text"
-                  sx={{ bgcolor: "#888888" }}
-                  width={350}
+                  variant="rectangular"
+                  sx={{
+                    bgcolor: "#888888",
+                    borderRadius: "4px",
+                    width: "100%",
+                    height: "100%",
+                  }}
                 />
               ) : (
-                album?.name
+                <img src={album?.images?.[0]?.url} />
               )}
-            </h1>
+            </figure>
 
-            <div className="album-details">
-              <figure className="album-owner-image-wrapper">
-                {isLoading ? (
-                  <Skeleton
-                    variant="rectangular"
-                    sx={{
-                      bgcolor: "#888888",
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: "50%",
-                    }}
-                  />
-                ) : (
-                  <img
-                    src={album && artistImage}
-                    alt="artist-image"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: "50%",
-                    }}
-                  />
-                )}
-              </figure>
-              <div className="playlist-details">
+            <div className="album-header-text">
+              <span className="playlist-description album-label">Álbum</span>
+              <h1 className="album-title">
                 {isLoading ? (
                   <Skeleton
                     variant="text"
-                    sx={{
-                      bgcolor: "#888888",
-                      width: 250,
-                      display: "inline-block",
-                      verticalAlign: "middle",
-                      borderRadius: 1,
-                    }}
+                    sx={{ bgcolor: "#888888" }}
+                    width={350}
                   />
                 ) : (
-                  <>
-                    <Link to={`/artist/${album?.artists?.[0]?.id}`}>
-                      <span className=" playlist-description  playlist-owner-name">
-                        {album?.artists?.[0]?.name}
-                      </span>
-                    </Link>
-                    <span className="separation-ball"></span>
-                    <span className="playlist-description">
-                      {album?.release_date}
-                    </span>
-                    <span className="separation-ball"></span>
-                    <span className="playlist-description">
-                      {album?.total_tracks} músicas
-                    </span>
-                  </>
+                  album?.name
                 )}
+              </h1>
+
+              <div className="album-details">
+                <figure className="album-owner-image-wrapper">
+                  {isLoading ? (
+                    <Skeleton
+                      variant="rectangular"
+                      sx={{
+                        bgcolor: "#888888",
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={album && artistImage}
+                      alt="artist-image"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  )}
+                </figure>
+                <div className="playlist-details">
+                  {isLoading ? (
+                    <Skeleton
+                      variant="text"
+                      sx={{
+                        bgcolor: "#888888",
+                        width: 250,
+                        display: "inline-block",
+                        verticalAlign: "middle",
+                        borderRadius: 1,
+                      }}
+                    />
+                  ) : (
+                    <>
+                      <Link to={`/artist/${album?.artists?.[0]?.id}`}>
+                        <span className=" playlist-description  playlist-owner-name">
+                          {album?.artists?.[0]?.name}
+                        </span>
+                      </Link>
+                      <span className="separation-ball"></span>
+                      <span className="playlist-description">
+                        {album?.release_date}
+                      </span>
+                      <span className="separation-ball"></span>
+                      <span className="playlist-description">
+                        {album?.total_tracks} músicas
+                      </span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {!isLoading && (
-          <div
-            className="album-header-overlay"
-            style={{
-              backgroundColor: albumDominantColor || "#1d1d1e",
-            }}
-          ></div>
-        )}
-      </header>
+          {!isLoading && (
+            <div
+              className="album-header-overlay"
+              style={{
+                backgroundColor: albumDominantColor || "#1d1d1e",
+              }}
+            ></div>
+          )}
+        </header>
 
-      <div className="playlist-songs">
-        {!isLoading && (
-          <div
-            className="songs-overlay"
-            style={{
-              background:
-                !isLoading && gradientColor
-                  ? `linear-gradient(
+        <div className="playlist-songs">
+          {!isLoading && (
+            <div
+              className="songs-overlay"
+              style={{
+                background:
+                  !isLoading && gradientColor
+                    ? `linear-gradient(
             to bottom,
             ${hexToRgb(gradientColor, 0.6)} 0%,
             ${hexToRgb(gradientColor, 0.4)} 25%,
@@ -221,51 +224,52 @@ export default function AlbumPage() {
             ${hexToRgb(gradientColor, 0.0)} 85%,
             transparent 100%
           )`
-                  : "#1d1d1e",
+                    : "#1d1d1e",
+              }}
+            ></div>
+          )}
+          <PlaylistTools
+            playSongs={{
+              nextsongs: album?.tracks?.items,
+              id: album?.id,
+              type: "album",
             }}
-          ></div>
-        )}
-        <PlaylistTools
-          playSongs={{
-            nextsongs: album?.tracks?.items,
-            id: album?.id,
-            type: "album",
-          }}
-          type={"album"}
-          data={album}
-          scrollContainerRef={scrollContainerRef}
-          playlistDominantColor={albumDominantColor}
-        ></PlaylistTools>
-        <div className="songs-heading-container">
-          <div className="songs-heading">
-            <div className="column heading-title">
-              <span className="hashtag">#</span>
-              <span className="title">Título</span>
+            type={"album"}
+            data={album}
+            scrollContainerRef={scrollContainerRef}
+            playlistDominantColor={albumDominantColor}
+          ></PlaylistTools>
+          <div className="songs-heading-container">
+            <div className="songs-heading">
+              <div className="column heading-title">
+                <span className="hashtag">#</span>
+                <span className="title">Título</span>
+              </div>
+              <div className="column heading-album">Álbum</div>
+              <div className="column heading-added">Adicionada em</div>
+              <div className="column heading-duration">
+                <FontAwesomeIcon icon={faClock} />
+              </div>
             </div>
-            <div className="column heading-album">Álbum</div>
-            <div className="column heading-added">Adicionada em</div>
-            <div className="column heading-duration">
-              <FontAwesomeIcon icon={faClock} />
-            </div>
-          </div>
 
-          <div className="song-list-container">
-            {isLoading
-              ? Array.from({ length: 10 }).map((_, index) => (
-                  <PlaylistSongSkeleton key={index} />
-                ))
-              : playlist?.map((song, index) => (
-                  <PlaylistSong
-                    key={index}
-                    image={song.album.images[2].url}
-                    index={index}
-                    song={song}
-                    playlist={playlist}
-                  />
-                ))}
+            <div className="song-list-container">
+              {isLoading
+                ? Array.from({ length: 10 }).map((_, index) => (
+                    <PlaylistSongSkeleton key={index} />
+                  ))
+                : playlist?.map((song, index) => (
+                    <PlaylistSong
+                      key={index}
+                      image={song.album.images[2].url}
+                      index={index}
+                      song={song}
+                      playlist={playlist}
+                    />
+                  ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </SimpleBar>
   );
 }
