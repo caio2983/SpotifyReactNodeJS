@@ -251,19 +251,19 @@ export default function PlaylistPage() {
                 <FontAwesomeIcon icon={faClock} />
               </div>
               <div className="border-div"></div>
-              {isLoading
-                ? Array.from({ length: 10 }).map((_, index) => (
-                    <PlaylistSongSkeleton key={index} />
-                  ))
-                : playlist?.tracks?.items?.map((song, index) => (
-                    <PlaylistSong
-                      key={index}
-                      image={song.track.album.images[2].url}
-                      index={index}
-                      song={song.track}
-                      playlist={playlist}
-                    />
-                  ))}
+              {isLoading ? (
+                <PlaylistSongSkeleton />
+              ) : (
+                playlist?.tracks?.items?.map((song, index) => (
+                  <PlaylistSong
+                    key={index}
+                    image={song.track.album.images[2].url}
+                    index={index}
+                    song={song.track}
+                    playlist={playlist}
+                  />
+                ))
+              )}
             </div>
           </div>
         </div>

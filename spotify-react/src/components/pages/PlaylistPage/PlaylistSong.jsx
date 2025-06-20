@@ -61,6 +61,7 @@ export default function PlaylistSong({ index, image, song, playlist }) {
       <span className="song-date song-album-playlist">
         {formatDate(song.album.release_date)}
       </span>
+
       <span className="song-duration song-album-playlist">
         {Math.floor(song.duration_ms / 60000)}:
         {Math.floor((song.duration_ms % 60000) / 1000)
