@@ -250,6 +250,12 @@
   text-align: center;
 }
 
+.heading-added {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .heading-title {
   display: flex;
   align-items: center;
@@ -263,7 +269,7 @@
 
 .song-cards-grid {
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: min-content min-content auto auto;
   min-height: 100%;
   align-items: center;
   align-content: center;
@@ -271,6 +277,10 @@
   padding: 8px 16px;
 
   width: 100%;
+}
+
+.song-cards-grid-skeleton {
+  grid-template-columns: auto auto auto auto;
 }
 
 .song-row {
@@ -428,6 +438,7 @@
   height: 100%;
   display: flex;
   align-items: center;
+  height: 110px;
 }
 
 .name-artist-wrapper {
