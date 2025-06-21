@@ -27,6 +27,8 @@ export default function PlaylistPage({ currentWidth }) {
   const scrollContainerRef = useRef(null);
   const { playlistId } = useParams();
 
+  let isSmall = currentWidth < 57;
+
   function hexToRgb(hex, alpha = 1) {
     const cleanHex = hex.replace("#", "");
     const r = parseInt(cleanHex.substring(0, 2), 16);
@@ -243,7 +245,12 @@ export default function PlaylistPage({ currentWidth }) {
             <div
               className={`song-cards-grid ${
                 isLoading ? "song-cards-grid-skeleton" : ""
-              } ${currentWidth < 57 ? "song-cards-grid-small-width" : ""}`}
+              } ${
+                currentWidth < 57 && !isLoading
+                  ? "song-cards-grid-small-width"
+                  : ""
+              }
+              ${isSmall && isLoading ? "song-cards-grid-skeleton-small" : ""}`}
             >
               <div className="column heading-title">
                 <span className="hashtag">#</span>
@@ -265,7 +272,7 @@ export default function PlaylistPage({ currentWidth }) {
               </div>
               <div className="border-div"></div>
               {isLoading ? (
-                <PlaylistSongSkeleton />
+                <PlaylistSongSkeleton isSmall={isSmall} />
               ) : (
                 playlist?.tracks?.items?.map((song, index) => (
                   <PlaylistSong

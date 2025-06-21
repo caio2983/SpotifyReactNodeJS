@@ -296,7 +296,11 @@
 }
 
 .song-cards-grid-skeleton {
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto;
+}
+
+.song-cards-grid-skeleton-small {
+  grid-template-columns: auto auto auto auto auto;
 }
 
 .song-row {
