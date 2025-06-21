@@ -275,20 +275,20 @@ export default function AlbumPage({ currentWidth }) {
                 <FontAwesomeIcon icon={faClock} />
               </div>
               <div className="border-div"></div>
-              {isLoading
-                ? Array.from({ length: 10 }).map((_, index) => (
-                    <PlaylistSongSkeleton key={index} isSmall={isSmall} />
-                  ))
-                : playlist?.map((song, index) => (
-                    <PlaylistSong
-                      key={index}
-                      image={song.album.images[2].url}
-                      index={index}
-                      song={song}
-                      playlist={playlist}
-                      currentWidth={currentWidth}
-                    />
-                  ))}
+              {isLoading ? (
+                <PlaylistSongSkeleton isSmall={isSmall} />
+              ) : (
+                playlist?.map((song, index) => (
+                  <PlaylistSong
+                    key={index}
+                    image={song.album.images[2].url}
+                    index={index}
+                    song={song}
+                    playlist={playlist}
+                    currentWidth={currentWidth}
+                  />
+                ))
+              )}
             </div>
           </div>
         </div>

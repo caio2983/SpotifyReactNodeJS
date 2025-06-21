@@ -12,12 +12,10 @@ export default function ArtistSongSkeleton() {
         <div className="song-index-number">
           <Skeleton
             variant="rectangular"
-            sx={{
-              bgcolor: "#888888",
-            }}
-            height={72}
-            width={72}
-          ></Skeleton>
+            height={64}
+            width={64}
+            sx={{ bgcolor: "#888888" }}
+          />
         </div>
 
         <div className="gap-fill"></div>

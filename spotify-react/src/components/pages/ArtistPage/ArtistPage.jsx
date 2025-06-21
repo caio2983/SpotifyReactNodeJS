@@ -222,21 +222,21 @@ export default function ArtistPage() {
               <div className="artist-popular-tracks">
                 <span>Populares</span>
                 <div className="artist-popular-tracks-wrapper">
-                  {isLoading
-                    ? Array(showAllTracks ? 10 : 5)
-                        .fill(null)
-                        .map((_, index) => <ArtistSongSkeleton key={index} />)
-                    : popularTracks?.tracks
-                        ?.slice(0, showAllTracks ? 10 : 5)
-                        .map((track, index) => (
-                          <ArtistSong
-                            key={index + 1}
-                            track={track}
-                            index={index + 1}
-                            tracks={popularTracks.tracks}
-                            artist_id={artist?.id}
-                          />
-                        ))}
+                  {isLoading ? (
+                    <ArtistSongSkeleton />
+                  ) : (
+                    popularTracks?.tracks
+                      ?.slice(0, showAllTracks ? 10 : 5)
+                      .map((track, index) => (
+                        <ArtistSong
+                          key={index + 1}
+                          track={track}
+                          index={index + 1}
+                          tracks={popularTracks.tracks}
+                          artist_id={artist?.id}
+                        />
+                      ))
+                  )}
                 </div>
                 {popularTracks?.tracks?.length > 5 && (
                   <button
