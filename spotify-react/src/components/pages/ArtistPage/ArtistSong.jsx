@@ -17,13 +17,14 @@ export default function ArtistSong({ track, index, tracks, artist_id }) {
   }
 
   return (
-    <div className="song-card" style={{ gridTemplateColumns: "8fr 2fr" }}>
+    <div
+      className="song-card"
+      style={{ gridTemplateColumns: "auto 1fr auto", display: "grid" }}
+      onClick={clickSong}
+    >
       <div className="song-index-album">
         <div className="song-index-number" onClick={clickSong}>
-          <div
-            className="song-artist-index-wrapper"
-            style={{ display: "flex", alignContent: "center" }}
-          >
+          <div className="song-artist-index-wrapper">
             <span
               className="song-index"
               style={{
@@ -33,23 +34,23 @@ export default function ArtistSong({ track, index, tracks, artist_id }) {
             >
               {index}
             </span>
-          </div>
-
-          <div
-            className="song-play-triangle"
-            style={{
-              display: "flex",
-              alignContent: "center",
-            }}
-          >
-            <span
+            <div
+              className="song-play-triangle"
               style={{
-                marginBottom: "0",
-                alignItems: "center",
+                display: "flex",
+                alignContent: "center",
+                justifyContent: "center",
               }}
             >
-              ▶
-            </span>
+              <span
+                style={{
+                  marginBottom: "0",
+                  alignItems: "center",
+                }}
+              >
+                ▶
+              </span>
+            </div>
           </div>
         </div>
 
@@ -63,11 +64,21 @@ export default function ArtistSong({ track, index, tracks, artist_id }) {
         </div>
       </div>
 
-      <span className="song-duration">
-        {Math.floor(track.duration_ms / 60000)}:
-        {Math.floor((track.duration_ms % 60000) / 1000)
-          .toString()
-          .padStart(2, "0")}
+      <div className="gap-fill"></div>
+
+      <span
+        className="song-duration song-album-playlist"
+        style={{
+          textAlign: "center",
+          justifySelf: "end",
+        }}
+      >
+        <div style={{ marginRight: "16px" }}>
+          {Math.floor(track.duration_ms / 60000)}:
+          {Math.floor((track.duration_ms % 60000) / 1000)
+            .toString()
+            .padStart(2, "0")}
+        </div>
       </span>
     </div>
   );

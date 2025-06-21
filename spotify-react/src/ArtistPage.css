@@ -159,6 +159,38 @@
   color: #b3b3b3;
 }
 
+.song-card {
+  height: 110px;
+}
+
+.song-card:hover > * {
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.song-card:hover .gap-fill {
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.song-card:hover > .song-duration {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.song-card:hover > .song-index-album {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.song-card:hover .song-index {
+  opacity: 0;
+}
+
+.song-card:hover .song-play-triangle {
+  opacity: 1;
+}
+
 .song-index-album {
   display: flex;
   align-items: center;
