@@ -163,7 +163,10 @@ export default function Main({ currentWidth }) {
       <Route path="/artist/:artistId" element={<ArtistPage />} />
       <Route path="/search/:query" element={<SearchingPage />} />
       <Route path="/track/:trackId" element={<TrackPage />} />
-      <Route path="/album/:albumId" element={<AlbumPage />} />
+      <Route
+        path="/album/:albumId"
+        element={<AlbumPage currentWidth={currentWidth} />}
+      />
     </Routes>
   );
 }

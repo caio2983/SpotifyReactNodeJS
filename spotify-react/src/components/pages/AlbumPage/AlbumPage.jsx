@@ -11,7 +11,7 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 
-export default function AlbumPage() {
+export default function AlbumPage({ currentWidth }) {
   const { albumId } = useParams();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -241,13 +241,26 @@ export default function AlbumPage() {
           ></PlaylistTools>
 
           <div className="song-list-container">
-            <div className="song-cards-grid">
+            <div
+              className={`song-cards-grid ${
+                isLoading ? "song-cards-grid-skeleton" : ""
+              } ${currentWidth < 56 ? "song-cards-grid-small-width" : ""}`}
+            >
               <div className="column heading-title">
                 <span className="hashtag">#</span>
                 <span className="title">Título</span>
               </div>
+              <div className="gap-fill gap-fill-heading"></div>
               <div className="column heading-album">Álbum</div>
-              <div className="column heading-added">Adicionada em</div>
+              {currentWidth > 56 && (
+                <>
+                  <div className="gap-fill gap-fill-heading"></div>
+                  <div className="column heading-added">Adicionada em</div>
+                </>
+              )}
+
+              <div className="gap-fill gap-fill-heading"></div>
+
               <div className="column heading-duration playlist-heading-duration">
                 <FontAwesomeIcon icon={faClock} />
               </div>
@@ -263,6 +276,7 @@ export default function AlbumPage() {
                       index={index}
                       song={song}
                       playlist={playlist}
+                      currentWidth={currentWidth}
                     />
                   ))}
             </div>
