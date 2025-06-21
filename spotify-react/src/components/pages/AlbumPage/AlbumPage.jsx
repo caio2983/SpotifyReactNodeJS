@@ -244,7 +244,7 @@ export default function AlbumPage({ currentWidth }) {
             <div
               className={`song-cards-grid ${
                 isLoading ? "song-cards-grid-skeleton" : ""
-              } ${currentWidth < 56 ? "song-cards-grid-small-width" : ""}`}
+              } ${currentWidth < 57 ? "song-cards-grid-small-width" : ""}`}
             >
               <div className="column heading-title">
                 <span className="hashtag">#</span>
@@ -252,7 +252,7 @@ export default function AlbumPage({ currentWidth }) {
               </div>
               <div className="gap-fill gap-fill-heading"></div>
               <div className="column heading-album">Álbum</div>
-              {currentWidth > 56 && (
+              {currentWidth > 57 && (
                 <>
                   <div className="gap-fill gap-fill-heading"></div>
                   <div className="column heading-added">Adicionada em</div>

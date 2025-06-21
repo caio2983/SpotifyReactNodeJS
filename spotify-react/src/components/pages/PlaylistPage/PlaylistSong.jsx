@@ -67,7 +67,7 @@ export default function PlaylistSong({
         <span className="song-album ">{song.album.name}</span>
       </Link>
       <div className="gap-fill"></div>
-      {currentWidth > 56 && (
+      {currentWidth > 57 && (
         <>
           <span className="song-date song-album-playlist">
             {formatDate(song.album.release_date)}

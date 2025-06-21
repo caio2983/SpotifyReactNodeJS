@@ -161,7 +161,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  z-index: 150;
+  z-index: 200;
   position: sticky;
   top: 0;
   box-sizing: content-box;
