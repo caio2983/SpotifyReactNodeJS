@@ -3,7 +3,7 @@
 @import "./PlayingSong.css";
 @import "./components/subcomponents/Header/Header.css";
 @import "./SwiperSpotify.css";
-@import "./ArtistPage.css";
+@import "./components/pages/ArtistPage/ArtistPage.css";
 @import "./components/pages/AlbumPage/AlbumPage.css";
 @import "./components/pages/SearchingPage/SearchingPage.css";
 @import "./components//pages/TrackPage/TrackPage.css";
