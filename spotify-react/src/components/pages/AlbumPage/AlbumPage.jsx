@@ -22,6 +22,8 @@ export default function AlbumPage({ currentWidth }) {
   const scrollContainerRef = useRef(null);
   const [artistImage, setArtistImage] = useState("");
 
+  let isSmall = currentWidth < 57;
+
   useEffect(() => {
     setIsLoading(true);
 
@@ -244,7 +246,12 @@ export default function AlbumPage({ currentWidth }) {
             <div
               className={`song-cards-grid ${
                 isLoading ? "song-cards-grid-skeleton" : ""
-              } ${currentWidth < 57 ? "song-cards-grid-small-width" : ""}`}
+              } ${
+                currentWidth < 57 && !isLoading
+                  ? "song-cards-grid-small-width"
+                  : ""
+              }
+              ${isSmall && isLoading ? "song-cards-grid-skeleton-small" : ""}`}
             >
               <div className="column heading-title">
                 <span className="hashtag">#</span>
@@ -267,7 +274,7 @@ export default function AlbumPage({ currentWidth }) {
               <div className="border-div"></div>
               {isLoading
                 ? Array.from({ length: 10 }).map((_, index) => (
-                    <PlaylistSongSkeleton key={index} />
+                    <PlaylistSongSkeleton key={index} isSmall={isSmall} />
                   ))
                 : playlist?.map((song, index) => (
                     <PlaylistSong
