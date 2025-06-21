@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { Vibrant } from "node-vibrant/browser";
+import { FastAverageColor } from "fast-average-color";
 import { Skeleton } from "@mui/material";
 import PlaylistTools from "../PlaylistPage/PlaylistTools";
 import PlaylistSongSkeleton from "../PlaylistPage/PlaylistSongSkeleton";
@@ -81,16 +81,19 @@ export default function AlbumPage({ currentWidth }) {
 
   useEffect(() => {
     if (album?.images?.[0]?.url) {
-      Vibrant.from(album?.images?.[0]?.url)
-        .getPalette()
-        .then((palette) => {
-          console.log("palette", palette);
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = album.images[0].url;
 
-          const darkerColor = palette.DarkVibrant.hex;
+      img.onload = () => {
+        const fac = new FastAverageColor();
+        const color = fac.getColor(img);
 
-          setGradientColor(darkerColor);
-          setDominantColor(hexToRgb(palette.DarkVibrant.hex));
-        });
+        console.log("average color", color);
+
+        setGradientColor(color.hex);
+        setDominantColor(color.rgba);
+      };
     }
   }, [album]);
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Vibrant } from "node-vibrant/browser";
+import { FastAverageColor } from "fast-average-color";
+
 import { useGlobalContext } from "../../../GlobalContext";
 
 export default function SongExpanded({ setIsSongExpanded, selectedSong }) {
@@ -13,17 +14,18 @@ export default function SongExpanded({ setIsSongExpanded, selectedSong }) {
   }, []);
 
   const { songSelected, setSong } = useGlobalContext();
+  const fac = new FastAverageColor();
 
   useEffect(() => {
-    Vibrant.from(songSelected?.album?.images[0].url)
-      .getPalette()
-      .then((palette) => {
-        if (palette?.Vibrant?.hex) {
-          setSongDominantColor(palette.Vibrant.hex);
-        }
-      });
-  }, [songSelected]);
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = songSelected?.album?.images[0]?.url;
 
+    img.onload = () => {
+      const color = fac.getColor(img);
+      setSongDominantColor(color.rgba);
+    };
+  }, [songSelected]);
   const handleClick = () => {
     setAnimateClass("collapsed");
 

@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { Vibrant } from "node-vibrant/browser";
+import { FastAverageColor } from "fast-average-color";
+
 import parse from "html-react-parser";
 import PlaylistTools from "./PlaylistTools";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,6 +29,7 @@ export default function PlaylistPage({ currentWidth }) {
   const { playlistId } = useParams();
 
   let isSmall = currentWidth < 57;
+  const fac = new FastAverageColor();
 
   function hexToRgb(hex, alpha = 1) {
     const cleanHex = hex.replace("#", "");
@@ -50,16 +52,17 @@ export default function PlaylistPage({ currentWidth }) {
 
   useEffect(() => {
     if (playlist?.images?.[0]?.url) {
-      Vibrant.from(playlist?.images?.[0]?.url)
-        .getPalette()
-        .then((palette) => {
-          console.log("palette", palette);
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = playlist.images[0].url;
 
-          const darkerColor = palette.Vibrant.hex;
+      img.onload = () => {
+        const fac = new FastAverageColor();
+        const color = fac.getColor(img);
 
-          setGradientColor(darkerColor);
-          setDominantColor(hexToRgb(palette.Vibrant.hex));
-        });
+        setGradientColor(color.hex);
+        setDominantColor(color.rgba);
+      };
     }
   }, [playlist]);
 
