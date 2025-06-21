@@ -26,9 +26,10 @@ export default function PlaylistTools({
         });
     } else if (type == "track") {
       setSong(playSongs.nextsongs);
+    } else if (type == "artist") {
+      setSong(playSongs?.nextsongs?.[0]);
     } else {
       setSong(playSongs?.nextsongs?.[0]?.track);
-      console.log("PLAYING SONGS", playSongs);
     }
 
     setNextSongs({
