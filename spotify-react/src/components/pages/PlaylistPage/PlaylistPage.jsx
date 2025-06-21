@@ -110,7 +110,7 @@ export default function PlaylistPage({ currentWidth }) {
             </figure>
             <div className="playlist-header-text">
               <span className="playlist-description album-label">
-                Playlist pública {currentWidth}
+                Playlist pública
               </span>
               <h1 className="playlist-title ">
                 {isLoading ? (
