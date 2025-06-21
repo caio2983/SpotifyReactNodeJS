@@ -156,7 +156,10 @@ export default function Main({ currentWidth }) {
         }
       />
 
-      <Route path="/playlist/:playlistId" element={<PlaylistPage />} />
+      <Route
+        path="/playlist/:playlistId"
+        element={<PlaylistPage currentWidth={currentWidth} />}
+      />
       <Route path="/artist/:artistId" element={<ArtistPage />} />
       <Route path="/search/:query" element={<SearchingPage />} />
       <Route path="/track/:trackId" element={<TrackPage />} />

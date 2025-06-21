@@ -4,7 +4,13 @@ import { ptBR } from "date-fns/locale";
 import { useGlobalContext } from "../../../GlobalContext";
 import { Link } from "react-router-dom";
 
-export default function PlaylistSong({ index, image, song, playlist }) {
+export default function PlaylistSong({
+  index,
+  image,
+  song,
+  playlist,
+  currentWidth,
+}) {
   useEffect(() => {
     console.log(song);
   }, []);
@@ -34,7 +40,7 @@ export default function PlaylistSong({ index, image, song, playlist }) {
   }
 
   return (
-    <div className="song-row">
+    <div className="song-row" onClick={clickSong}>
       <div className="song-index-album-playlist">
         <div className="song-index-number" onClick={clickSong}>
           <span className="song-index"> {index + 1}</span>
@@ -55,12 +61,20 @@ export default function PlaylistSong({ index, image, song, playlist }) {
           </Link>
         </div>
       </div>
+
+      <div className="gap-fill"></div>
       <Link to={`/album/${song.album.id}`} className="song-album-playlist">
         <span className="song-album ">{song.album.name}</span>
       </Link>
-      <span className="song-date song-album-playlist">
-        {formatDate(song.album.release_date)}
-      </span>
+      <div className="gap-fill"></div>
+      {currentWidth > 56 && (
+        <>
+          <span className="song-date song-album-playlist">
+            {formatDate(song.album.release_date)}
+          </span>
+          <div className="gap-fill"></div>
+        </>
+      )}
 
       <span className="song-duration song-album-playlist">
         {Math.floor(song.duration_ms / 60000)}:
