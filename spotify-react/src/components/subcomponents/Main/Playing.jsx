@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../../GlobalContext";
 import Slider from "@mui/material/Slider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBackward,
   faBackwardStep,
-  faForward,
   faForwardStep,
   faPlay,
   faVolumeHigh,
@@ -15,8 +13,6 @@ import axios from "axios";
 export default function Playing() {
   const { songSelected, setSong } = useGlobalContext();
   const { nextSongs, setNextSongs } = useGlobalContext();
-
-  const [isPlaying, setIsPlaying] = useState(false);
 
   const duration = songSelected?.duration_ms;
   const [currentTime, setCurrentTime] = useState(0);
