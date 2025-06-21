@@ -5,6 +5,8 @@ async function getInitialArtists() {
   const ids = [
     "3NbPGB8aCTBF7wyvi538tn",
     "3o2dn2O0FCVsWDFSh8qxgG",
+    "0dgJbQ0bKPyUXco8hEXN7X",
+
     "2dXj6aC3DsxoTDyhk3u4gl",
     "6Ghvu1VvMGScGpOUJBAHNH",
     "6olE6TJLqED3rqDCT0FyPh",

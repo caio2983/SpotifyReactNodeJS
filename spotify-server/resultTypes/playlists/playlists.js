@@ -8,7 +8,7 @@ async function getInitialPlaylists() {
     "59t8ddTpSrPmoeHKVYqofq",
     "4QgNA28tONdhtb7zJMNz6I",
     "06tCWiOWTnuTfoKwHB8Byl",
-    "5SxdXfHoBlJzVvqmTwRXPw",
+    "3nUvKaoye6QEBiaPdlJhpK",
     "2HfFccisPxQfprhgIHM7XH",
     "3DZymF4xwHZHo0cbgLDiv1",
     "4OtetuN08DiPosPhfxsyCw",
