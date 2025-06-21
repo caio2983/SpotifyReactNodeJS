@@ -36,57 +36,44 @@ export default function Playing() {
     setNextSongId(next);
   }, [songSelected, nextSongs]);
 
-  function handleNextClick() {
-    if (nextSongs?.type.type == "playlist") {
-      let current_number = nextSongs.nextsongs.findIndex(
+  function handleSongClick(number) {
+    if (!nextSongs?.type?.type || !songSelected) return;
+
+    const isNext = number === 1;
+    const songs = nextSongs.nextsongs;
+
+    let currentIndex;
+
+    if (nextSongs.type.type === "playlist") {
+      currentIndex = songs.findIndex(
         (item) => item.track.id === songSelected.id
       );
-
-      let next_song_index = current_number + 1;
-      if (next_song_index == nextSongs.nextsongs.length) {
-        next_song_index = 0;
-      }
-      const next_song_id = nextSongs.nextsongs[next_song_index].track.id;
-
-      axios
-        .get(`http://localhost:3000/get-track/${next_song_id}`)
-        .then((response) => {
-          const track = response.data;
-          setSong(track);
-        });
-    } else if (nextSongs?.type.type == "album") {
-      let current_number = nextSongs.nextsongs.findIndex(
-        (item) => item.id === songSelected.id
-      );
-
-      const next_song_index = current_number + 1;
-      const next_song_id = nextSongs.nextsongs[next_song_index].id;
-
-      axios
-        .get(`http://localhost:3000/get-track/${next_song_id}`)
-        .then((response) => {
-          const track = response.data;
-          setSong(track);
-        });
-    } else if (nextSongs?.type.type == "artist") {
-      console.log("NEXT SONGS", nextSongs);
-      let current_number = nextSongs.nextsongs.findIndex(
-        (item) => item.id === songSelected.id
-      );
-
-      let next_song_index = current_number + 1;
-      if (next_song_index == nextSongs.nextsongs.length) {
-        next_song_index = 0;
-      }
-      const next_song_id = nextSongs.nextsongs[next_song_index].id;
-
-      axios
-        .get(`http://localhost:3000/get-track/${next_song_id}`)
-        .then((response) => {
-          const track = response.data;
-          setSong(track);
-        });
+    } else {
+      currentIndex = songs.findIndex((item) => item.id === songSelected.id);
     }
+
+    if (currentIndex === -1) return;
+
+    let newIndex = isNext ? currentIndex + 1 : currentIndex - 1;
+
+    if (newIndex >= songs.length) {
+      newIndex = 0;
+    } else if (newIndex < 0) {
+      newIndex = songs.length - 1;
+    }
+
+    const songItem = songs[newIndex];
+    const songId =
+      nextSongs.type.type === "playlist" ? songItem.track.id : songItem.id;
+
+    axios
+      .get(`http://localhost:3000/get-track/${songId}`)
+      .then((response) => {
+        setSong(response.data);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar a faixa:", error);
+      });
   }
 
   return (
@@ -106,7 +93,10 @@ export default function Playing() {
 
         <div className="playing-tools-center">
           <div className="playing-controls">
-            <div className="playing-previous-wrapper">
+            <div
+              className="playing-previous-wrapper"
+              onClick={() => handleSongClick(0)}
+            >
               <FontAwesomeIcon
                 icon={faBackwardStep}
                 size="2xl"
@@ -116,7 +106,10 @@ export default function Playing() {
             <div className="playing-button-circle-wrapper">
               <FontAwesomeIcon icon={faPlay} style={{ color: "black" }} />
             </div>
-            <div className="playing-next-wrapper" onClick={handleNextClick}>
+            <div
+              className="playing-next-wrapper"
+              onClick={() => handleSongClick(1)}
+            >
               <FontAwesomeIcon
                 icon={faForwardStep}
                 size="2xl"

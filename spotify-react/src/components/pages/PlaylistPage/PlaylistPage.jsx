@@ -232,8 +232,9 @@ export default function PlaylistPage({ currentWidth }) {
 
           <PlaylistTools
             playSongs={{
-              nextsongs: playlist?.tracks.items,
+              nextsongs: playlist?.tracks?.items,
               id: playlist?.id,
+              type: "playlist",
             }}
             type={"playlist"}
             data={playlist}

@@ -13,7 +13,7 @@ export default function Song({ setIsSongExpanded, currentWidth }) {
   const textRef = useRef(null);
   const headerRef = useRef(null);
   const [shouldAnimate, setShouldAnimate] = useState(false);
-  const { songSelected, setSong } = useGlobalContext();
+  const { songSelected, setSong, nextSongs } = useGlobalContext();
 
   useEffect(() => {
     if (textRef.current) {
@@ -112,9 +112,13 @@ export default function Song({ setIsSongExpanded, currentWidth }) {
 
           <span className="song-artist-big">
             {songSelected ? (
-              <Link to={`/artist/${songSelected?.artists?.[0]?.id}`}>
-                {songSelected?.artists[0]?.name}
-              </Link>
+              nextSongs.type === "artist" ? (
+                <Link to={`/artist/${songSelected?.artists?.[0]?.id}`}>
+                  {songSelected?.artists?.[0]?.name}
+                </Link>
+              ) : (
+                <span>{songSelected?.artists?.[0]?.name}</span>
+              )
             ) : (
               <Skeleton
                 variant="text"
@@ -123,7 +127,7 @@ export default function Song({ setIsSongExpanded, currentWidth }) {
                   borderRadius: "6px",
                 }}
                 width={100}
-              ></Skeleton>
+              />
             )}
           </span>
         </div>

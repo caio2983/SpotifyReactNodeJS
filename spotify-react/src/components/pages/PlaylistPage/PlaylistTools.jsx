@@ -27,7 +27,8 @@ export default function PlaylistTools({
     } else if (type == "track") {
       setSong(playSongs.nextsongs);
     } else {
-      setSong(playSongs?.nextsongs?.[0]);
+      setSong(playSongs?.nextsongs?.[0]?.track);
+      console.log("PLAYING SONGS", playSongs);
     }
 
     setNextSongs({
