@@ -131,7 +131,10 @@ export default function LibraryExpanded({ setIsExpanded }) {
               }
             >
               <div className="library-expanded-item-content">
-                <Link to={`/${item.type}/${item.id}`}>
+                <Link
+                  to={`/${item.type}/${item.id}`}
+                  onClick={() => setIsExpanded(false)}
+                >
                   <img
                     alt={item.name}
                     className={
