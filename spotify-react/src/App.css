@@ -115,6 +115,10 @@
   opacity: 1;
 }
 
+.simplebar-scrollable-y:hover .simplebar-scrollbar {
+  opacity: 1;
+}
+
 .simplebar-scrollbar:before {
   display: none;
 }

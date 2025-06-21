@@ -3,7 +3,6 @@ const { fetchWebApi } = require("../../fetchWebApi/fetchWebApi");
 // Fetches the initial set of artists used to populate the homepage swiper
 async function getInitialArtists() {
   const ids = [
-    "48nHO1cuTbpx4ELhChsxX1",
     "3NbPGB8aCTBF7wyvi538tn",
     "3o2dn2O0FCVsWDFSh8qxgG",
     "2dXj6aC3DsxoTDyhk3u4gl",
