@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from "../../../GlobalContext";
 import { Link } from "react-router-dom";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -56,7 +56,7 @@ export default function LibraryExpanded({ setIsExpanded }) {
     <SimpleBar style={{ maxHeight: "100%", zIndex: 150 }}>
       <div className={`library-expanded-container ${animateClass}`}>
         <div className="library-expanded-tools">
-          <button onClick={handleClick}>Expandir</button>
+          <button onClick={handleClick}>Voltar</button>
           <div className="glass-and-input">
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
